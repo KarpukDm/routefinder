@@ -1,5 +1,4 @@
 package com.routefinder.model;
-
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -12,8 +11,7 @@ import java.util.List;
 @Table(
         name = "account",
         uniqueConstraints = {
-                @UniqueConstraint(name = "uc_account_login", columnNames = {"login"}),
-                @UniqueConstraint(name = "uc_account_email", columnNames = {"email"})
+                @UniqueConstraint(name = "uc_account_login", columnNames = {"login"})
         }
 )
 public class Account implements Persistable<Integer> {
