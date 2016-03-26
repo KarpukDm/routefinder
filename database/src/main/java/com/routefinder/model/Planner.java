@@ -28,6 +28,10 @@ public class Planner implements Persistable<Integer> {
     @Column
     private String message;
 
+    public Planner(){
+        super();
+    }
+
     public Integer getAccount_id() {
         return account_id;
     }

@@ -25,6 +25,10 @@ public class Feedback implements Persistable<Integer> {
     @Column
     private String email;
 
+    public Feedback(){
+        super();
+    }
+
     public Account getAccount() {
         return account;
     }

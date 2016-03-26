@@ -25,6 +25,14 @@ public class Role implements Persistable<Integer> {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
     private List<Account> users;
 
+    public Role(){
+        super();
+    }
+
+    public Role(String name){
+        this.name = name;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

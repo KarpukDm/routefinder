@@ -43,6 +43,9 @@ public class Route implements Persistable<Integer> {
     )
     private List<WayPoint> wayPoints;
 
+    public Route(){
+        super();
+    }
 
     public List<Point> getPoints() {
         return points;

@@ -28,6 +28,10 @@ public class Schedule implements Persistable<Integer> {
     @Column
     private String time;
 
+    public Schedule(){
+        super();
+    }
+
     public RouteInfo getRouteInfo() {
         return routeInfo;
     }

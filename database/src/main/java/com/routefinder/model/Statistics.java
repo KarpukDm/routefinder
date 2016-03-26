@@ -28,6 +28,10 @@ public class Statistics implements Persistable<Integer> {
     @Column
     private String month;
 
+    public Statistics(){
+        super();
+    }
+
     public RouteInfo getRouteInfo() {
         return routeInfo;
     }

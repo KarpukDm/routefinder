@@ -28,6 +28,10 @@ public class Rating implements Persistable<Integer> {
     @Column
     private Double value;
 
+    public Rating(){
+        super();
+    }
+
     public Account getAccount() {
         return account;
     }

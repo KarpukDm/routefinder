@@ -28,6 +28,10 @@ public class RouteInfo implements Persistable<Integer> {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "routeInfo")
     private List<Schedule> schedules;
 
+    public RouteInfo(){
+        super();
+    }
+
     public Route getRoute() {
         return route;
     }

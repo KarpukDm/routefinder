@@ -22,6 +22,10 @@ public class WayPoint implements Persistable<Integer> {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "wayPoints")
     private List<Route> routes;
 
+    public WayPoint(){
+        super();
+    }
+
     public List<Route> getRoutes() {
         return routes;
     }

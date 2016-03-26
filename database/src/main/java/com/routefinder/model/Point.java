@@ -32,6 +32,10 @@ public class Point implements Persistable<Integer> {
     @Column
     private String name;
 
+    public Point(){
+        super();
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

@@ -28,6 +28,10 @@ public class Coordinates implements Persistable<Integer> {
     @Column
     private Double lng;
 
+    public Coordinates(){
+        super();
+    }
+
     public Point getPoint() {
         return point;
     }

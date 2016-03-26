@@ -25,6 +25,10 @@ public class MyRoute implements Persistable<Integer> {
     @Column
     private Integer route_id;
 
+    public MyRoute(){
+        super();
+    }
+
     public Integer getRoute_id() {
         return route_id;
     }

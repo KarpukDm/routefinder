@@ -22,6 +22,10 @@ public class Neighbor implements Persistable<Integer> {
     @JoinColumn(name = "point_id", nullable = false)
     private Point point;
 
+    public Neighbor(){
+        super();
+    }
+
     public Point getPoint() {
         return point;
     }

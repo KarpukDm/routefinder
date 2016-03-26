@@ -29,6 +29,10 @@ public class Comment implements Persistable<Integer> {
     @Column
     private String message;
 
+    public Comment(){
+        super();
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
