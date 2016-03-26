@@ -23,13 +23,17 @@ public class Planner implements Persistable<Integer> {
     private Integer account_id;
 
     @Column
-    private Date datetime;
+    private String datetime;
 
     @Column
     private String message;
 
     public Planner(){
         super();
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getAccount_id() {
@@ -40,11 +44,11 @@ public class Planner implements Persistable<Integer> {
         this.account_id = account_id;
     }
 
-    public Date getDatetime() {
+    public String getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(Date datetime) {
+    public void setDatetime(String datetime) {
         this.datetime = datetime;
     }
 

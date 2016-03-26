@@ -32,6 +32,10 @@ public class Rating implements Persistable<Integer> {
         super();
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Account getAccount() {
         return account;
     }

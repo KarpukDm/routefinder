@@ -36,15 +36,23 @@ public class Route implements Persistable<Integer> {
     @JoinColumn(name="route_info_id", unique = true, nullable = false, updatable = false)
     private RouteInfo routeInfo;
 
-    @ManyToMany
-    @JoinTable(name="route_waypoint",
-            joinColumns = @JoinColumn(name="route_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="waypoint_id", referencedColumnName="id")
-    )
-    private List<WayPoint> wayPoints;
+    @Column
+    private Double distance;
 
     public Route(){
         super();
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 
     public List<Point> getPoints() {
@@ -77,14 +85,6 @@ public class Route implements Persistable<Integer> {
 
     public void setRouteInfo(RouteInfo routeInfo) {
         this.routeInfo = routeInfo;
-    }
-
-    public List<WayPoint> getWayPoints() {
-        return wayPoints;
-    }
-
-    public void setWayPoints(List<WayPoint> wayPoints) {
-        this.wayPoints = wayPoints;
     }
 
     public Integer getId() {

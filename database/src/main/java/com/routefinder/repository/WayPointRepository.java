@@ -1,6 +1,5 @@
 package com.routefinder.repository;
 
-import com.routefinder.model.WayPoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -32,6 +32,10 @@ public class RouteInfo implements Persistable<Integer> {
         super();
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Route getRoute() {
         return route;
     }

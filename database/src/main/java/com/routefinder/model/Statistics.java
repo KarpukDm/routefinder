@@ -32,6 +32,10 @@ public class Statistics implements Persistable<Integer> {
         super();
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public RouteInfo getRouteInfo() {
         return routeInfo;
     }

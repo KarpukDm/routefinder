@@ -26,65 +26,54 @@ CREATE TABLE my_route(
 
 CREATE TABLE rating(
   id SERIAL PRIMARY KEY NOT NULL,
-  route_id INTEGER NOT NULL,
-  account_id INTEGER NOT NULL
+  value INTEGER NOT NULL
 );
 
 CREATE TABLE comment(
   id SERIAL PRIMARY KEY NOT NULL,
-  route_id INTEGER NOT NULL,
-  account_id INTEGER NOT NULL,
-  message MESSAGE_TEXT
+  message TEXT
 );
 
 CREATE TABLE neighbor(
-  point_id INTEGER NOT NULL,
-  neightbor_id INTEGER NOT NULL,
-  distance DOUBLE NOT NULL
+  id SERIAL PRIMARY KEY NOT NULL,
+  distance REAL NOT NULL
 );
 
 CREATE TABLE point(
   id SERIAL PRIMARY KEY NOT NULL,
-  coordinates_id INTEGER NOT NULL
+  name TEXT
 );
 
 CREATE TABLE coordinates(
   id SERIAL PRIMARY KEY NOT NULL,
-  lat DOUBLE NOT NULL,
-  lng DOUBLE NOT NULL
+  lat REAL NOT NULL,
+  lng REAL NOT NULL
 );
 
 CREATE TABLE route(
   id SERIAL PRIMARY KEY NOT NULL,
-  start_point INTEGER NOT NULL,
-  end_point INTEGER NOT NULL,
-  distance DOUBLE NOT NULL
+  distance REAL NOT NULL
 );
 
-CREATE TABLE info(
+CREATE TABLE route_info(
   id SERIAL PRIMARY KEY NOT NULL
 );
 
 CREATE TABLE statistics(
   id SERIAL PRIMARY KEY NOT NULL,
   counter INTEGER NOT NULL,
-  month_name CHAR(20)
+  month CHAR(20)
 );
 
 CREATE TABLE schedule(
   id SERIAL PRIMARY KEY NOT NULL,
-  weekday CHAR(20),
-  sending_time TIME NOT NULL
-);
-
-CREATE TABLE waypoint(
-  id SERIAL PRIMARY KEY NOT NULL,
-  point_id INTEGER NOT NULL
+  day CHAR(20),
+  time CHAR(20) NOT NULL
 );
 
 CREATE TABLE planner(
   id SERIAL PRIMARY KEY NOT NULL,
   account_id INTEGER NOT NULL,
-  route_id INTEGER NOT NULL,
+  datetime CHAR(20) NOT NULL,
   message TEXT
 );

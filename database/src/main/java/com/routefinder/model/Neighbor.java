@@ -22,8 +22,23 @@ public class Neighbor implements Persistable<Integer> {
     @JoinColumn(name = "point_id", nullable = false)
     private Point point;
 
+    @Column
+    private Double distance;
+
     public Neighbor(){
         super();
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 
     public Point getPoint() {

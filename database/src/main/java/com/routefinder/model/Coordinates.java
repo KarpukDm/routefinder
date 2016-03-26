@@ -32,6 +32,10 @@ public class Coordinates implements Persistable<Integer> {
         super();
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Point getPoint() {
         return point;
     }
