@@ -29,6 +29,11 @@ public class Feedback implements Persistable<Integer> {
         super();
     }
 
+    public Feedback(String email) {
+        super();
+        this.email = email;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
