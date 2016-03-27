@@ -27,10 +27,10 @@ public class Account implements Persistable<Integer> {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private List<Feedback> feedbacks;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name="account_role",
-            joinColumns = @JoinColumn(name="account_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName="id")
+            joinColumns = @JoinColumn(name="account_id", referencedColumnName="id", updatable = false, nullable = false),
+            inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName="id", updatable = false, nullable = false)
     )
     private List<Role> roles;
 

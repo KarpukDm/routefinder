@@ -4,6 +4,7 @@ import com.routefinder.model.Account;
 import com.routefinder.model.Rating;
 import com.routefinder.model.Role;
 import com.routefinder.repository.AccountRepository;
+import com.routefinder.repository.RoleRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,16 +26,19 @@ public class AppTest {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Before
     public void setUp() {
 
         Account user = new Account();
         List<Role> userRole = new ArrayList<>();
         userRole.add(new Role("ROLE_ADMIN"));
-        user.setRoles(userRole);
+
         user.setLogin("dima");
         user.setPassword("qwerty");
-        List<Rating> rs = new ArrayList<>();
+        user.setRoles(userRole);
 
         accountRepository.save(user);
 
@@ -49,6 +53,7 @@ public class AppTest {
 
     @After
     public void clean() {
-
+        accountRepository.deleteAll();
+        roleRepository.deleteAll();
     }
 }
