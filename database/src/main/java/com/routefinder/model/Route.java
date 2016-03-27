@@ -26,10 +26,10 @@ public class Route implements Persistable<Integer> {
     )
     private List<Point> points;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "route")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "route")
     private List<Comment> comments;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "route")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "route")
     private List<Rating> ratings;
 
     @OneToOne(optional = false)

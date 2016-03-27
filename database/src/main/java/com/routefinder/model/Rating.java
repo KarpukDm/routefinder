@@ -21,7 +21,7 @@ public class Rating implements Persistable<Integer> {
     @OneToOne(optional = false, mappedBy="rating")
     private Account account;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 

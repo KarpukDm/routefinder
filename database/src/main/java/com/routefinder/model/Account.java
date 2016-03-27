@@ -8,28 +8,23 @@ import java.util.List;
  * Created by karpukdm on 26.03.16.
  */
 @Entity
-@Table(
-        name = "account",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "uc_account_login", columnNames = {"login"})
-        }
-)
+@Table(name = "account")
 public class Account implements Persistable<Integer> {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_gen")
-    @SequenceGenerator(name = "account_gen", sequenceName = "account_id_sec", allocationSize = 1)
-    @Column(name = "id", unique = true, nullable = false)
+    @SequenceGenerator(name = "account_seq", sequenceName = "account_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "login", nullable = false, length = 20)
+    @Column(name = "login", unique = true, nullable = false)
     private String login;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private List<Feedback> feedbacks;
 
     @ManyToMany
@@ -43,13 +38,13 @@ public class Account implements Persistable<Integer> {
     @JoinColumn(name="rating_id", unique = true, nullable = false, updatable = false)
     private Rating rating;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private List<Comment> comments;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private List<MyRoute> myRoutes;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private List<FavoriteRoute> favoriteRoutes;
 
     public Account(){
@@ -137,4 +132,5 @@ public class Account implements Persistable<Integer> {
     public boolean isNew() {
         return false;
     }
+
 }

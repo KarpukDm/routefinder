@@ -19,10 +19,10 @@ public class Point implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "point")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "point")
     private List<Neighbor> neighbors;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "points")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "points")
     private List<Route> routes;
 
     @OneToOne(optional = false)

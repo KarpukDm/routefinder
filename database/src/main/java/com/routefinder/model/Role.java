@@ -14,7 +14,7 @@ public class Role implements Persistable<Integer> {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_gen")
     @SequenceGenerator(name = "role_gen", sequenceName = "role_id_sec", allocationSize = 1)
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
@@ -22,7 +22,7 @@ public class Role implements Persistable<Integer> {
     @Column
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
     private List<Account> users;
 
     public Role(){

@@ -22,10 +22,10 @@ public class RouteInfo implements Persistable<Integer> {
     @OneToOne(optional = false, mappedBy="routeInfo")
     private Route route;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "routeInfo")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "routeInfo")
     private List<Statistics> statistics;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "routeInfo")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "routeInfo")
     private List<Schedule> schedules;
 
     public RouteInfo(){

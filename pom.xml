@@ -43,6 +43,8 @@
         <hibernate.version>4.3.5.Final</hibernate.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <dbunit.version>2.5.0</dbunit.version>
+        <spring-test-dbunit.version>1.2.1</spring-test-dbunit.version>
     </properties>
 
     <dependencies>
@@ -104,10 +106,9 @@
 
         <!-- Other Libs -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>${dbunit.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
