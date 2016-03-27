@@ -1,8 +1,6 @@
 package com.routefinder;
 
-import com.routefinder.model.Account;
-import com.routefinder.model.Rating;
-import com.routefinder.model.Role;
+import com.routefinder.model.*;
 import com.routefinder.repository.AccountRepository;
 import com.routefinder.repository.RoleRepository;
 import org.junit.After;
