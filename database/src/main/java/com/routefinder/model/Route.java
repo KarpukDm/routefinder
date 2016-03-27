@@ -36,7 +36,7 @@ public class Route implements Persistable<Integer> {
     @JoinColumn(name="route_info_id", unique = true, nullable = false, updatable = false)
     private RouteInfo routeInfo;
 
-    @Column
+    @Column(nullable = false)
     private Double distance;
 
     public Route(){

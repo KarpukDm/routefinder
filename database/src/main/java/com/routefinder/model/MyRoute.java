@@ -22,7 +22,7 @@ public class MyRoute implements Persistable<Integer> {
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
-    @Column
+    @Column(nullable = false)
     private Integer route_id;
 
     public MyRoute(){

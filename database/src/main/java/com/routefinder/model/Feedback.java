@@ -22,7 +22,7 @@ public class Feedback implements Persistable<Integer> {
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
-    @Column
+    @Column(nullable = false)
     private String email;
 
     public Feedback(){

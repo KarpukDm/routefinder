@@ -22,7 +22,7 @@ public class Neighbor implements Persistable<Integer> {
     @JoinColumn(name = "point_id", nullable = false)
     private Point point;
 
-    @Column
+    @Column(nullable = false)
     private Double distance;
 
     public Neighbor(){

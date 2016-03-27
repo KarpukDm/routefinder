@@ -29,7 +29,7 @@ public class Point implements Persistable<Integer> {
     @JoinColumn(name="coordinates_id", unique = true, nullable = false, updatable = false)
     private Coordinates coordinates;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
     public Point(){

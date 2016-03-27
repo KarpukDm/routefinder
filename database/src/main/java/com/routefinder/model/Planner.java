@@ -19,13 +19,13 @@ public class Planner implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @Column
+    @Column(nullable = false)
     private Integer account_id;
 
-    @Column
+    @Column(nullable = false)
     private String datetime;
 
-    @Column
+    @Column(nullable = false)
     private String message;
 
     public Planner(){

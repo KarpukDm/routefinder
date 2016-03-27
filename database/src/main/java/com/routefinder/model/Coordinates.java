@@ -22,10 +22,10 @@ public class Coordinates implements Persistable<Integer> {
     @JoinColumn(name="coordinates_id", unique = true, nullable = false, updatable = false)
     private Point point;
 
-    @Column
+    @Column(nullable = false)
     private Double lat;
 
-    @Column
+    @Column(nullable = false)
     private Double lng;
 
     public Coordinates(){

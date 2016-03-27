@@ -19,7 +19,7 @@ public class Role implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")

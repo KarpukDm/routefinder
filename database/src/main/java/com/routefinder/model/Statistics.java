@@ -22,10 +22,10 @@ public class Statistics implements Persistable<Integer> {
     @JoinColumn(name = "route_info_id", nullable = false)
     private RouteInfo routeInfo;
 
-    @Column
+    @Column(nullable = false)
     private Integer counter;
 
-    @Column
+    @Column(nullable = false)
     private String month;
 
     public Statistics(){

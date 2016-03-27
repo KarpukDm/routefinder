@@ -26,7 +26,7 @@ public class Comment implements Persistable<Integer> {
     @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 
-    @Column
+    @Column(nullable = false)
     private String message;
 
     public Comment(){

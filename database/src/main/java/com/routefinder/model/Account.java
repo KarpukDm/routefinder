@@ -34,9 +34,8 @@ public class Account implements Persistable<Integer> {
     )
     private List<Role> roles;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name="rating_id", unique = true, nullable = false, updatable = false)
-    private Rating rating;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    private List<Rating> ratings;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private List<Comment> comments;
@@ -65,12 +64,12 @@ public class Account implements Persistable<Integer> {
         this.feedbacks = feedbacks;
     }
 
-    public Rating getRating() {
-        return rating;
+    public List<Rating> getRatings() {
+        return ratings;
     }
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     public List<Comment> getComments() {

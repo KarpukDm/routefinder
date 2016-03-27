@@ -18,14 +18,15 @@ public class Rating implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @OneToOne(optional = false, mappedBy="rating")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 
-    @Column
+    @Column(nullable = false)
     private Double value;
 
     public Rating(){

@@ -1,6 +1,7 @@
 package com.routefinder;
 
 import com.routefinder.model.Account;
+import com.routefinder.model.Rating;
 import com.routefinder.model.Role;
 import com.routefinder.repository.AccountRepository;
 import org.junit.After;
@@ -33,6 +34,7 @@ public class AppTest {
         user.setRoles(userRole);
         user.setLogin("dima");
         user.setPassword("qwerty");
+        List<Rating> rs = new ArrayList<>();
 
         accountRepository.save(user);
 
