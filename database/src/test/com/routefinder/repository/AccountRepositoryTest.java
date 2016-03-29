@@ -20,7 +20,7 @@ import java.util.List;
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:database-config/database-context.xml")
-public class AccountRepositoryTestTest extends GenericRepositoryTest {
+public class AccountRepositoryTest extends GenericRepositoryTest {
 
     @Autowired
     private AccountRepository accountRepository;

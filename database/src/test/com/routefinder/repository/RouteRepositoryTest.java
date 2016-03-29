@@ -5,5 +5,5 @@ import com.routefinder.common.GenericRepositoryTest;
 /**
  * Created by karpukdm on 27.03.16.
  */
-public class PointRepositoryTestTest extends GenericRepositoryTest {
+public class RouteRepositoryTest extends GenericRepositoryTest {
 }
