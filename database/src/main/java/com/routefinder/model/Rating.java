@@ -33,6 +33,11 @@ public class Rating implements Persistable<Integer> {
         super();
     }
 
+    public Rating(Double value){
+        super();
+        this.value = value;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

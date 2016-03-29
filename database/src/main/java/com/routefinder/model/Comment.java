@@ -33,6 +33,11 @@ public class Comment implements Persistable<Integer> {
         super();
     }
 
+    public Comment(String message){
+        super();
+        this.message = message;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

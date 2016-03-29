@@ -32,6 +32,12 @@ public class Schedule implements Persistable<Integer> {
         super();
     }
 
+    public Schedule(String day, String time){
+        super();
+        this.day = day;
+        this.time = time;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

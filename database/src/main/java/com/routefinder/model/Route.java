@@ -43,6 +43,11 @@ public class Route implements Persistable<Integer> {
         super();
     }
 
+    public Route(Double distance){
+        super();
+        this.distance = distance;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

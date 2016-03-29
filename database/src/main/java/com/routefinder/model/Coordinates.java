@@ -28,6 +28,12 @@ public class Coordinates implements Persistable<Integer> {
     @Column(nullable = false)
     private Double lng;
 
+    public Coordinates(Double lat, Double lng){
+        super();
+        this.lat = lat;
+        this.lng = lng;
+    }
+
     public Coordinates(){
         super();
     }

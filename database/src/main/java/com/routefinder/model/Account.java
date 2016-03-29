@@ -8,7 +8,10 @@ import java.util.List;
  * Created by karpukdm on 26.03.16.
  */
 @Entity
-@Table(name = "account")
+@Table(name = "account",
+    uniqueConstraints = {
+            @UniqueConstraint(name = "account_login", columnNames = {"login"})
+    })
 public class Account implements Persistable<Integer> {
     private static final long serialVersionUID = 1L;
 

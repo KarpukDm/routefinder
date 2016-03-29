@@ -32,6 +32,12 @@ public class Statistics implements Persistable<Integer> {
         super();
     }
 
+    public Statistics(Integer counter, String month){
+        super();
+        this.counter = counter;
+        this.month = month;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

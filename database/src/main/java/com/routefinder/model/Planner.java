@@ -32,6 +32,13 @@ public class Planner implements Persistable<Integer> {
         super();
     }
 
+    public Planner(Integer account_id, String datetime, String message){
+        super();
+        this.account_id = account_id;
+        this.datetime = datetime;
+        this.message = message;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

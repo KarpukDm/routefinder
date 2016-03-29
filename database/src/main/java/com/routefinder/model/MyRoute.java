@@ -28,6 +28,11 @@ public class MyRoute implements Persistable<Integer> {
     public MyRoute(){
         super();
     }
+    
+    public MyRoute(Integer route_id){
+        super();
+        this.route_id = route_id;
+    }
 
     public Integer getRoute_id() {
         return route_id;

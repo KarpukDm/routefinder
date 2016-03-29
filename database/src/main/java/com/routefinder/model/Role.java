@@ -30,6 +30,7 @@ public class Role implements Persistable<Integer> {
     }
 
     public Role(String name){
+        super();
         this.name = name;
     }
 

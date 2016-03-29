@@ -25,6 +25,11 @@ public class FavoriteRoute implements Persistable<Integer> {
     @Column
     private Integer route_id;
 
+    public FavoriteRoute(Integer route_id){
+        super();
+        this.route_id =  route_id;
+    }
+
     public FavoriteRoute(){
         super();
     }
