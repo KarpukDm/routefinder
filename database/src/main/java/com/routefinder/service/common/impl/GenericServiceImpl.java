@@ -103,11 +103,11 @@ public abstract class GenericServiceImpl<T extends Persistable<ID>, ID extends S
 
     @Override
     public <S extends T> S save(S entity) {
-        return save(entity);
+        return repository.save(entity);
     }
 
     @Override
     public T saveAndFlush(T entity) {
-        return saveAndFlush(entity);
+        return repository.saveAndFlush(entity);
     }
 }

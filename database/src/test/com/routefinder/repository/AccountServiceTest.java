@@ -1,8 +1,9 @@
 package com.routefinder.repository;
 
-import com.routefinder.common.GenericRepositoryTest;
+import com.routefinder.common.GenericServiceTest;
 import com.routefinder.model.Account;
 import com.routefinder.model.Role;
+import com.routefinder.service.AccountService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,14 +21,14 @@ import java.util.List;
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:database-config/database-context.xml")
-public class AccountRepositoryTest extends GenericRepositoryTest {
+public class AccountServiceTest extends GenericServiceTest {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @Before
     public void before(){
-        accountRepository.deleteAll();
+        accountService.deleteAll();
     }
 
     @Test
@@ -37,32 +38,20 @@ public class AccountRepositoryTest extends GenericRepositoryTest {
         roles.add(new Role("ROLE_ADMIN"));
         account.setRoles(roles);
 
-        accountRepository.save(account);
-    }
-
-    @Test
-    public void findById(){
-        Account user = accountRepository.findOneAccountById(1);
-        if(user != null) {
-            System.out.println(user.toString());
-        }
+        accountService.save(account);
     }
 
     @Test
     public void findByLogin(){
-        Account user = accountRepository.findOneAccountByLogin("KarpukDM");
+        Account user = accountService.findOneAccountByLogin("KarpukDM");
         if(user != null) {
             System.out.println(user.toString());
         }
     }
 
     @Test
-    public void deleteById(){
-        accountRepository.deleteOneById(1);
+    public void counter(){
+        System.out.println(accountService.count());
     }
 
-    @Test
-    public void deleteByLogin(){
-        accountRepository.deleteOneByLogin("KarpukDM");
-    }
 }

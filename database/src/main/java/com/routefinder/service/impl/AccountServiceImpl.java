@@ -16,4 +16,23 @@ public class AccountServiceImpl extends GenericServiceImpl<Account, Integer, Acc
         implements AccountService{
 
 
+    @Override
+    public Account findOneAccountById(Integer id) {
+        return repository.findOneAccountById(id);
+    }
+
+    @Override
+    public Account findOneAccountByLogin(String login) {
+        return repository.findOneAccountByLogin(login);
+    }
+
+    @Override
+    public void deleteOneById(Integer id) {
+        repository.deleteOneById(id);
+    }
+
+    @Override
+    public void deleteOneByLogin(String login) {
+        repository.deleteOneByLogin(login);
+    }
 }

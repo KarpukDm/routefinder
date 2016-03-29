@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by karpukdm on 29.03.16.
  */
 
-public class GenericRepositoryTest {
-
-    @Autowired
-    private AccountRepository accountRepository;
+public class GenericServiceTest {
 
     @Before
     public void before(){
