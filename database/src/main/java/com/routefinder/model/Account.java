@@ -135,4 +135,12 @@ public class Account implements Persistable<Integer> {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
