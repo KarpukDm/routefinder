@@ -1,6 +1,7 @@
 package com.routefinder.repository;
 
 import com.routefinder.model.Account;
+import com.routefinder.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -7,21 +7,21 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses( {
 
-        AccountRepositoryTest.class,
-        CommentRepositoryTest.class,
-        CommentRepositoryTest.class,
-        FavoriteRouteRepositoryTest.class,
-        FeedbackRepositoryTest.class,
-        MyRouteRepositoryTest.class,
-        NeighborRepositoryTest.class,
-        PlannerRepositoryTest.class,
-        PointRepositoryTest.class,
-        RatingRepositoryTest.class,
-        RoleRepositoryTest.class,
-        RouteInfoRepositoryTest.class,
-        RouteRepositoryTest.class,
-        ScheduleRepositoryTest.class,
-        StatisticsRepositoryTest.class
+        AccountRepositoryTestTest.class,
+        CommentRepositoryTestTest.class,
+        CommentRepositoryTestTest.class,
+        FavoriteRouteRepositoryTestTest.class,
+        FeedbackRepositoryTestTest.class,
+        MyRouteRepositoryTestTest.class,
+        NeighborRepositoryTestTest.class,
+        PlannerRepositoryTestTest.class,
+        PointRepositoryTestTest.class,
+        RatingRepositoryTestTest.class,
+        RoleRepositoryTestTest.class,
+        RouteInfoRepositoryTestTest.class,
+        RouteRepositoryTestTest.class,
+        ScheduleRepositoryTestTest.class,
+        StatisticsRepositoryTestTest.class
 })
 
 public class AppTest {

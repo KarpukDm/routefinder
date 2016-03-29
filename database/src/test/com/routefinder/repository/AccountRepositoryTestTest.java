@@ -1,5 +1,6 @@
 package com.routefinder.repository;
 
+import com.routefinder.common.GenericRepositoryTest;
 import com.routefinder.model.Account;
 import com.routefinder.model.Role;
 import org.junit.Before;
@@ -19,15 +20,15 @@ import java.util.List;
 @DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:database-config/database-context.xml")
-public class AccountRepositoryTest{
+public class AccountRepositoryTestTest extends GenericRepositoryTest {
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Before
     public void before(){
         accountRepository.deleteAll();
     }
-
-    @Autowired
-    private AccountRepository accountRepository;
 
     @Test
     public void addAccount(){
@@ -40,16 +41,19 @@ public class AccountRepositoryTest{
     }
 
     @Test
-    public void findByLogin(){
-        Account user = accountRepository.findOneAccountByLogin("KarpukDM");
+    public void findById(){
+        Account user = accountRepository.findOneAccountById(1);
         if(user != null) {
             System.out.println(user.toString());
         }
     }
 
     @Test
-    public void findByRole(){
-        List<Account> accounts = accountRepository.findByRole("ROLE_ADMIN");
+    public void findByLogin(){
+        Account user = accountRepository.findOneAccountByLogin("KarpukDM");
+        if(user != null) {
+            System.out.println(user.toString());
+        }
     }
 
     @Test
