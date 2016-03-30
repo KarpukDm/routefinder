@@ -4,6 +4,8 @@ import com.routefinder.common.GenericServiceTest;
 import com.routefinder.model.Account;
 import com.routefinder.model.Role;
 import com.routefinder.service.AccountService;
+import com.routefinder.service.common.GenericService;
+import com.routefinder.service.impl.AccountServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

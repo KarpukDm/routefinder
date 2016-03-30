@@ -14,7 +14,8 @@
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="com.routefinder"/>
+    <context:component-scan base-package="com.routefinder.service" />
+    <context:component-scan base-package="com.routefinder.repository" />
 
     <tx:annotation-driven mode="proxy" transaction-manager="transactionManager"/>
 
@@ -27,7 +28,7 @@
         <property name="password" value="${db.password}"/>
     </bean>
 
-    <jpa:repositories base-package="com.routefinder"/>
+    <jpa:repositories base-package="com.routefinder.repository"/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
@@ -47,10 +48,11 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
         <property name="persistenceUnitName" value="hib-jpa-persistence-unit"/>
-        <property name="packagesToScan" value="com.routefinder"/>
+        <property name="packagesToScan" value="com.routefinder.repository"/>
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
         <property name="jpaDialect" ref="jpaDialect"/>
     </bean>
+
 
 </beans>
