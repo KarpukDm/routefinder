@@ -4,6 +4,7 @@ import com.routefinder.model.Account;
 import com.routefinder.model.Role;
 import com.routefinder.repository.AccountRepository;
 import com.routefinder.service.AccountService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,14 @@ public class AppTest {
     @Autowired
     public AccountService accountService;
 
+    @Before
+    public void before(){
+        accountService.deleteAll();
+    }
+
     @Test
     public void test2(){
-        Account account = new Account("1111", "Slava");
+        Account account = new Account("admin", "KarpukDM");
         List<Role> roles = new LinkedList<>();
         roles.add(new Role("ROLE_ADMIN"));
         account.setRoles(roles);
