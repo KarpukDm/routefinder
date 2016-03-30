@@ -3,7 +3,6 @@ package com.routefinder.model;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by karpukdm on 26.03.16.
