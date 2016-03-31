@@ -13,6 +13,7 @@
         <module>repositories</module>
         <module>services</module>
         <module>models</module>
+	    <module>tests</module>
     </modules>
 
         <packaging>pom</packaging>
