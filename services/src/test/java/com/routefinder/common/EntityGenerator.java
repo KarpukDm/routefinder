@@ -62,10 +62,31 @@ public class EntityGenerator {
     private  StatisticsService statisticsService;
 
     public Account getAccountEntity(){
-        Account account = new Account("admin", "KarpukDM");
+        Account account = new Account();
+        account.setLogin("KarpukDMITRY");
+        account.setPassword("admin");
+
         List<Role> roles = new LinkedList<>();
         roles.add(new Role("ROLE_ADMIN"));
+        roles.add(new Role("ROLE_ADMIN"));
         account.setRoles(roles);
+
+        List<Feedback> feedbacks = new LinkedList<>();
+        feedbacks.add(new Feedback("email@email.com"));
+        account.setFeedbacks(feedbacks);
+
+        Route route = new Route();
+        RouteInfo routeInfo = new RouteInfo();
+        route.setRouteInfo(routeInfo);
+
+        List<FavoriteRoute> favoriteRoutes = new LinkedList<>();
+        favoriteRoutes.add(new FavoriteRoute(route.getId()));
+
+        List<Comment> comments = new LinkedList<>();
+        comments.add(new Comment("message"));
+
+        route.setComments(comments);
+        account.setComments(comments);
         return account;
     }
 
