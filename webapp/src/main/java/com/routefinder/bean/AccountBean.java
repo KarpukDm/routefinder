@@ -2,6 +2,7 @@ package com.routefinder.bean;
 
 import com.routefinder.model.Account;
 import com.routefinder.model.Role;
+import com.routefinder.model.Roles;
 import com.routefinder.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,9 +39,9 @@ public class AccountBean implements Serializable {
     public void signUp(){
 
         if(this.repeatedPassword.equals(password)){
-            if(accountService.findOneAccountByLogin(login) == null){
+            if(!isExist(login)){
                 List<Role> roles = new LinkedList<Role>();
-                roles.add(new Role("ROLE_USER"));
+                roles.add(new Role(Roles.getRoleUser()));
 
                 Account newUser = new Account();
                 newUser.setPassword(password);
@@ -50,6 +51,10 @@ public class AccountBean implements Serializable {
                 accountService.save(newUser);
             }
         }
+    }
+
+    private boolean isExist(String login){
+        return accountService.findOneAccountByLogin(login) != null;
     }
 
     public String getRepeatedPassword() {

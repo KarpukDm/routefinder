@@ -35,4 +35,5 @@ public class AccountServiceImpl extends GenericServiceImpl<Account, Integer, Acc
     public void deleteOneByLogin(String login) {
         repository.deleteOneByLogin(login);
     }
+
 }

@@ -14,4 +14,5 @@ public interface AccountService extends GenericService<Account, Integer> {
 
     void deleteOneById(Integer id);
     void deleteOneByLogin(String login);
+
 }
