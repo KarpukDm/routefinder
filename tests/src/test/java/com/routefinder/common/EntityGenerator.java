@@ -71,9 +71,9 @@ public class EntityGenerator {
         roles.add(new Role("ROLE_ADMIN"));
         account.setRoles(roles);
 
-        List<Feedback> feedbacks = new LinkedList<>();
-        feedbacks.add(new Feedback("email@email.com"));
-        account.setFeedbacks(feedbacks);
+        List<Address> addresses = new LinkedList<>();
+        addresses.add(new Address("email@email.com"));
+        account.setAddresses(addresses);
 
         Route route = new Route();
         RouteInfo routeInfo = new RouteInfo();
@@ -104,8 +104,8 @@ public class EntityGenerator {
         return new FavoriteRoute(1);
     }
 
-    public Feedback getFeedbackEntity(){
-        return new Feedback("email@email.com");
+    public Address getFeedbackEntity(){
+        return new Address("email@email.com");
     }
 
     public MyRoute getMyRouteEntity(){
@@ -137,6 +137,7 @@ public class EntityGenerator {
     }
 
     public Route getRouteEntity(){
+
         return new Route(12.2);
     }
 

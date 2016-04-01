@@ -28,7 +28,7 @@ public class Account implements Persistable<Integer> {
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
-    private List<Feedback> feedbacks;
+    private List<Address> addresses;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name="account_role",
@@ -59,12 +59,12 @@ public class Account implements Persistable<Integer> {
         this.password = password;
     }
 
-    public List<Feedback> getFeedbacks() {
-        return feedbacks;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setFeedbacks(List<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public List<Rating> getRatings() {

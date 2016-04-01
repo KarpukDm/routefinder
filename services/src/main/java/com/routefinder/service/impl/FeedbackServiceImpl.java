@@ -1,6 +1,6 @@
 package com.routefinder.service.impl;
 
-import com.routefinder.model.Feedback;
+import com.routefinder.model.Address;
 import com.routefinder.repository.FeedbackRepository;
 import com.routefinder.service.FeedbackService;
 import com.routefinder.service.common.impl.GenericServiceImpl;
@@ -12,6 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class FeedbackServiceImpl extends GenericServiceImpl<Feedback, Integer, FeedbackRepository>
+public class FeedbackServiceImpl extends GenericServiceImpl<Address, Integer, FeedbackRepository>
         implements FeedbackService {
 }

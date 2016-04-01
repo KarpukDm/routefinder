@@ -33,7 +33,7 @@ public class Route implements Persistable<Integer> {
     private List<Rating> ratings;
 
     @OneToOne(optional = false)
-    @JoinColumn(name="route_info_id", unique = true, nullable = false, updatable = false)
+    @JoinColumn(name="route_info_id", unique = true, updatable = false)
     private RouteInfo routeInfo;
 
     @Column(nullable = false)

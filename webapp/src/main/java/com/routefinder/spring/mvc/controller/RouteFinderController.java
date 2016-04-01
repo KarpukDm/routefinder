@@ -19,4 +19,10 @@ public class RouteFinderController {
 
         return "profile";
     }
+
+    @RequestMapping("/signup")
+    public String registrate(Model model) {
+
+        return "registration";
+    }
 }

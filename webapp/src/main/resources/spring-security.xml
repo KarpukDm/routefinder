@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:bean="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <bean:http auto-config="true" use-expressions="true">
+        <bean:intercept-url pattern="/templates/profile.xhtml" access="permitAll"/>
+        <bean:form-login login-page="/templates/login.xhtml" default-target-url="/templates/main.xhtml"
+                         authentication-failure-url="/templates/login.xhtml?auth=fail"/>
+        <bean:logout logout-success-url="/templates/login.xhtml?logout"/>
+    </bean:http>
+
+    <bean:authentication-manager>
+        <bean:authentication-provider user-service-ref="customUserDetailsService"/>
+    </bean:authentication-manager>
+
+    <import resource="classpath:service-config/service-spring-config.xml"/>
+
+    <context:component-scan base-package="com.routefinder"/>
+
+</beans>

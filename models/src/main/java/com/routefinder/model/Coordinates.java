@@ -18,8 +18,7 @@ public class Coordinates implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name="coordinates_id", unique = true, nullable = false, updatable = false)
+    @OneToOne(optional = false, mappedBy="coordinates")
     private Point point;
 
     @Column(nullable = false)

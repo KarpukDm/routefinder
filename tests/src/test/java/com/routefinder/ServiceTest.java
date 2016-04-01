@@ -14,7 +14,7 @@ import org.junit.runners.Suite;
         CommentServiceTest.class,
         CoordinatestServiceTest.class,
         FavoriteRouteServiceTest.class,
-        FeedbackServiceTest.class,
+        AddressServiceTest.class,
         MyRouteServiceTest.class,
         NeighborServiceTest.class,
         PlannerServiceTest.class,

@@ -8,13 +8,13 @@ import javax.persistence.*;
  * Created by karpukdm on 26.03.16.
  */
 @Entity
-@Table(name = "feedback")
-public class Feedback implements Persistable<Integer> {
+@Table(name = "address")
+public class Address implements Persistable<Integer> {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "feedback_gen")
-    @SequenceGenerator(name = "feedback_gen", sequenceName = "feedback_id_sec", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_gen")
+    @SequenceGenerator(name = "address_gen", sequenceName = "address_id_sec", allocationSize = 1)
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
@@ -25,11 +25,11 @@ public class Feedback implements Persistable<Integer> {
     @Column(nullable = false)
     private String email;
 
-    public Feedback(){
+    public Address(){
         super();
     }
 
-    public Feedback(String email) {
+    public Address(String email) {
         super();
         this.email = email;
     }
