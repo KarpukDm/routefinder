@@ -43,12 +43,13 @@
         </build>
 
         <properties>
-            <spring.version>4.2.5.RELEASE</spring.version>
+            <spring.version>4.0.3.RELEASE</spring.version>
             <hibernate.version>4.3.5.Final</hibernate.version>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
             <dbunit.version>2.5.0</dbunit.version>
             <spring-test-dbunit.version>1.2.1</spring-test-dbunit.version>
+            <servletapi.version>2.5</servletapi.version>
         </properties>
 
         <dependencies>
@@ -158,14 +159,16 @@
                 <version>1.2</version>
             </dependency>
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>2.5</version>
-            </dependency>
-            <dependency>
                 <groupId>javax.servlet.jsp</groupId>
                 <artifactId>jsp-api</artifactId>
                 <version>2.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servletapi.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
 </project>
