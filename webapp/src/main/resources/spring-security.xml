@@ -11,10 +11,20 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
 
     <bean:http auto-config="true" use-expressions="true">
-        <bean:intercept-url pattern="/templates/profile.xhtml" access="permitAll"/>
+        <bean:intercept-url pattern="/templates/profile.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/creating-route.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/favorites.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/home.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/my-comments.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/my-notices.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/my-routes.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/planned-routes.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/route.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/" access="hasAuthority('ROLE_USER')"/>
         <bean:form-login login-page="/templates/login.xhtml" default-target-url="/templates/main.xhtml"
                          authentication-failure-url="/templates/login.xhtml?auth=fail"/>
         <bean:logout logout-success-url="/templates/login.xhtml?logout"/>
+        <bean:access-denied-handler error-page="/templates/acces-deneid.xhtml"/>
     </bean:http>
 
     <bean:authentication-manager>
