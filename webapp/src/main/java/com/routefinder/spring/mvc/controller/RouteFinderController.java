@@ -25,4 +25,10 @@ public class RouteFinderController {
 
         return "registration";
     }
+
+    @RequestMapping("/login")
+    public String login(Model model) {
+
+        return "registration";
+    }
 }
