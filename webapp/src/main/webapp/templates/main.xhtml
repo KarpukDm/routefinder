@@ -4,17 +4,27 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xsi:schemaLocation="http://java.sun.com/jsf/core
         http://java.sun.com/jsf/core ">
 <h:head>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
-<h:body>
-    <f:view>
+<f:view>
 
+        <h:panelGrid columns="2" style="width: 100%;">
+            <h:panelGroup>
+                <form action="${pageContext.request.contextPath}/j_spring_security_check" method="post" class="sign-up">
+                    <h1 class="sign-up-title">Sign in</h1>
+
+                    <h:inputText class="sign-up-input" a:placeholder="Username" id="j_username" required="true"/>
+                    <h:inputSecret class="sign-up-input" a:placeholder="Password" id="j_password" required="true"/>
+
+                    <input type="submit" value="Log in" class="sign-up-button"/>
+                </form>
+            </h:panelGroup>
             <ui:include src="/templates-components/registration-form.xhtml"/>
+        </h:panelGrid>
 
-    </f:view>
-</h:body>
+</f:view>
 </html>

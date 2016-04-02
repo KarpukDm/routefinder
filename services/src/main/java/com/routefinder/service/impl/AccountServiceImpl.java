@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by karpukdm on 29.03.16.
  */
 @Service
-@Qualifier("accountService")
+//@Qualifier("accountService")
 @Transactional
 public class AccountServiceImpl extends GenericServiceImpl<Account, Integer, AccountRepository>
         implements AccountService{

@@ -5,24 +5,19 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:a="http://java.sun.com/jsf/composite">
+<h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
 <f:view>
-    <h:outputLabel value="Hello, world"/>
 
-    <form action="${pageContext.request.contextPath}/j_spring_security_check" method="post">
-        <div>
-            <div>
-                <h:outputText value="Spring Security"/>
-            </div>
+    <form action="${pageContext.request.contextPath}/j_spring_security_check" method="post" class="sign-up">
+        <h1 class="sign-up-title">Sign in</h1>
 
-            <h:panelGrid columns="1" style="text-align: center">
-                <h:inputText a:placeholder="Username" id="j_username" required="true"/>
-                <h:inputSecret a:placeholder="Password" id="j_password" required="true"/>
-            </h:panelGrid>
+        <h:inputText class="sign-up-input" a:placeholder="Username" id="j_username" required="true"/>
+        <h:inputSecret class="sign-up-input" a:placeholder="Password" id="j_password" required="true"/>
 
-            <h:panelGrid columns="2" style="text-align: center">
-                <input type="submit" value="Login"/>
-            </h:panelGrid>
-        </div>
+        <input type="submit" value="Log in" class="sign-up-button"/>
     </form>
+
 </f:view>
 </html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+
+    <ui:composition>
+
+        <form action="${pageContext.request.contextPath}/j_spring_security_check" method="post" class="sign-up">
+            <h1 class="sign-up-title">Sign in</h1>
+
+            <h:inputText class="sign-up-input" a:placeholder="Username" id="j_username" required="true"/>
+            <h:inputSecret class="sign-up-input" a:placeholder="Password" id="j_password" required="true"/>
+
+            <input type="submit" value="Log in" class="sign-up-button"/>
+        </form>
+
+    </ui:composition>
+
+</html>

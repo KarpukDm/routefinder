@@ -24,7 +24,7 @@
         <bean:intercept-url pattern="/profile" access="hasAuthority('ROLE_USER')"/>
         <bean:intercept-url pattern="/createroute" access="hasAuthority('ROLE_USER')"/>
 
-        <bean:form-login login-page="/templates/login.xhtml" default-target-url="/templates/main.xhtml"
+        <bean:form-login login-page="/templates/login.xhtml" default-target-url="/templates/profile.xhtml"
                          authentication-failure-url="/templates/login.xhtml?auth=fail"/>
         <bean:logout logout-success-url="/templates/login.xhtml?logout"/>
         <bean:access-denied-handler error-page="/templates/acces-deneid.xhtml"/>
