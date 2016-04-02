@@ -1,17 +1,17 @@
 CREATE TABLE account(
   id SERIAL PRIMARY KEY NOT NULL,
-  login CHAR(50) UNIQUE NOT NULL,
-  password CHAR(50) NOT NULL
+  login TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
 );
 
 CREATE TABLE role(
   id SERIAL PRIMARY KEY NOT NULL,
-  name CHAR(25) NOT NULL
+  name TEXT NOT NULL
 );
 
 CREATE TABLE feedback(
   id SERIAL PRIMARY KEY NOT NULL,
-  email CHAR(50) NOT NULL
+  email TEXT NOT NULL
 );
 
 CREATE TABLE favorite_route(
@@ -62,18 +62,18 @@ CREATE TABLE route_info(
 CREATE TABLE statistics(
   id SERIAL PRIMARY KEY NOT NULL,
   counter INTEGER NOT NULL,
-  month CHAR(20)
+  month TEXT
 );
 
 CREATE TABLE schedule(
   id SERIAL PRIMARY KEY NOT NULL,
-  day CHAR(20),
-  time CHAR(20) NOT NULL
+  day TEXT,
+  time TEXT NOT NULL
 );
 
 CREATE TABLE planner(
   id SERIAL PRIMARY KEY NOT NULL,
   account_id INTEGER NOT NULL,
-  datetime CHAR(20) NOT NULL,
+  datetime TEXT NOT NULL,
   message TEXT
 );
