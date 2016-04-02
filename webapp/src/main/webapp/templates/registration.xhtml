@@ -1,15 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://java.sun.com/jsf/composite">
+<h:head>
     <title>Title</title>
-</head>
+</h:head>
 <h:body>
     <h:form>
     <h:panelGrid columns="2">
+
         <h:outputText value="Логин"/>
-        <h:inputText value="#{accountBean.login}"/>
+        <h:inputText  id="login" value="#{accountBean.login}" a:placeholder="login">
+            <f:validator validatorId="login"/>
+            <f:ajax event="blur" execute="@this" render="loginError"/>
+        </h:inputText>
+        <h:message for="login" id="loginError" style="color: red"/>
 
         <h:outputText value="Пароль"/>
         <h:inputSecret value="#{accountBean.password}"/>
