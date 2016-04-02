@@ -11,21 +11,21 @@
     <h:panelGrid columns="3">
 
         <h:outputText value="Логин"/>
-        <h:inputText  id="login" value="#{accountBean.login}" required="true" a:placeholder="login">
+        <h:inputText  id="login" value="#{accountBean.login}"  a:placeholder="login">
             <f:validator validatorId="login"/>
             <f:ajax event="blur" execute="@this" render="loginError"/>
         </h:inputText>
         <h:message for="login" id="loginError" style="color: red"/>
 
         <h:outputText value="Пароль"/>
-        <h:inputText  id="password" value="#{accountBean.password}" required="true" a:placeholder="password">
+        <h:inputText  id="password" value="#{accountBean.password}" a:placeholder="password">
             <f:validator validatorId="password"/>
             <f:ajax event="blur" execute="@this" render="passwordError"/>
         </h:inputText>
         <h:message for="password" id="passwordError" style="color: red"/>
 
         <h:outputText value="Пароль"/>
-        <h:inputText  id="repeatedPassword" value="#{accountBean.repeatedPassword}" required="true" a:placeholder="repeatedPassword">
+        <h:inputText  id="repeatedPassword" value="#{accountBean.repeatedPassword}" a:placeholder="repeatedPassword">
             <f:validator validatorId="repeatedPassword"/>
             <f:ajax event="blur" execute="@this" render="repeatedPasswordError"/>
         </h:inputText>

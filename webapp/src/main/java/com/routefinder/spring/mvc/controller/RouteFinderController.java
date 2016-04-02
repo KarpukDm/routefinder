@@ -40,4 +40,10 @@ public class RouteFinderController {
 
         return "profile";
     }
+
+    @RequestMapping("/createroute")
+    public String createroute(Model model) {
+
+        return "creating-route";
+    }
 }

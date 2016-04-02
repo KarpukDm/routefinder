@@ -1,9 +1,6 @@
 package com.routefinder.validator;
 
-import com.routefinder.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -18,7 +15,8 @@ import java.io.Serializable;
  */
 @FacesValidator("login")
 @Component
-public class LoginValidator implements Validator{
+public class LoginValidator implements Validator, Serializable{
+    private static final long serialVersionUID = 1L;
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {

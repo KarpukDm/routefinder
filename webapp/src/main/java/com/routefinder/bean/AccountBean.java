@@ -5,22 +5,14 @@ import com.routefinder.model.Role;
 import com.routefinder.model.Roles;
 import com.routefinder.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.FacesValidator;
-import javax.faces.validator.Validator;
-import javax.faces.validator.ValidatorException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,8 +27,10 @@ import java.util.List;
 
 //подключить el-resolver faces-config.
 public class AccountBean implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     //@ManagedProperty("#{accountService}")
+    @Qualifier("accountService")
     @Autowired
     private AccountService accountService;
 
