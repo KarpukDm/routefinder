@@ -8,20 +8,29 @@
 </h:head>
 <h:body>
     <h:form>
-    <h:panelGrid columns="2">
+    <h:panelGrid columns="3">
 
         <h:outputText value="Логин"/>
-        <h:inputText  id="login" value="#{accountBean.login}" a:placeholder="login">
+        <h:inputText  id="login" value="#{accountBean.login}" required="true" a:placeholder="login">
             <f:validator validatorId="login"/>
             <f:ajax event="blur" execute="@this" render="loginError"/>
         </h:inputText>
         <h:message for="login" id="loginError" style="color: red"/>
 
         <h:outputText value="Пароль"/>
-        <h:inputSecret value="#{accountBean.password}"/>
+        <h:inputText  id="password" value="#{accountBean.password}" required="true" a:placeholder="password">
+            <f:validator validatorId="password"/>
+            <f:ajax event="blur" execute="@this" render="passwordError"/>
+        </h:inputText>
+        <h:message for="password" id="passwordError" style="color: red"/>
 
-        <h:outputText value="Повторите пароль"/>
-        <h:inputSecret value="#{accountBean.repeatedPassword}"/>
+        <h:outputText value="Пароль"/>
+        <h:inputText  id="repeatedPassword" value="#{accountBean.repeatedPassword}" required="true" a:placeholder="repeatedPassword">
+            <f:validator validatorId="repeatedPassword"/>
+            <f:ajax event="blur" execute="@this" render="repeatedPasswordError"/>
+        </h:inputText>
+        <h:message for="repeatedPassword" id="repeatedPasswordError" style="color: red"/>
+
     </h:panelGrid>
     <h:commandButton type="submit" value="Продолжить" action="#{accountBean.signUp}"/>
     </h:form>
