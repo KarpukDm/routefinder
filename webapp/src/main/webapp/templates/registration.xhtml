@@ -2,38 +2,51 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://java.sun.com/jsf/composite">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <title>Title</title>
+    <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <h:body>
-    <h:form>
-    <h:panelGrid columns="3">
+    <h:form class="sign-up">
+        <h1 class="sign-up-title">Instant registration</h1>
 
-        <h:outputText value="Логин"/>
-        <h:inputText  id="login" value="#{accountBean.login}"  a:placeholder="login">
+        <h:inputText class="sign-up-input" required="true" id="login"
+                     requiredMessage="Value is required"
+                     value="#{accountBean.login}"  a:placeholder="login">
             <f:validator validatorId="login"/>
             <f:ajax event="blur" execute="@this" render="loginError"/>
         </h:inputText>
-        <h:message for="login" id="loginError" style="color: red"/>
 
-        <h:outputText value="Пароль"/>
-        <h:inputText  id="password" value="#{accountBean.password}" a:placeholder="password">
+
+        <h:inputSecret class="sign-up-input" required="true"
+                       requiredMessage="Value is required" id="password"
+                       value="#{accountBean.password}" a:placeholder="password">
             <f:validator validatorId="password"/>
             <f:ajax event="blur" execute="@this" render="passwordError"/>
-        </h:inputText>
-        <h:message for="password" id="passwordError" style="color: red"/>
+        </h:inputSecret>
 
-        <h:outputText value="Пароль"/>
-        <h:inputText  id="repeatedPassword" value="#{accountBean.repeatedPassword}" a:placeholder="repeatedPassword">
+
+        <h:inputSecret class="sign-up-input" required="true"
+                       requiredMessage="Value is required" id="repeatedPassword"
+                       value="#{accountBean.repeatedPassword}" a:placeholder="repeate password">
             <f:validator validatorId="repeatedPassword"/>
             <f:ajax event="blur" execute="@this" render="repeatedPasswordError"/>
-        </h:inputText>
-        <h:message for="repeatedPassword" id="repeatedPasswordError" style="color: red"/>
+        </h:inputSecret>
 
-    </h:panelGrid>
-    <h:commandButton type="submit" value="Продолжить" action="#{accountBean.signUp}"/>
+        <h:panelGroup style="text-align: center">
+            <h:message for="login" id="loginError" style="color: #ff5b54"/>
+            <br/>
+            <h:message for="password" id="passwordError" style="color: #ff5b54"/>
+            <br/>
+            <h:message for="repeatedPassword" id="repeatedPasswordError" style="color: #ff5b54"/>
+        </h:panelGroup>
+
+
+    <h:commandButton id="button" type="submit" class="sign-up-button"
+                     value="Continue" action="#{accountBean.signUp}"/>
     </h:form>
+
 </h:body>
 
 </html>
