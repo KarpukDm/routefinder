@@ -14,6 +14,7 @@ import javax.faces.validator.ValidatorException;
 public class AllFieldsValidator implements Validator {
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
+
         String prefix = facesContext.getExternalContext().getRequestParameterMap().values().iterator().next();
         String password = facesContext.getExternalContext().getRequestParameterMap().get(prefix.concat(":password"));
         String login = facesContext.getExternalContext().getRequestParameterMap().get(prefix.concat(":login"));
