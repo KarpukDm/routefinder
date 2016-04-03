@@ -12,7 +12,7 @@
         <h1 class="sign-up-title">Instant registration</h1>
 
         <h:inputText class="sign-up-input" required="true" id="login"
-                     requiredMessage="Value is required"
+                     requiredMessage="The 'login' is required"
                      value="#{accountBean.login}"  a:placeholder="login">
             <f:validator validatorId="login"/>
             <f:ajax event="blur" execute="@this" render="loginError"/>
@@ -20,7 +20,7 @@
 
 
         <h:inputSecret class="sign-up-input" required="true"
-                       requiredMessage="Value is required" id="password"
+                       requiredMessage="The 'password' is required" id="password"
                        value="#{accountBean.password}" a:placeholder="password">
             <f:validator validatorId="password"/>
             <f:ajax event="blur" execute="@this" render="passwordError"/>
@@ -28,23 +28,23 @@
 
 
         <h:inputSecret class="sign-up-input" required="true"
-                       requiredMessage="Value is required" id="repeatedPassword"
+                       requiredMessage="The 'password' is required" id="repeatedPassword"
                        value="#{accountBean.repeatedPassword}" a:placeholder="repeate password">
             <f:validator validatorId="repeatedPassword"/>
             <f:ajax event="blur" execute="@this" render="repeatedPasswordError"/>
         </h:inputSecret>
 
-        <h:panelGroup style="text-align: center">
+        <h:panelGrid columns="1" style="text-align:center; width: 100%" border="0">
             <h:message for="login" id="loginError" style="color: #ff5b54"/>
-            <br/>
+
             <h:message for="password" id="passwordError" style="color: #ff5b54"/>
-            <br/>
+
             <h:message for="repeatedPassword" id="repeatedPasswordError" style="color: #ff5b54"/>
-        </h:panelGroup>
+        </h:panelGrid>
 
 
-    <h:commandButton id="button" type="submit" class="sign-up-button"
-                     value="Continue" action="#{accountBean.signUp}"/>
+        <h:commandButton id="button" type="submit" class="sign-up-button"
+                         value="Continue" action="#{accountBean.signUp}"/>
     </h:form>
 
 </h:body>
