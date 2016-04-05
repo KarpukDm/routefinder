@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+
+<ui:composition>
+
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li class="active"><a href="/profile">#{accountBean.getUser()} <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Favorites</a></li>
+            <li><a href="#">My routes</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li><a href="">My Reminders</a></li>
+            <li><a href="">My comments</a></li>
+            <li><a href="">My marks</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li><a href="/createroute">Create route</a></li>
+            <li><a href="">Setting</a></li>
+        </ul>
+    </div>
+
+</ui:composition>
+
+</html>

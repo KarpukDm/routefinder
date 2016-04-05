@@ -4,11 +4,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:a="http://java.sun.com/jsf/composite">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <f:view>
+
+    <h:panelGroup layout="block" style=" text-align: center; width: 100%; background-color: rgba(39, 66, 76, 0.7); padding-top: 2%; padding-bottom: 2%;">
+        <h1 style="font-family: Impact, sans-serif; font-size: 32pt; color: rgba(255, 255, 255, 0.7)">
+            INSTANT SEARCH ROUTES
+        </h1>
+    </h:panelGroup>
 
     <form action="${pageContext.request.contextPath}/j_spring_security_check" method="post" class="sign-up">
         <h1 class="sign-up-title">Sign in</h1>
