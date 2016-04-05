@@ -2,11 +2,28 @@
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en">
+<h:head>
     <title>Title</title>
-</head>
-<body>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="dashboard.css"/>
+</h:head>
 
-</body>
+<f:view>
+
+    <ui:include src="/templates-components/horisontal-menu.xhtml"/>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <ui:include src="/templates-components/vertical-menu.xhtml"/>
+
+        </div>
+    </div>
+
+</f:view>
 </html>
+
+

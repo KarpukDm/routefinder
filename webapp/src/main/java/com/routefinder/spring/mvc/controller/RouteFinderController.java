@@ -17,6 +17,12 @@ public class RouteFinderController {
         return "main";
     }
 
+    @RequestMapping("/home")
+    public String home(Model model) {
+
+        return "home";
+    }
+
     @RequestMapping("/profile")
     public String profile(Model model) {
 
@@ -27,6 +33,24 @@ public class RouteFinderController {
     public String registrate(Model model) {
 
         return "registration";
+    }
+
+    @RequestMapping("/favorites")
+    public String favorites(Model model) {
+
+        return "favorites";
+    }
+
+    @RequestMapping("/myroutes")
+    public String myroutes(Model model) {
+
+        return "my-routes";
+    }
+
+    @RequestMapping("/reminders")
+    public String reminders(Model model) {
+
+        return "my-reminders";
     }
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
@@ -41,9 +65,45 @@ public class RouteFinderController {
         return "profile";
     }
 
+    @RequestMapping("/comments")
+    public String comments(Model model) {
+
+        return "my-comments";
+    }
+
+    @RequestMapping("/marks")
+    public String marks(Model model) {
+
+        return "marks";
+    }
+
+    @RequestMapping("/admin")
+    public String admin(Model model) {
+
+        return "admin";
+    }
+
+    @RequestMapping("/help")
+    public String help(Model model) {
+
+        return "help";
+    }
+
+    @RequestMapping("/settings")
+    public String settings(Model model) {
+
+        return "settings";
+    }
+
     @RequestMapping("/createroute")
     public String createroute(Model model) {
 
         return "creating-route";
+    }
+
+    @RequestMapping("/search")
+    public String search(Model model) {
+
+        return "search";
     }
 }
