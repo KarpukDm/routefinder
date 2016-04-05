@@ -74,7 +74,7 @@ public class RouteFinderController {
     @RequestMapping("/marks")
     public String marks(Model model) {
 
-        return "marks";
+        return "my-marks";
     }
 
     @RequestMapping("/admin")
