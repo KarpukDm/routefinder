@@ -19,7 +19,7 @@ public class Route implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name="route_point",
             joinColumns = @JoinColumn(name="route_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="point_id", referencedColumnName="id")
@@ -32,8 +32,11 @@ public class Route implements Persistable<Integer> {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "route", fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
-    @OneToOne(optional = false, mappedBy="route")
-    private RouteInfo routeInfo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route", fetch = FetchType.LAZY)
+    private List<Statistics> statistics;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route", fetch = FetchType.LAZY)
+    private List<Schedule> schedules;
 
     @Column(nullable = false)
     private Double distance;
@@ -45,6 +48,22 @@ public class Route implements Persistable<Integer> {
     public Route(Double distance){
         super();
         this.distance = distance;
+    }
+
+    public List<Statistics> getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(List<Statistics> statistics) {
+        this.statistics = statistics;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     public void setId(Integer id) {
@@ -81,14 +100,6 @@ public class Route implements Persistable<Integer> {
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
-    }
-
-    public RouteInfo getRouteInfo() {
-        return routeInfo;
-    }
-
-    public void setRouteInfo(RouteInfo routeInfo) {
-        this.routeInfo = routeInfo;
     }
 
     public Integer getId() {

@@ -21,7 +21,6 @@ import org.junit.runners.Suite;
         PointServiceTest.class,
         RatingServiceTest.class,
         RoleServiceTest.class,
-        RouteInfoServiceTest.class,
         RouteServiceTest.class,
         ScheduleServiceTest.class,
         StatisticsServiceTest.class

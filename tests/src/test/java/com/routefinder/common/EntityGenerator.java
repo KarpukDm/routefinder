@@ -50,9 +50,6 @@ public class EntityGenerator {
     private  RoleService roleService;
 
     @Autowired
-    private  RouteInfoService routeInfoService;
-
-    @Autowired
     private RouteService routeService;
 
     @Autowired
@@ -74,6 +71,11 @@ public class EntityGenerator {
         List<Address> addresses = new LinkedList<>();
         addresses.add(new Address("email@email.com"));
         account.setAddresses(addresses);
+
+        List<Comment> comments = new LinkedList<>();
+        comments.add(new Comment("message"));
+
+        account.setComments(comments);
 
         return account;
 
@@ -134,15 +136,21 @@ public class EntityGenerator {
         return new Role("ROLE_ADMIN");
     }
 
-    public RouteInfo getRouteInfoEntity(){
-        return new RouteInfo();
-    }
-
     public Route getRouteEntity(){
 
         Route route = new Route((double) 15);
-        RouteInfo routeInfo = new RouteInfo();
-        route.setRouteInfo(routeInfo);
+
+        List<Schedule> schedules = new LinkedList<>();
+        List<Statistics> statisticses = new LinkedList<>();
+
+        Schedule schedule = new Schedule("Monday", "15:22");
+        schedules.add(schedule);
+
+        Statistics statistics = new Statistics(31, "March");
+        statisticses.add(statistics);
+
+        route.setStatistics(statisticses);
+        route.setSchedules(schedules);
 
         return route;
     }

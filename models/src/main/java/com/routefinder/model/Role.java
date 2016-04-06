@@ -22,7 +22,7 @@ public class Role implements Persistable<Integer> {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles",cascade = {CascadeType.ALL})
     private List<Account> users;
 
     public Role(){
