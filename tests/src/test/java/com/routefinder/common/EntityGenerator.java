@@ -75,7 +75,9 @@ public class EntityGenerator {
         addresses.add(new Address("email@email.com"));
         account.setAddresses(addresses);
 
-        Route route = new Route();
+        return account;
+
+        /*Route route = new Route();
         RouteInfo routeInfo = new RouteInfo();
         route.setRouteInfo(routeInfo);
 
@@ -87,7 +89,7 @@ public class EntityGenerator {
 
         route.setComments(comments);
         account.setComments(comments);
-        return account;
+        return account;*/
     }
 
     public Comment getCommentEntity(){
@@ -138,7 +140,11 @@ public class EntityGenerator {
 
     public Route getRouteEntity(){
 
-        return new Route(12.2);
+        Route route = new Route((double) 15);
+        RouteInfo routeInfo = new RouteInfo();
+        route.setRouteInfo(routeInfo);
+
+        return route;
     }
 
     public Schedule getScheduleEntity(){

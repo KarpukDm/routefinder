@@ -9,7 +9,7 @@ CREATE TABLE role(
   name TEXT NOT NULL
 );
 
-CREATE TABLE feedback(
+CREATE TABLE address(
   id SERIAL PRIMARY KEY NOT NULL,
   email TEXT NOT NULL
 );

@@ -32,8 +32,8 @@ public class Route implements Persistable<Integer> {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "route")
     private List<Rating> ratings;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name="route_info_id", unique = true, updatable = false)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "route_info_id")
     private RouteInfo routeInfo;
 
     @Column(nullable = false)

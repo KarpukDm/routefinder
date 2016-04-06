@@ -19,7 +19,7 @@ public class RouteInfo implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @OneToOne(optional = false, mappedBy="routeInfo")
+    @OneToOne(mappedBy = "routeInfo")
     private Route route;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "routeInfo")

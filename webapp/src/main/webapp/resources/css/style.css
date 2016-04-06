@@ -116,9 +116,13 @@ body {
   color: #404040;
   background-size: cover;
   -moz-background-size: cover;  /* Firefox 3.6 */
-  background: url(#{resource[ 'image/omg.jpg' ]}) center;
-
+  background: url(#{resource['image/omg.jpg']}) no-repeat;
+  width: 100%;
+  position: absolute;
+  text-align: center;
 }
+
+
 
 .sign-up {
   position: relative;

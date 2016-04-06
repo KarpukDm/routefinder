@@ -27,7 +27,7 @@ public class Account implements Persistable<Integer> {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
     private List<Address> addresses;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
