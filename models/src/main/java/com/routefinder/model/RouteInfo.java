@@ -19,13 +19,14 @@ public class RouteInfo implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @OneToOne(mappedBy = "routeInfo")
+    @OneToOne(optional = false)
+    @JoinColumn(name="route_id", unique = true, nullable = false, updatable = false)
     private Route route;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "routeInfo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeInfo", fetch = FetchType.LAZY)
     private List<Statistics> statistics;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "routeInfo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeInfo", fetch = FetchType.LAZY)
     private List<Schedule> schedules;
 
     public RouteInfo(){

@@ -19,14 +19,13 @@ public class Point implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "point")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "point", fetch = FetchType.LAZY)
     private List<Neighbor> neighbors;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "points")
     private List<Route> routes;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name="coordinates_id", unique = true, nullable = false, updatable = false)
+    @OneToOne(optional = false, mappedBy="point")
     private Coordinates coordinates;
 
     @Column(nullable = false)

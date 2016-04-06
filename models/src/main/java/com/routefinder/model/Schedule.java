@@ -18,8 +18,8 @@ public class Schedule implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "route_info_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "route_info_id")
     private RouteInfo routeInfo;
 
     @Column(nullable = false)
