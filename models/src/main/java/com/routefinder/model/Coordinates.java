@@ -18,10 +18,6 @@ public class Coordinates implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @OneToOne(optional = false, cascade = {CascadeType.ALL})
-    @JoinColumn(name="point_id", unique = true, nullable = false, updatable = false)
-    private Point point;
-
     @Column(nullable = false)
     private Double lat;
 
@@ -40,14 +36,6 @@ public class Coordinates implements Persistable<Integer> {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Point getPoint() {
-        return point;
-    }
-
-    public void setPoint(Point point) {
-        this.point = point;
     }
 
     public Double getLat() {
@@ -72,5 +60,16 @@ public class Coordinates implements Persistable<Integer> {
 
     public boolean isNew() {
         return false;
+    }
+
+    @OneToOne(cascade=CascadeType.ALL)
+    private Point point;
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
     }
 }

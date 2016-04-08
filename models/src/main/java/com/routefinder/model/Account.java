@@ -27,28 +27,6 @@ public class Account implements Persistable<Integer> {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
-    private List<Address> addresses;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name="account_role",
-            joinColumns = @JoinColumn(name="account_id", referencedColumnName="id", updatable = false, nullable = false),
-            inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName="id", updatable = false, nullable = false)
-    )
-    private List<Role> roles;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
-    private List<Rating> ratings;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
-    private List<Comment> comments;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
-    private List<MyRoute> myRoutes;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
-    private List<FavoriteRoute> favoriteRoutes;
-
     public Account(){
         super();
     }
@@ -57,46 +35,6 @@ public class Account implements Persistable<Integer> {
         super();
         this.login = login;
         this.password = password;
-    }
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<MyRoute> getMyRoutes() {
-        return myRoutes;
-    }
-
-    public void setMyRoutes(List<MyRoute> myRoutes) {
-        this.myRoutes = myRoutes;
-    }
-
-    public List<FavoriteRoute> getFavoriteRoutes() {
-        return favoriteRoutes;
-    }
-
-    public void setFavoriteRoutes(List<FavoriteRoute> favoriteRoutes) {
-        this.favoriteRoutes = favoriteRoutes;
     }
 
     public void setId(Integer id) {
@@ -119,14 +57,6 @@ public class Account implements Persistable<Integer> {
         this.password = password;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
     public Integer getId() {
         return null;
     }
@@ -142,5 +72,60 @@ public class Account implements Persistable<Integer> {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @OneToMany(mappedBy = "account", cascade=CascadeType.ALL)
+    private List<Rating> ratings;
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Address> addresses;
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<MyRoute> myRoutes;
+
+    public List<MyRoute> getMyRoutes() {
+        return myRoutes;
+    }
+
+    public void setMyRoutes(List<MyRoute> myRoutes) {
+        this.myRoutes = myRoutes;
+    }
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<FavoriteRoute> favoriteRoutes;
+
+    public List<FavoriteRoute> getFavoriteRoutes() {
+        return favoriteRoutes;
+    }
+
+    public void setFavoriteRoutes(List<FavoriteRoute> favoriteRoutes) {
+        this.favoriteRoutes = favoriteRoutes;
     }
 }

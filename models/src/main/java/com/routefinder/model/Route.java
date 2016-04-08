@@ -19,25 +19,6 @@ public class Route implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name="route_point",
-            joinColumns = @JoinColumn(name="route_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="point_id", referencedColumnName="id")
-    )
-    private List<Point> points;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route", fetch = FetchType.LAZY)
-    private List<Comment> comments;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route", fetch = FetchType.LAZY)
-    private List<Rating> ratings;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route", fetch = FetchType.LAZY)
-    private List<Statistics> statistics;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "route", fetch = FetchType.LAZY)
-    private List<Schedule> schedules;
-
     @Column(nullable = false)
     private Double distance;
 
@@ -53,22 +34,6 @@ public class Route implements Persistable<Integer> {
         this.distance = distance;
     }
 
-    public List<Statistics> getStatistics() {
-        return statistics;
-    }
-
-    public void setStatistics(List<Statistics> statistics) {
-        this.statistics = statistics;
-    }
-
-    public List<Schedule> getSchedules() {
-        return schedules;
-    }
-
-    public void setSchedules(List<Schedule> schedules) {
-        this.schedules = schedules;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -79,30 +44,6 @@ public class Route implements Persistable<Integer> {
 
     public void setDistance(Double distance) {
         this.distance = distance;
-    }
-
-    public List<Point> getPoints() {
-        return points;
-    }
-
-    public void setPoints(List<Point> points) {
-        this.points = points;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
     }
 
     public String getInfo() {
@@ -119,5 +60,82 @@ public class Route implements Persistable<Integer> {
 
     public boolean isNew() {
         return false;
+    }
+
+    @Column
+    private String mapData;
+
+    public String getMapData() {
+        return mapData;
+    }
+
+    public void setMapData(String mapData) {
+        this.mapData = mapData;
+    }
+
+    @OneToMany(mappedBy = "route",cascade=CascadeType.ALL)
+    private List<Rating> ratings;
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    @OneToMany(mappedBy = "route",cascade=CascadeType.ALL)
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    private List<Point> points;
+
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
+
+    @OneToMany(mappedBy = "route",cascade=CascadeType.ALL)
+    private List<Schedule> shcedules;
+
+    public List<Schedule> getShcedules() {
+        return shcedules;
+    }
+
+    public void setShcedules(List<Schedule> shcedules) {
+        this.shcedules = shcedules;
+    }
+
+    @OneToMany(mappedBy = "route",cascade=CascadeType.ALL)
+    private List<Statistics> statistics;
+
+    public List<Statistics> getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(List<Statistics> statistics) {
+        this.statistics = statistics;
+    }
+
+    @OneToOne(cascade=CascadeType.ALL)
+    private MyRoute myRoute;
+
+    public MyRoute getMyRoute() {
+        return myRoute;
+    }
+
+    public void setMyRoute(MyRoute myRoute) {
+        this.myRoute = myRoute;
     }
 }

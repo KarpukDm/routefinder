@@ -18,10 +18,6 @@ public class Address implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "account_id")
-    private Account account;
-
     @Column(nullable = false)
     private String email;
 
@@ -38,14 +34,6 @@ public class Address implements Persistable<Integer> {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -60,5 +48,16 @@ public class Address implements Persistable<Integer> {
 
     public boolean isNew() {
         return false;
+    }
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

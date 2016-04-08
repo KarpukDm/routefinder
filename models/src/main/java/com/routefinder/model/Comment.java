@@ -18,14 +18,6 @@ public class Comment implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "account_id")
-    private Account account;
-
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "route_id")
-    private Route route;
-
     @Column(nullable = false)
     private String message;
 
@@ -42,22 +34,6 @@ public class Comment implements Persistable<Integer> {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -72,5 +48,16 @@ public class Comment implements Persistable<Integer> {
 
     public boolean isNew() {
         return false;
+    }
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Route route;
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

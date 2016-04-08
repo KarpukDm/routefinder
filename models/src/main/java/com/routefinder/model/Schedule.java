@@ -18,10 +18,6 @@ public class Schedule implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "route_id")
-    private Route route;
-
     @Column(nullable = false)
     private String day;
 
@@ -40,14 +36,6 @@ public class Schedule implements Persistable<Integer> {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
     }
 
     public String getDay() {
@@ -72,5 +60,16 @@ public class Schedule implements Persistable<Integer> {
 
     public boolean isNew() {
         return false;
+    }
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Route route;
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

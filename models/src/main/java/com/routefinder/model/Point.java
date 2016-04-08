@@ -19,15 +19,6 @@ public class Point implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "point", fetch = FetchType.LAZY)
-    private List<Neighbor> neighbors;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "points")
-    private List<Route> routes;
-
-    @OneToOne(optional = false, mappedBy="point")
-    private Coordinates coordinates;
-
     @Column(nullable = false)
     private String name;
 
@@ -52,21 +43,16 @@ public class Point implements Persistable<Integer> {
         this.name = name;
     }
 
-    public List<Neighbor> getNeighbors() {
-        return neighbors;
+    public Integer getId() {
+        return null;
     }
 
-    public void setNeighbors(List<Neighbor> neighbors) {
-        this.neighbors = neighbors;
+    public boolean isNew() {
+        return false;
     }
 
-    public List<Route> getRoutes() {
-        return routes;
-    }
-
-    public void setRoutes(List<Route> routes) {
-        this.routes = routes;
-    }
+    @OneToOne(mappedBy = "point",cascade=CascadeType.ALL)
+    private Coordinates coordinates;
 
     public Coordinates getCoordinates() {
         return coordinates;
@@ -76,11 +62,25 @@ public class Point implements Persistable<Integer> {
         this.coordinates = coordinates;
     }
 
-    public Integer getId() {
-        return null;
+    @OneToMany(mappedBy = "point",cascade=CascadeType.ALL)
+    private List<Neighbor> neighbor;
+
+    public List<Neighbor> getNeighbor() {
+        return neighbor;
     }
 
-    public boolean isNew() {
-        return false;
+    public void setNeighbor(List<Neighbor> neighbor) {
+        this.neighbor = neighbor;
+    }
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    private List<Route> routes;
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 }

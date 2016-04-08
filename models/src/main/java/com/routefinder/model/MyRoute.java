@@ -18,10 +18,6 @@ public class MyRoute implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "account_id")
-    private Account account;
-
     @Column(nullable = false)
     private Integer route_id;
 
@@ -42,14 +38,6 @@ public class MyRoute implements Persistable<Integer> {
         this.route_id = route_id;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -60,5 +48,27 @@ public class MyRoute implements Persistable<Integer> {
 
     public boolean isNew() {
         return false;
+    }
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    @OneToOne(mappedBy = "myRoute",cascade=CascadeType.ALL)
+    private Route route;
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

@@ -22,9 +22,6 @@ public class Role implements Persistable<Integer> {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles",cascade = {CascadeType.ALL})
-    private List<Account> users;
-
     public Role(){
         super();
     }
@@ -46,19 +43,22 @@ public class Role implements Persistable<Integer> {
         this.name = name;
     }
 
-    public List<Account> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<Account> users) {
-        this.users = users;
-    }
-
     public Integer getId() {
         return null;
     }
 
     public boolean isNew() {
         return false;
+    }
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    private List<Account> accounts;
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }
