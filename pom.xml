@@ -28,6 +28,15 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- Spring -->
         <dependency>
@@ -158,6 +167,11 @@
             <version>2.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>3.0.M4</version>
+        </dependency>
 
     </dependencies>
 </project>

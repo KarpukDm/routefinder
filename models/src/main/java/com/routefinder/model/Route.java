@@ -41,6 +41,9 @@ public class Route implements Persistable<Integer> {
     @Column(nullable = false)
     private Double distance;
 
+    @Column
+    private String info;
+
     public Route(){
         super();
     }
@@ -100,6 +103,14 @@ public class Route implements Persistable<Integer> {
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public Integer getId() {

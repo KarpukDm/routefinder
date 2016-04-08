@@ -5,11 +5,11 @@ import com.routefinder.model.Role;
 import com.routefinder.model.Roles;
 import com.routefinder.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -39,7 +39,7 @@ public class AccountBean implements Serializable {
     private String password;
 
 
-    public void signUp(){
+    public ModelAndView signUp(){
 
         if(this.repeatedPassword.equals(password)){
             if(!isExist(login)){
@@ -52,8 +52,11 @@ public class AccountBean implements Serializable {
                 newUser.setRoles(roles);
 
                 accountService.save(newUser);
+
+                return new ModelAndView("redirect:/profile");
             }
         }
+        return new ModelAndView("redirect:/main");
     }
 
     public String getUser(){

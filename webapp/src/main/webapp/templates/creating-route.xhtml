@@ -4,6 +4,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <h:head>
     <title>Title</title>
@@ -24,11 +25,77 @@
     <div class="container-fluid">
         <div class="row">
 
-            <h:panelGrid columns="2" border="1" style="width: 100%">
-            <ui:include src="/templates-components/vertical-menu.xhtml"/>
+            <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <ui:include src="/templates-components/vertical-menu.xhtml"/>
 
-            <div id="chartdiv" style="width: 100%; height: 400px;"></div>
-            </h:panelGrid>
+                <div id="chartdiv" style="width: 100%; height: 450px;"></div>
+
+                <h2 class="sub-header"/>
+
+                <h:commandButton value="Add start and end points" onclick="points.show();"
+                                 styleClass="btn btn-md btn-primary"/>
+
+                <p:dialog header="Points" widgetVar="points" resizable="false">
+                    <h:form styleClass="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h:inputText id="start" a:placeholder="Start point" value="#{routeBean.startPoint}"
+                                             styleClass="form-control input-sm" style="width: 100%"/>
+                                <h:inputText id="end" a:placeholder="End point" value="#{routeBean.endPoint}"
+                                             styleClass="form-control input-sm"
+                                             style="width: 100%; margin-top: 20px;"/>
+
+                                <h:commandButton id="button" type="submit" class="sign-up-button"
+                                                 value="Save" action="#{routeBean.addPoints()}"
+                                                 styleClass="btn btn-md btn-primary"
+                                                 style="margin-top: 20px; float: right"/>
+                            </div>
+                        </div>
+                    </h:form>
+                </p:dialog>
+
+
+                <h:commandButton value="Add a description to the route" onclick="descr.show();"
+                                 styleClass="btn btn-md btn-info" style="margin-left: 10px;"/>
+
+                <p:dialog header="Description" widgetVar="descr" resizable="false">
+                    <h:form styleClass="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h:inputTextarea id="info" a:placeholder="Info" value="#{routeBean.info}"
+                                                 styleClass="form-control input-sm"
+                                                 style="width: 400px; resize: none; height: 200px;"/>
+
+                                <h:commandButton id="button1" type="submit" class="sign-up-button"
+                                                 value="Save" action="#{routeBean.addInfo}"
+                                                 styleClass="btn btn-md btn-info"
+                                                 style="margin-top: 20px; float: right"/>
+                            </div>
+                        </div>
+                    </h:form>
+                </p:dialog>
+
+
+                <h:commandButton value="Add schedule" onclick="schedule.show();"
+                                 styleClass="btn btn-md btn-group" style="margin-left: 10px;"/>
+
+                <p:dialog header="Schedule" widgetVar="schedule" resizable="false">
+                    <h:form styleClass="form-horizontal col-md-6">
+                        <div class="form-group col-md-12">
+                            <div class="col-md-12">
+
+                            </div>
+                        </div>
+                    </h:form>
+                </p:dialog>
+
+                <h:form>
+                    <h:commandButton value="Create route" action="#{routeBean.createRoute}"
+                                     styleClass="btn btn-md btn-primary" style="float: right;"/>
+                </h:form>
+
+
+            </h:panelGroup>
 
             <script type="application/javascript">
                 // svg path for target icon
@@ -122,10 +189,9 @@
                         alpha: 0.4
                     },
 
-                    export:{
-                        enabled:true
+                    export: {
+                        enabled: true
                     }
-
                 });
             </script>
 
