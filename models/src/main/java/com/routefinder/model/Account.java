@@ -85,7 +85,7 @@ public class Account implements Persistable<Integer> {
         this.roles = roles;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<FavoriteRoute> favoritesRoutes;
 
     public List<FavoriteRoute> getFavoritesRoutes() {
@@ -107,7 +107,7 @@ public class Account implements Persistable<Integer> {
         this.addresses = addresses;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
     public List<Rating> getRatings() {
@@ -118,7 +118,7 @@ public class Account implements Persistable<Integer> {
         this.ratings = ratings;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<MyRoute> myRoutes;
 
     public List<MyRoute> getMyRoutes() {
@@ -129,7 +129,7 @@ public class Account implements Persistable<Integer> {
         this.myRoutes = myRoutes;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
     public List<Comment> getComments() {

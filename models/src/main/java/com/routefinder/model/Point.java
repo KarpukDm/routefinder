@@ -57,7 +57,7 @@ public class Point implements Persistable<Integer> {
         return false;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Route> routes;
 
     public List<Route> getRoutes() {
@@ -79,7 +79,7 @@ public class Point implements Persistable<Integer> {
         this.coordinates = coordinates;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Neighbor> neighbors;
 
     public List<Neighbor> getNeighbors() {

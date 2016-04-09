@@ -62,7 +62,7 @@ public class Route implements Persistable<Integer> {
         return false;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
     public List<Rating> getRatings() {
@@ -73,7 +73,7 @@ public class Route implements Persistable<Integer> {
         this.ratings = ratings;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
     public List<Comment> getComments() {

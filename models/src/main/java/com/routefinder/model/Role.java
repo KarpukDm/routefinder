@@ -51,7 +51,7 @@ public class Role implements Persistable<Integer> {
         return false;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Account> accounts;
 
     public List<Account> getAccounts() {
