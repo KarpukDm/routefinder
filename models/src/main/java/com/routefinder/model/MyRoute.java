@@ -50,25 +50,4 @@ public class MyRoute implements Persistable<Integer> {
         return false;
     }
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    private Account account;
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    @OneToOne(mappedBy = "myRoute",cascade=CascadeType.ALL)
-    private Route route;
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
-    }
 }

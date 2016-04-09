@@ -25,9 +25,6 @@ public class Route implements Persistable<Integer> {
     @Column
     private String info;
 
-    @Column
-    private String dataJson;
-
     public Route(){
         super();
     }
@@ -65,18 +62,7 @@ public class Route implements Persistable<Integer> {
         return false;
     }
 
-    @Column
-    private String mapData;
-
-    public String getMapData() {
-        return mapData;
-    }
-
-    public void setMapData(String mapData) {
-        this.mapData = mapData;
-    }
-
-    @OneToMany(mappedBy = "route",cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Rating> ratings;
 
     public List<Rating> getRatings() {
@@ -87,7 +73,7 @@ public class Route implements Persistable<Integer> {
         this.ratings = ratings;
     }
 
-    @OneToMany(mappedBy = "route",cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     public List<Comment> getComments() {
@@ -98,29 +84,7 @@ public class Route implements Persistable<Integer> {
         this.comments = comments;
     }
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    private List<Point> points;
-
-    public List<Point> getPoints() {
-        return points;
-    }
-
-    public void setPoints(List<Point> points) {
-        this.points = points;
-    }
-
-    @OneToMany(mappedBy = "route",cascade=CascadeType.ALL)
-    private List<Schedule> shcedules;
-
-    public List<Schedule> getShcedules() {
-        return shcedules;
-    }
-
-    public void setShcedules(List<Schedule> shcedules) {
-        this.shcedules = shcedules;
-    }
-
-    @OneToMany(mappedBy = "route",cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Statistics> statistics;
 
     public List<Statistics> getStatistics() {
@@ -131,22 +95,14 @@ public class Route implements Persistable<Integer> {
         this.statistics = statistics;
     }
 
-    @OneToOne(cascade=CascadeType.ALL)
-    private MyRoute myRoute;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Point> points;
 
-    public MyRoute getMyRoute() {
-        return myRoute;
+    public List<Point> getPoints() {
+        return points;
     }
 
-    public void setMyRoute(MyRoute myRoute) {
-        this.myRoute = myRoute;
-    }
-
-    public String getDataJson() {
-        return dataJson;
-    }
-
-    public void setDataJson(String dataJson) {
-        this.dataJson = dataJson;
+    public void setPoints(List<Point> points) {
+        this.points = points;
     }
 }

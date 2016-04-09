@@ -64,10 +64,6 @@ public class RouteBean implements Serializable {
 
         route.setDistance(new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate));
 
-        ConfigGeneratorJson configGeneratorJson = new ConfigGeneratorJson();
-        JSONObject jsonObject = configGeneratorJson.generateJson(points);
-        route.setDataJson(jsonObject.toString());
-
         routeService.save(route);
     }
 

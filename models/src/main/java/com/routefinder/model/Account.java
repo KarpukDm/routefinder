@@ -74,18 +74,7 @@ public class Account implements Persistable<Integer> {
                 '}';
     }
 
-    @OneToMany(mappedBy = "account", cascade=CascadeType.ALL)
-    private List<Rating> ratings;
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Role> roles;
 
     public List<Role> getRoles() {
@@ -96,7 +85,18 @@ public class Account implements Persistable<Integer> {
         this.roles = roles;
     }
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<FavoriteRoute> favoritesRoutes;
+
+    public List<FavoriteRoute> getFavoritesRoutes() {
+        return favoritesRoutes;
+    }
+
+    public void setFavoritesRoutes(List<FavoriteRoute> favoritesRoutes) {
+        this.favoritesRoutes = favoritesRoutes;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Address> addresses;
 
     public List<Address> getAddresses() {
@@ -107,7 +107,18 @@ public class Account implements Persistable<Integer> {
         this.addresses = addresses;
     }
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Rating> ratings;
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<MyRoute> myRoutes;
 
     public List<MyRoute> getMyRoutes() {
@@ -118,14 +129,14 @@ public class Account implements Persistable<Integer> {
         this.myRoutes = myRoutes;
     }
 
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<FavoriteRoute> favoriteRoutes;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
-    public List<FavoriteRoute> getFavoriteRoutes() {
-        return favoriteRoutes;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setFavoriteRoutes(List<FavoriteRoute> favoriteRoutes) {
-        this.favoriteRoutes = favoriteRoutes;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

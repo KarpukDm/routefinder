@@ -57,7 +57,18 @@ public class Point implements Persistable<Integer> {
         return false;
     }
 
-    @OneToOne(mappedBy = "point",cascade=CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Route> routes;
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
+
+    @OneToOne(mappedBy = "point", cascade = CascadeType.ALL)
     private Coordinates coordinates;
 
     public Coordinates getCoordinates() {
@@ -68,25 +79,14 @@ public class Point implements Persistable<Integer> {
         this.coordinates = coordinates;
     }
 
-    @OneToMany(mappedBy = "point",cascade=CascadeType.ALL)
-    private List<Neighbor> neighbor;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Neighbor> neighbors;
 
-    public List<Neighbor> getNeighbor() {
-        return neighbor;
+    public List<Neighbor> getNeighbors() {
+        return neighbors;
     }
 
-    public void setNeighbor(List<Neighbor> neighbor) {
-        this.neighbor = neighbor;
-    }
-
-    @ManyToMany(cascade=CascadeType.ALL)
-    private List<Route> routes;
-
-    public List<Route> getRoutes() {
-        return routes;
-    }
-
-    public void setRoutes(List<Route> routes) {
-        this.routes = routes;
+    public void setNeighbors(List<Neighbor> neighbors) {
+        this.neighbors = neighbors;
     }
 }

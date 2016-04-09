@@ -50,14 +50,4 @@ public class Neighbor implements Persistable<Integer> {
         return false;
     }
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    private Point point;
-
-    public Point getPoint() {
-        return point;
-    }
-
-    public void setPoint(Point point) {
-        this.point = point;
-    }
 }
