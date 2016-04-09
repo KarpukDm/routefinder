@@ -96,7 +96,7 @@ public class EntityGenerator {
 
     public Comment getCommentEntity(){
         Comment comment = new Comment("message");
-        comment.setAccount(accountService.findOneAccountByLogin("KarpukDM"));
+        //comment.setAccount(accountService.findOneAccountByLogin("KarpukDM"));
         return new Comment("message");
     }
 
@@ -150,7 +150,7 @@ public class EntityGenerator {
         statisticses.add(statistics);
 
         route.setStatistics(statisticses);
-        route.setSchedules(schedules);
+       // route.setSchedules(schedules);
 
         return route;
     }

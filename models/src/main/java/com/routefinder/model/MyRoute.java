@@ -18,24 +18,8 @@ public class MyRoute implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @Column(nullable = false)
-    private Integer route_id;
-
     public MyRoute(){
         super();
-    }
-    
-    public MyRoute(Integer route_id){
-        super();
-        this.route_id = route_id;
-    }
-
-    public Integer getRoute_id() {
-        return route_id;
-    }
-
-    public void setRoute_id(Integer route_id) {
-        this.route_id = route_id;
     }
 
     public void setId(Integer id) {
@@ -50,4 +34,14 @@ public class MyRoute implements Persistable<Integer> {
         return false;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Route route;
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 }

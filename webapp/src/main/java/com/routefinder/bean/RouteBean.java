@@ -3,9 +3,11 @@ package com.routefinder.bean;
 import com.routefinder.amcharts.helper.ConfigGeneratorJson;
 import com.routefinder.maps.google.api.helper.CoordinateFinder;
 import com.routefinder.maps.google.api.helper.DistanceCalculator;
+import com.routefinder.model.MyRoute;
 import com.routefinder.model.Point;
 import com.routefinder.model.Route;
 import com.routefinder.model.Schedule;
+import com.routefinder.service.MyRouteService;
 import com.routefinder.service.RouteService;
 import org.primefaces.json.JSONException;
 import org.primefaces.json.JSONObject;
@@ -29,7 +31,7 @@ public class RouteBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Autowired
-    private RouteService routeService;
+    private MyRouteService myRouteService;
 
     private String startPoint;
     private String endPoint;
@@ -44,6 +46,15 @@ public class RouteBean implements Serializable {
 
     public void addInfo(){
 
+    }
+
+    public String getMapConfigJson() throws JSONException {
+        List<Point> points = new LinkedList<>();
+
+        points.add(startPointCoordinate);
+        points.add(endPointCoordinate);
+
+        return new ConfigGeneratorJson().generateJson(points).toString();
     }
 
     public void createRoute() throws IOException, JSONException {
@@ -64,15 +75,10 @@ public class RouteBean implements Serializable {
 
         route.setDistance(new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate));
 
-        routeService.save(route);
-    }
+        MyRoute myRoute = new MyRoute();
+        myRoute.setRoute(route);
 
-    public RouteService getRouteService() {
-        return routeService;
-    }
-
-    public void setRouteService(RouteService routeService) {
-        this.routeService = routeService;
+        myRouteService.save(myRoute);
     }
 
     public String getStartPoint() {
@@ -121,5 +127,13 @@ public class RouteBean implements Serializable {
 
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
+    }
+
+    public MyRouteService getMyRouteService() {
+        return myRouteService;
+    }
+
+    public void setMyRouteService(MyRouteService myRouteService) {
+        this.myRouteService = myRouteService;
     }
 }

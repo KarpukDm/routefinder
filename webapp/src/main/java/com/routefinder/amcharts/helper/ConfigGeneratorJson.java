@@ -23,7 +23,6 @@ public class ConfigGeneratorJson {
         dataProvider.put("zoomLongitude", "-55");
         dataProvider.put("zoomLatitude", "42");
 
-
         JSONArray lines = new JSONArray();
 
         JSONObject line1 = new JSONObject();

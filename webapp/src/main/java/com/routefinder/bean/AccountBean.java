@@ -23,14 +23,10 @@ import java.util.List;
 @ManagedBean
 @SessionScoped
 @Component
-//@ManageProperty("#{accountService}")
 
-//подключить el-resolver faces-config.
 public class AccountBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    //@ManagedProperty("#{accountService}")
-    //@Qualifier("accountService")
     @Autowired
     private AccountService accountService;
 
