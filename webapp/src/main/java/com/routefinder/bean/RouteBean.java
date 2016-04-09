@@ -1,13 +1,16 @@
 package com.routefinder.bean;
 
+import com.routefinder.maps.google.api.helper.CoordinateFinder;
 import com.routefinder.model.*;
 import com.routefinder.service.AccountService;
 import com.routefinder.service.RouteService;
+import org.primefaces.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,9 +42,19 @@ public class RouteBean implements Serializable {
 
     }
 
-    public void createRoute(){
+    public void createRoute() throws IOException, JSONException {
+
+        CoordinateFinder coordinateFinder = new CoordinateFinder();
+
         Route route = new Route(15.0);
         List<Point> points = new LinkedList<>();
+
+        startPointCoordinate = coordinateFinder.getPoint(startPoint);
+        endPointCoordinate = coordinateFinder.getPoint(endPoint);
+
+        points.add(startPointCoordinate);
+        points.add(endPointCoordinate);
+
         route.setPoints(points);
         route.setInfo(this.info);
 

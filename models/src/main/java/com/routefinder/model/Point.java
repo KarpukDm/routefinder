@@ -31,6 +31,12 @@ public class Point implements Persistable<Integer> {
         this.name = name;
     }
 
+    public Point(String name, Coordinates a){
+        super();
+        this.name = name;
+        this.coordinates = a;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
