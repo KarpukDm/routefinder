@@ -14,6 +14,8 @@ public class Encoder {
         for(Map.Entry<String, String> x : params.entrySet()){
             url += x.getKey() + "=" + x.getValue() + "&";
         }
-        return url;
+
+
+        return url.replace(' ', '%');
     }
 }

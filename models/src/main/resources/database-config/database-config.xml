@@ -27,7 +27,7 @@
         <property name="password" value="${db.password}"/>
     </bean>
 
-    <jpa:repositories base-package="com.routefinder"/>
+    <jpa:repositories base-package="com.routefinder.repository"/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>

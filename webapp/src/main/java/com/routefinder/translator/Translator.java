@@ -45,8 +45,6 @@ public class Translator {
         associations.put("э", "e");
         associations.put("ю", "yu");
         associations.put("я", "ya");
-        associations.put("-", "-");
-        associations.put(" ", " ");
     }
 
     public String translate(String city) {
@@ -54,7 +52,16 @@ public class Translator {
         try {
             String cityTranslate = "";
             for (char l : city.toCharArray()) {
-                cityTranslate += associations.get(String.valueOf(l).toLowerCase());
+                if(Character.isAlphabetic(l)) {
+                    cityTranslate += associations.get(String.valueOf(l).toLowerCase());
+                }
+                else{
+                    if(Character.isDigit(l)) {
+                        cityTranslate += String.valueOf(l);
+                    }else{
+                        cityTranslate += " ";
+                    }
+                }
             }
             return cityTranslate;
         }catch (Exception e){

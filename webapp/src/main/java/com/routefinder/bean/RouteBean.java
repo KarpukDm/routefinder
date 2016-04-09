@@ -1,8 +1,10 @@
 package com.routefinder.bean;
 
 import com.routefinder.maps.google.api.helper.CoordinateFinder;
-import com.routefinder.model.*;
-import com.routefinder.service.AccountService;
+import com.routefinder.maps.google.api.helper.DistanceCalculator;
+import com.routefinder.model.Point;
+import com.routefinder.model.Route;
+import com.routefinder.model.Schedule;
 import com.routefinder.service.RouteService;
 import org.primefaces.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,8 @@ public class RouteBean implements Serializable {
 
         route.setPoints(points);
         route.setInfo(this.info);
+
+        route.setDistance(new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate));
 
         routeService.save(route);
     }
