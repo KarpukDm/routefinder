@@ -24,7 +24,7 @@ public class ConfigGeneratorJson {
         dataProvider.put("zoomLatitude", "42");
 
 
-        JSONObject lines = new JSONObject();
+        JSONArray lines = new JSONArray();
 
         JSONObject line1 = new JSONObject();
         line1.put("id", "line1");
@@ -47,17 +47,17 @@ public class ConfigGeneratorJson {
         line2.put("latitudes", latitudes);
         line2.put("longitudes", longitudes);
 
-        lines.put("lines", line1);
-        lines.put("lines", line2);
+        lines.put(line1);
+        lines.put(line2);
 
-        JSONObject images = new JSONObject();
+        JSONArray images = new JSONArray();
         for(Point p : points){
             JSONObject city = new JSONObject();
             city.put("svgPath", "targetSVG");
             city.put("title", p.getName());
             city.put("latitude", p.getCoordinates().getLat());
             city.put("longitude", p.getCoordinates().getLng());
-            images.put("images", city);
+            images.put(city);
         }
         JSONObject lineSVG = new JSONObject();
         lineSVG.put("svgPath","planeSVG");
@@ -72,7 +72,7 @@ public class ConfigGeneratorJson {
         lineSVG.put("positionScale","1.3");
         lineSVG.put("","");
 
-        images.put("images", lineSVG);
+        images.put(lineSVG);
 
         JSONObject lineSVG2 = new JSONObject();
         lineSVG2.put("svgPath", "planeSVG");
@@ -85,15 +85,15 @@ public class ConfigGeneratorJson {
         lineSVG2.put("scale", "0.03");
         lineSVG2.put("positionScale", "1.8");
 
-        images.put("images", lineSVG2);
+        images.put(lineSVG2);
 
-        JSONObject areasSettings = new JSONObject();
+        JSONArray areasSettings = new JSONArray();
         JSONObject unlistedAreasColor = new JSONObject();
         unlistedAreasColor.put("unlistedAreasColor", "#8dd9ef");
-        areasSettings.put("areasSettings", unlistedAreasColor);
+        areasSettings.put(unlistedAreasColor);
 
 
-        JSONObject imagesSettings = new JSONObject();
+        JSONArray imagesSettings = new JSONArray();
         JSONObject is = new JSONObject();
         is.put("color", "#585869");
         is.put("rollOverColor", "#585869");
@@ -102,20 +102,20 @@ public class ConfigGeneratorJson {
         is.put("animationDuration", "2.5");
         is.put("adjustAnimationSpeed", "true");
 
-        imagesSettings.put("imagesSettings", is);
+        imagesSettings.put(is);
 
-        JSONObject linesSettings = new JSONObject();
+        JSONArray linesSettings = new JSONArray();
         JSONObject ls = new JSONObject();
         ls.put("color", "#585869");
         ls.put("alpha", "0.4");
 
-        linesSettings.put("linesSettings", ls);
+        linesSettings.put(ls);
 
-        JSONObject export = new JSONObject();
+        JSONArray export = new JSONArray();
         JSONObject exp = new JSONObject();
         exp.put("enabled", "true");
 
-        export.put("export", exp);
+        export.put(exp);
 
 
         dataProvider.put("lines", lines);

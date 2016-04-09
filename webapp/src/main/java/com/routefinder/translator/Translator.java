@@ -47,7 +47,18 @@ public class Translator {
         associations.put("я", "ya");
     }
 
+    private boolean isEnglish(String word){
+
+        char s = word.toLowerCase().charAt(0);
+
+        return s > 'a' && s < 'z';
+    }
+
     public String translate(String city) {
+
+        if(isEnglish(city)){
+            return city;
+        }
 
         try {
             String cityTranslate = "";

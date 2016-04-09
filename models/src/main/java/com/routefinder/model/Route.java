@@ -25,6 +25,9 @@ public class Route implements Persistable<Integer> {
     @Column
     private String info;
 
+    @Column
+    private String dataJson;
+
     public Route(){
         super();
     }
@@ -137,5 +140,13 @@ public class Route implements Persistable<Integer> {
 
     public void setMyRoute(MyRoute myRoute) {
         this.myRoute = myRoute;
+    }
+
+    public String getDataJson() {
+        return dataJson;
+    }
+
+    public void setDataJson(String dataJson) {
+        this.dataJson = dataJson;
     }
 }

@@ -1,5 +1,6 @@
 package com.routefinder.maps.google.api.helper;
 
+import com.routefinder.amcharts.helper.ConfigGeneratorJson;
 import com.routefinder.translator.Translator;
 import com.routefinder.model.Coordinates;
 import com.routefinder.model.Point;
