@@ -15,7 +15,6 @@ public class Encoder {
             url += x.getKey() + "=" + x.getValue() + "&";
         }
 
-
         return url.replace(' ', '%');
     }
 }

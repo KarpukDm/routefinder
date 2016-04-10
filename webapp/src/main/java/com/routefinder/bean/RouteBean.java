@@ -148,7 +148,11 @@ public class RouteBean implements Serializable {
             points.add(startPointCoordinate);
             points.add(endPointCoordinate);
 
-            return new ConfigGeneratorJson().generateJson(points).toString();
+           String x = new ConfigGeneratorJson().generateJson(points).toString();
+
+            return x;
+
+            //return getConfig();
         }
     }
 
