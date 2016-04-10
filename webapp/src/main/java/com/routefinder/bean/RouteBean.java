@@ -89,6 +89,36 @@ public class RouteBean implements Serializable {
         return configGenerator.getLngs(this.points);
     }
 
+    public String  getZoomLat(){
+
+        if(startPoint == null || endPoint == null ||
+                startPointCoordinate == null || endPointCoordinate == null){
+            return "42";
+        }
+
+        return configGenerator.getZoomLat(this.points);
+    }
+
+    public String getZoomLng(){
+
+        if(startPoint == null || endPoint == null ||
+                startPointCoordinate == null || endPointCoordinate == null){
+            return "-55";
+        }
+
+        return configGenerator.getZoomLng(this.points);
+    }
+
+    public String getZoomLevel(){
+
+        if(startPoint == null || endPoint == null ||
+                startPointCoordinate == null || endPointCoordinate == null){
+            return "3.5";
+        }
+
+        return configGenerator.getZoomLevel(this.route);
+    }
+
     public String getPointNames(){
 
         if(startPoint == null || endPoint == null ||

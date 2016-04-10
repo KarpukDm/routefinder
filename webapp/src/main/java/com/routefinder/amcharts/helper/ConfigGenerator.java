@@ -1,6 +1,7 @@
 package com.routefinder.amcharts.helper;
 
 import com.routefinder.model.Point;
+import com.routefinder.model.Route;
 
 import java.util.List;
 
@@ -42,5 +43,28 @@ public class ConfigGenerator {
         }
 
         return pointNames.substring(0, pointNames.length() - 2  );
+    }
+
+    public String getZoomLat(List<Point> points){
+        double lat = 0;
+        for(Point p : points){
+            lat += p.getCoordinates().getLat();
+        }
+
+        return String.valueOf((lat / points.size()));
+    }
+
+    public String getZoomLng(List<Point> points){
+        double lng = 0;
+        for(Point p : points){
+            lng += p.getCoordinates().getLng();
+        }
+
+        return String.valueOf((lng / points.size()));
+    }
+
+    public String getZoomLevel(Route route){
+
+        return String.valueOf(14000 / route.getDistance() * 0.5);
     }
 }
