@@ -25,6 +25,9 @@ public class Route implements Persistable<Integer> {
     @Column
     private String info;
 
+    @Column(nullable = false)
+    private Integer counter;
+
     public Route(){
         super();
     }
@@ -104,5 +107,13 @@ public class Route implements Persistable<Integer> {
 
     public void setPoints(List<Point> points) {
         this.points = points;
+    }
+
+    public Integer getCounter() {
+        return counter;
+    }
+
+    public void setCounter(Integer counter) {
+        this.counter = counter;
     }
 }
