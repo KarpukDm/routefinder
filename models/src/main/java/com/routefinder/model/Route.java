@@ -40,6 +40,15 @@ public class Route implements Persistable<Integer> {
         this.distance = distance;
     }
 
+    public String getRating(){
+        int x = 0;
+        for(Rating rating : ratings){
+            x += rating.getValue();
+        }
+
+        return String.valueOf(x);
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -126,5 +135,16 @@ public class Route implements Persistable<Integer> {
 
     public void setCounter(Integer counter) {
         this.counter = counter;
+    }
+
+    @OneToMany
+    private List<Schedule> schedules;
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 }

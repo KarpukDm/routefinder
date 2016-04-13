@@ -41,6 +41,10 @@ public class Account implements Persistable<Integer> {
         this.id = id;
     }
 
+    public void addRoute(MyRoute myRoute){
+        myRoutes.add(myRoute);
+    }
+
     public String getLogin() {
         return login;
     }
@@ -139,4 +143,5 @@ public class Account implements Persistable<Integer> {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
 }

@@ -23,6 +23,12 @@ public class RouteFinderController {
         return "home";
     }
 
+    @RequestMapping("/route")
+    public String route(Model model) {
+
+        return "route";
+    }
+
     @RequestMapping("/profile")
     public String profile(Model model) {
 

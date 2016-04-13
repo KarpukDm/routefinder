@@ -3,22 +3,27 @@ package com.routefinder.bean;
 import com.routefinder.amcharts.helper.ConfigGenerator;
 import com.routefinder.maps.google.api.helper.CoordinateFinder;
 import com.routefinder.maps.google.api.helper.DistanceCalculator;
-import com.routefinder.model.MyRoute;
-import com.routefinder.model.Point;
-import com.routefinder.model.Route;
-import com.routefinder.model.Schedule;
+import com.routefinder.model.*;
+import com.routefinder.service.AccountService;
 import com.routefinder.service.MyRouteService;
 import com.routefinder.service.RouteService;
 import org.primefaces.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.SpringSessionContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by offsp on 07.04.2016.
@@ -30,7 +35,7 @@ public class RouteBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Autowired
-    private MyRouteService myRouteService;
+    private AccountService accountService;
 
     @Autowired
     private RouteService routeService;
@@ -39,10 +44,15 @@ public class RouteBean implements Serializable {
     private String endPoint;
     private Point startPointCoordinate;
     private Point endPointCoordinate;
+
     private List<Schedule> schedules;
     private List<Point> points;
+    private String info;
+    private String price;
+
     private Route route;
     private ConfigGenerator configGenerator;
+    private Account account;
 
     public void addPoints() throws IOException, JSONException {
         CoordinateFinder coordinateFinder = new CoordinateFinder();
@@ -61,7 +71,35 @@ public class RouteBean implements Serializable {
 
         route.setCounter(0);
 
+        List<Rating> ratings = new LinkedList<>();
+        ratings.add(new Rating(0));
+        route.setRatings(ratings);
+
         route.setDistance(new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate));
+    }
+
+    public void addInfo() {
+
+        route.setPrice(Double.valueOf(this.price));
+        route.setInfo(this.info);
+    }
+
+    public void addSchedule() {
+
+    }
+
+    public void createRoute() throws IOException {
+
+        MyRoute myRoute = new MyRoute();
+        myRoute.setRoute(route);
+
+        if(account == null) {
+           this.account = accountService.findOneAccountByLogin(AccountBean.getUsername());
+        }
+
+        account.addRoute(myRoute);
+
+        accountService.save(account);
     }
 
     public String getDuration(){
@@ -71,10 +109,6 @@ public class RouteBean implements Serializable {
         }
 
         return configGenerator.getDuration(route);
-    }
-
-    public void addSchedule() {
-
     }
 
     public String getLats() {
@@ -158,14 +192,6 @@ public class RouteBean implements Serializable {
         return configGenerator.getPointNames(this.points);
     }
 
-    public void createRoute() throws IOException {
-
-        MyRoute myRoute = new MyRoute();
-        myRoute.setRoute(route);
-
-        myRouteService.save(myRoute);
-    }
-
     public List<Route> getRoutes(){
 
         return routeService.findAll();
@@ -173,7 +199,13 @@ public class RouteBean implements Serializable {
 
     public List<MyRoute> getMyRoutes(){
 
-        return myRouteService.findAll();
+        String login = AccountBean.getUsername();
+
+        if(account == null) {
+           this.account = accountService.findOneAccountByLogin(login);
+        }
+
+        return account.getMyRoutes();
     }
 
     public String getStartPoint() {
@@ -216,14 +248,6 @@ public class RouteBean implements Serializable {
         this.schedules = schedules;
     }
 
-    public MyRouteService getMyRouteService() {
-        return myRouteService;
-    }
-
-    public void setMyRouteService(MyRouteService myRouteService) {
-        this.myRouteService = myRouteService;
-    }
-
     public Route getRoute() {
         return route;
     }
@@ -232,7 +256,19 @@ public class RouteBean implements Serializable {
         this.route = route;
     }
 
-    public void addInfo() {
+    public String getInfo() {
+        return info;
+    }
 
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

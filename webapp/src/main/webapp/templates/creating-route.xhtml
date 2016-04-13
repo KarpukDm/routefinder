@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <h:head>
-    <title>Title</title>
+    <title>Creating route | ROUTE FINDER</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <h:outputStylesheet library="css" name="dashboard.css"/>
 
@@ -41,11 +41,20 @@
                     <h:form styleClass="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <h:inputText id="start" a:placeholder="Start point" value="#{routeBean.startPoint}"
-                                             styleClass="form-control input-sm" style="width: 100%"/>
-                                <h:inputText id="end" a:placeholder="End point" value="#{routeBean.endPoint}"
+                                <h:inputText id="start" a:placeholder="Start point" required="true"
+                                             requiredMessage="The 'Start point' is required"
+                                             value="#{routeBean.startPoint}"
+                                             styleClass="form-control input-sm" style="width: 100%">
+                                    <f:validator validatorId="points"/>
+                                    <f:ajax event="blur" execute="@this" render="pointsError"/>
+                                </h:inputText>
+                                <h:inputText id="end" a:placeholder="End point" required="true"
+                                             requiredMessage="The 'End point' is required" value="#{routeBean.endPoint}"
                                              styleClass="form-control input-sm"
-                                             style="width: 100%; margin-top: 20px;"/>
+                                             style="width: 100%; margin-top: 20px;">
+                                    <f:validator validatorId="points"/>
+                                    <f:ajax event="blur" execute="@this" render="pointsError"/>
+                                </h:inputText>
 
                                 <h:commandButton id="button" type="submit" class="sign-up-button"
                                                  value="Save" action="#{routeBean.addPoints()}"
@@ -64,14 +73,29 @@
                     <h:form styleClass="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <h:inputTextarea id="info" a:placeholder="Info" value="#{routeBean.route.info}"
+                                <h:inputTextarea id="info" a:placeholder="Info" value="#{routeBean.info}"
                                                  styleClass="form-control input-sm"
                                                  style="width: 400px; resize: none; height: 200px;"/>
 
-                                <h:commandButton id="button1" type="submit" class="sign-up-button"
-                                                 value="Save" action="#{routeBean.addInfo}"
-                                                 styleClass="btn btn-md btn-info"
-                                                 style="margin-top: 20px; float: right"/>
+                                <h:panelGroup style="margin-top: 10px; display: inline">
+
+                                    <h:panelGroup style="float: left">
+                                        <h:outputLabel value="Ticket price: " style="margin-top: 10px;"/>
+                                        <p:inputText id="price" a:placeholder="Ticket price" required="true"
+                                                     requiredMessage="The 'Price' is required"
+                                                     style="margin-left: 10px; width: 100px; margin-top: 10px;"
+                                                     value="#{routeBean.price}">
+                                            <f:validator validatorId="price"/>
+                                            <f:ajax event="blur" execute="@this" render="priceError"/>
+                                        </p:inputText>
+                                    </h:panelGroup>
+
+                                    <h:commandButton id="button1" type="submit" class="sign-up-button"
+                                                     value="Save" action="#{routeBean.addInfo}"
+                                                     styleClass="btn btn-md btn-info"
+                                                     style="float: right; margin-top: 10px;"/>
+                                </h:panelGroup>
+
                             </div>
                         </div>
                     </h:form>
@@ -90,8 +114,6 @@
                         </div>
                     </h:form>
                 </p:dialog>
-
-                <p:inputText id="price" a:placeholder="Ticket price" style="margin-left: 10px; width: 100px;" value="#{routeBean.route.price}"/>
 
                 <h:form>
                     <h:commandButton value="Create route" action="#{routeBean.createRoute}"

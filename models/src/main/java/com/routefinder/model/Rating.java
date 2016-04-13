@@ -19,13 +19,13 @@ public class Rating implements Persistable<Integer> {
     private Integer id;
 
     @Column(nullable = false)
-    private Double value;
+    private Integer value;
 
     public Rating(){
         super();
     }
 
-    public Rating(Double value){
+    public Rating(Integer value){
         super();
         this.value = value;
     }
@@ -34,11 +34,11 @@ public class Rating implements Persistable<Integer> {
         this.id = id;
     }
 
-    public Double getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

@@ -20,41 +20,51 @@
 
             <ui:include src="/templates-components/vertical-menu.xhtml"/>
 
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h:dataTable border="0" styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 table table-hover"
+                         value="#{routeBean.myRoutes}" var="account" style="width: 83%;">
 
-                <h:dataTable border="1" styleClass="table table-hover"
-                             value="#{routeBean.myRoutes}" var="route" style="width: 600px;">
-                    <h:column>
-                        <f:facet name="header">
-                            title
-                        </f:facet>
+                <h:column>
+                    <f:facet name="header">Rating</f:facet>
 
-                    <h:outputText value="#{route.route.points.get(0).name}"/>
+                    <h:outputText value="#{account.route.rating}" styleClass="column" style="font-size: 36pt;"/>
+
+                </h:column>
+
+                <h:column>
+
+                    <f:facet name="header">Route</f:facet>
+
+                    <a href="route"
+                       style="font-size: 16pt;">#{account.route.points.get(0).name} - #{account.route.points.get(account.route.points.size() - 1).name}</a>
+
+                    <br/>
+
+                    <h:outputText value="#{account.route.info}" style="margin-top: 10px;"/>
+
+                </h:column>
+
+                <h:column>
+
+                    <f:facet name="header">Schedule</f:facet>
+
+                    <h:dataTable value="#{account.route.schedules}" var="schedule">
+                        <h:outputText value="#{schedule.day}"/>
                         <h:outputLabel value=" : "/>
-                    <h:outputText value="#{route.route.points.get(route.route.points.size() - 1).name}"/>
+                        <h:outputText value="#{schedule.time}"/>
+                    </h:dataTable>
 
-                    </h:column>
+                </h:column>
 
-                    <h:column>
-                        <f:facet name="header">
-                            info
-                        </f:facet>
+                <h:column>
 
-                        <h:outputText value="#{route.route.info}"/>
-                    </h:column>
+                    <f:facet name="header">Price</f:facet>
 
-                    <h:column>
-                        <f:facet name="header">
-                            distance
-                        </f:facet>
-
-                        <h:outputText value="#{route.route.distance}"/>
-                    </h:column>
-                </h:dataTable>
-
-            </div>
+                    <h:outputText style="font-size: 24pt;" value="#{account.route.price} y.e."/>
+                </h:column>
+            </h:dataTable>
 
         </div>
+
     </div>
 
 </f:view>

@@ -7,15 +7,20 @@ import com.routefinder.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by karpukdm on 01.04.16.
@@ -23,7 +28,6 @@ import java.util.List;
 @ManagedBean
 @SessionScoped
 @Component
-
 public class AccountBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -61,6 +65,17 @@ public class AccountBean implements Serializable {
             return authentication.getName();
         }
         return null;
+    }
+
+    public static String getUsername(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+        SecurityContext springSessionContext = (SecurityContext) sessionMap.get("SPRING_SECURITY_CONTEXT");
+        Authentication authentication = springSessionContext.getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        return user.getUsername();
     }
 
     private boolean isExist(String login){

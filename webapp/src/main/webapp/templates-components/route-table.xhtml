@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+
+<ui:composition>
+
+    <h:dataTable border="0" styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 table table-hover"
+                 value="#{routeBean.routes}" var="route" style="width: 83%;">
+
+        <h:column>
+            <f:facet name="header">Rating</f:facet>
+
+            <h:outputText value="#{route.rating}" styleClass="column" style="font-size: 36pt;"/>
+
+        </h:column>
+
+        <h:column>
+
+            <f:facet name="header">Route</f:facet>
+
+            <a href="route" style="font-size: 16pt;">#{route.points.get(0).name} - #{route.points.get(route.points.size() - 1).name}</a>
+
+            <br/>
+
+            <h:outputText value="#{route.info}" style="margin-top: 10px;"/>
+
+        </h:column>
+
+        <h:column>
+
+            <f:facet name="header">Schedule</f:facet>
+
+            <h:dataTable value="#{route.schedules}" var="schedule">
+                <h:outputText value="#{schedule.day}"/>
+                <h:outputLabel value=" : "/>
+                <h:outputText value="#{schedule.time}"/>
+            </h:dataTable>
+
+        </h:column>
+
+        <h:column>
+
+            <f:facet name="header">Price, y.e</f:facet>
+
+            <h:outputText style="font-size: 24pt;" value="#{route.price}"/>
+        </h:column>
+    </h:dataTable>
+
+</ui:composition>
+
+</html>
