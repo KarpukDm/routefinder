@@ -67,4 +67,9 @@ public class ConfigGenerator {
 
         return String.valueOf(14000 / route.getDistance() * 0.5);
     }
+
+    public String getDuration(Route route){
+
+        return String.valueOf(route.getDistance() / 300 * Double.valueOf(getZoomLevel(route)));
+    }
 }

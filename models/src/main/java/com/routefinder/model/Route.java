@@ -28,6 +28,9 @@ public class Route implements Persistable<Integer> {
     @Column(nullable = false)
     private Integer counter;
 
+    @Column(nullable = false)
+    private Double price;
+
     public Route(){
         super();
     }
@@ -111,6 +114,14 @@ public class Route implements Persistable<Integer> {
 
     public Integer getCounter() {
         return counter;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public void setCounter(Integer counter) {

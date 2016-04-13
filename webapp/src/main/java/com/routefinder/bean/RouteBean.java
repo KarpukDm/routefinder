@@ -8,6 +8,7 @@ import com.routefinder.model.Point;
 import com.routefinder.model.Route;
 import com.routefinder.model.Schedule;
 import com.routefinder.service.MyRouteService;
+import com.routefinder.service.RouteService;
 import org.primefaces.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,11 +32,13 @@ public class RouteBean implements Serializable {
     @Autowired
     private MyRouteService myRouteService;
 
+    @Autowired
+    private RouteService routeService;
+
     private String startPoint;
     private String endPoint;
     private Point startPointCoordinate;
     private Point endPointCoordinate;
-    private String info;
     private List<Schedule> schedules;
     private List<Point> points;
     private Route route;
@@ -61,8 +64,13 @@ public class RouteBean implements Serializable {
         route.setDistance(new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate));
     }
 
-    public void addInfo() {
-        route.setInfo(this.info);
+    public String getDuration(){
+
+        if(isExistRoute()){
+            return "5";
+        }
+
+        return configGenerator.getDuration(route);
     }
 
     public void addSchedule() {
@@ -71,8 +79,7 @@ public class RouteBean implements Serializable {
 
     public String getLats() {
 
-        if(startPoint == null || endPoint == null ||
-                startPointCoordinate == null || endPointCoordinate == null){
+        if(isExistRoute()){
             return "48.8567, 43.8163, 34.3, 23";
         }
 
@@ -81,8 +88,7 @@ public class RouteBean implements Serializable {
 
     public String getLngs() {
 
-        if(startPoint == null || endPoint == null ||
-                startPointCoordinate == null || endPointCoordinate == null){
+        if(isExistRoute()){
             return "2.3510, -79.4287, -118.15, -82";
         }
 
@@ -91,8 +97,7 @@ public class RouteBean implements Serializable {
 
     public String  getZoomLat(){
 
-        if(startPoint == null || endPoint == null ||
-                startPointCoordinate == null || endPointCoordinate == null){
+        if(isExistRoute()){
             return "42";
         }
 
@@ -101,8 +106,7 @@ public class RouteBean implements Serializable {
 
     public String getZoomLng(){
 
-        if(startPoint == null || endPoint == null ||
-                startPointCoordinate == null || endPointCoordinate == null){
+        if(isExistRoute()){
             return "-55";
         }
 
@@ -111,12 +115,17 @@ public class RouteBean implements Serializable {
 
     public String getZoomLevel(){
 
-        if(startPoint == null || endPoint == null ||
-                startPointCoordinate == null || endPointCoordinate == null){
+        if(isExistRoute()){
             return "3.5";
         }
 
         return configGenerator.getZoomLevel(this.route);
+    }
+
+    private boolean isExistRoute(){
+
+        return (startPoint == null || endPoint == null ||
+                startPointCoordinate == null || endPointCoordinate == null);
     }
 
     public String getPointNames(){
@@ -157,6 +166,16 @@ public class RouteBean implements Serializable {
         myRouteService.save(myRoute);
     }
 
+    public List<Route> getRoutes(){
+
+        return routeService.findAll();
+    }
+
+    public List<MyRoute> getMyRoutes(){
+
+        return myRouteService.findAll();
+    }
+
     public String getStartPoint() {
         return startPoint;
     }
@@ -189,14 +208,6 @@ public class RouteBean implements Serializable {
         this.endPointCoordinate = endPointCoordinate;
     }
 
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
     public List<Schedule> getSchedules() {
         return schedules;
     }
@@ -213,4 +224,15 @@ public class RouteBean implements Serializable {
         this.myRouteService = myRouteService;
     }
 
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    public void addInfo() {
+
+    }
 }

@@ -66,7 +66,7 @@ public abstract class GenericServiceImpl<T extends Persistable<ID>, ID extends S
 
     @Override
     public List<T> findAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
