@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by offsp on 07.04.2016.
@@ -93,8 +94,9 @@ public class RouteBean implements Serializable {
         MyRoute myRoute = new MyRoute();
         myRoute.setRoute(route);
 
-        if(account == null) {
-           this.account = accountService.findOneAccountByLogin(AccountBean.getUsername());
+        String username = AccountBean.getUsername();
+        if(account == null || !Objects.equals(account.getLogin(), username)) {
+           this.account = accountService.findOneAccountByLogin(username);
         }
 
         account.addRoute(myRoute);
@@ -201,7 +203,8 @@ public class RouteBean implements Serializable {
 
         String login = AccountBean.getUsername();
 
-        if(account == null) {
+        String username = AccountBean.getUsername();
+        if(account == null || !Objects.equals(account.getLogin(), username)) {
            this.account = accountService.findOneAccountByLogin(login);
         }
 
