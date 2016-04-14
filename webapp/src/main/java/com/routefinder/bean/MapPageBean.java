@@ -1,7 +1,5 @@
 package com.routefinder.bean;
 
-import org.springframework.stereotype.Component;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -11,6 +9,5 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-@Component
 public class MapPageBean {
 }

@@ -30,27 +30,31 @@
 
             <br/>
 
-            <h:outputText value="#{route.info}" style="margin-top: 10px;"/>
+            <h:outputText value="#{route.shortInfo}" style="margin-top: 10px;"/>
 
         </h:column>
 
         <h:column>
 
-            <f:facet name="header">Schedule</f:facet>
+            <f:facet name="header">Day: time</f:facet>
 
             <h:dataTable value="#{route.schedules}" var="schedule">
-                <h:outputText value="#{schedule.day}"/>
-                <h:outputLabel value=" : "/>
-                <h:outputText value="#{schedule.time}"/>
+                <h:column>
+                    <h:outputText value="#{schedule.day}: "/>
+                </h:column>
+
+                <h:column>
+                    <h:outputText value="#{schedule.time}"/>
+                </h:column>
             </h:dataTable>
 
         </h:column>
 
         <h:column>
 
-            <f:facet name="header">Price, y.e</f:facet>
+            <f:facet name="header">Price</f:facet>
 
-            <h:outputText style="font-size: 24pt;" value="#{route.price}"/>
+            <h:outputText style="font-size: 18pt;" value="#{route.price} y.e."/>
         </h:column>
     </h:dataTable>
 

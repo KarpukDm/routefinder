@@ -85,8 +85,9 @@ public class RouteBean implements Serializable {
         route.setInfo(this.info);
     }
 
-    public void addSchedule() {
+    public void addSchedule(List<Schedule> schedules) {
 
+        route.setSchedules(schedules);
     }
 
     public void createRoute() throws IOException {
@@ -260,6 +261,7 @@ public class RouteBean implements Serializable {
     }
 
     public String getInfo() {
+
         return info;
     }
 

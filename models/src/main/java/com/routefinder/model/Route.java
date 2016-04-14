@@ -65,6 +65,15 @@ public class Route implements Persistable<Integer> {
         return info;
     }
 
+    public String getShortInfo() {
+
+        if(info.length() > 255){
+            return info.substring(0, 255);
+        }
+
+        return info;
+    }
+
     public void setInfo(String info) {
         this.info = info;
     }
@@ -137,7 +146,7 @@ public class Route implements Persistable<Integer> {
         this.counter = counter;
     }
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Schedule> schedules;
 
     public List<Schedule> getSchedules() {

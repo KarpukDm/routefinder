@@ -39,18 +39,22 @@
 
                     <br/>
 
-                    <h:outputText value="#{account.route.info}" style="margin-top: 10px;"/>
+                    <h:outputText value="#{account.route.shortInfo}" style="margin-top: 10px;"/>
 
                 </h:column>
 
                 <h:column>
 
-                    <f:facet name="header">Schedule</f:facet>
+                    <f:facet name="header">Day: time</f:facet>
 
                     <h:dataTable value="#{account.route.schedules}" var="schedule">
-                        <h:outputText value="#{schedule.day}"/>
-                        <h:outputLabel value=" : "/>
-                        <h:outputText value="#{schedule.time}"/>
+                        <h:column>
+                            <h:outputText value="#{schedule.day}: "/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputText value="#{schedule.time}"/>
+                        </h:column>
                     </h:dataTable>
 
                 </h:column>
@@ -59,7 +63,7 @@
 
                     <f:facet name="header">Price</f:facet>
 
-                    <h:outputText style="font-size: 24pt;" value="#{account.route.price} y.e."/>
+                    <h:outputText style="font-size: 18pt;" value="#{account.route.price} y.e."/>
                 </h:column>
             </h:dataTable>
 

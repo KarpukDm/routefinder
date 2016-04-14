@@ -10,6 +10,7 @@
     <title>Creating route | ROUTE FINDER</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <h:outputStylesheet library="css" name="dashboard.css"/>
+    <h:outputStylesheet library="css" name="table.css"/>
 
     <h:outputScript library="js" name="ammap.js"/>
     <h:outputStylesheet library="css" name="ammap.css"/>
@@ -56,7 +57,7 @@
                                     <f:ajax event="blur" execute="@this" render="pointsError"/>
                                 </h:inputText>
 
-                                <h:commandButton id="button" type="submit" class="sign-up-button"
+                                <h:commandButton id="sendPoints" type="submit" class="sign-up-button"
                                                  value="Save" action="#{routeBean.addPoints()}"
                                                  styleClass="btn btn-md btn-primary"
                                                  style="margin-top: 20px; float: right"/>
@@ -90,7 +91,7 @@
                                         </p:inputText>
                                     </h:panelGroup>
 
-                                    <h:commandButton id="button1" type="submit" class="sign-up-button"
+                                    <h:commandButton id="sendInfo" type="submit" class="sign-up-button"
                                                      value="Save" action="#{routeBean.addInfo}"
                                                      styleClass="btn btn-md btn-info"
                                                      style="float: right; margin-top: 10px;"/>
@@ -109,7 +110,32 @@
                     <h:form styleClass="form-horizontal col-md-6">
                         <div class="form-group col-md-12">
                             <div class="col-md-12">
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
+                                                 a:placeholder="Monday" value="#{scheduleBean.monday}"/>
 
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
+                                                 a:placeholder="Tuesday" value="#{scheduleBean.tuesday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
+                                                 a:placeholder="Wednesday" value="#{scheduleBean.wednesday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
+                                                 a:placeholder="Thursday" value="#{scheduleBean.thursday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
+                                                 a:placeholder="Friday" value="#{scheduleBean.friday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
+                                                 a:placeholder="Saturday" value="#{scheduleBean.saturday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
+                                                 a:placeholder="Sunday" value="#{scheduleBean.sunday}"/>
+
+
+                                <h:commandButton id="sendSchedule" type="submit" class="sign-up-button"
+                                                 value="Save" action="#{routeBean.addSchedule(scheduleBean.scheduleList)}"
+                                                 styleClass="btn btn-md btn-info"
+                                                 style="float: right; margin-top: 10px;"/>
                             </div>
                         </div>
                     </h:form>
