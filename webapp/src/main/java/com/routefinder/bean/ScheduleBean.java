@@ -36,10 +36,6 @@ public class ScheduleBean {
 
         schedules = removeUnnecessary(schedules);
 
-        if(schedules.size() == 0){
-            schedules.add(new Schedule("Invalid ", "route"));
-        }
-
         return schedules;
     }
 

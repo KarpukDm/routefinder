@@ -1,8 +1,12 @@
 package com.routefinder.spring.mvc.controller;
 
+import com.routefinder.model.Route;
+import com.routefinder.service.RouteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @org.springframework.stereotype.Controller
 public class RouteFinderController {
+
+    @Autowired
+    private RouteService routeService;
+
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main(Model model) {
 
@@ -23,10 +31,17 @@ public class RouteFinderController {
         return "home";
     }
 
-    @RequestMapping("/route")
-    public String route(Model model) {
+    @RequestMapping("/route/{id}")
+    public String route(@PathVariable Integer id, Model model) {
 
-        return "route";
+        Route route = routeService.findOneRouteById(id);
+        if(route != null) {
+            model.addAttribute(route);
+
+            return "route";
+        }
+
+        return "not-found";
     }
 
     @RequestMapping("/profile")
@@ -62,11 +77,11 @@ public class RouteFinderController {
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public String login(Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().
+       /* Authentication authentication = SecurityContextHolder.getContext().
                 getAuthentication();
         String name = authentication.getName();
         model.addAttribute("username", name);
-        model.addAttribute("message", "Welcome to Spring");
+        model.addAttribute("message", "Welcome to Spring");*/
 
         return "profile";
     }

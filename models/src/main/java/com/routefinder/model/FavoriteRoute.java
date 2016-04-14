@@ -43,7 +43,7 @@ public class FavoriteRoute implements Persistable<Integer> {
     }
 
     public Integer getId() {
-        return null;
+        return id;
     }
 
     public boolean isNew() {

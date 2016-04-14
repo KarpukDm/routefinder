@@ -10,4 +10,14 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class MapPageBean {
+
+    private Integer routeId;
+
+    public Integer getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(Integer routeId) {
+        this.routeId = routeId;
+    }
 }

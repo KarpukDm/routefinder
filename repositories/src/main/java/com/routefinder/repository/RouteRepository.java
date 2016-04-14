@@ -1,6 +1,7 @@
 package com.routefinder.repository;
 
 
+import com.routefinder.model.Account;
 import com.routefinder.model.Route;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -9,4 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface RouteRepository extends JpaRepository<Route, Integer> {
+
+    Route findOneRouteById(Integer id);
 }

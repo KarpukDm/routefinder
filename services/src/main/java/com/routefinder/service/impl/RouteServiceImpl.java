@@ -14,4 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class RouteServiceImpl extends GenericServiceImpl<Route, Integer, RouteRepository>
         implements RouteService{
+    @Override
+    public Route findOneRouteById(Integer id) {
+        return repository.findOneRouteById(id);
+    }
 }

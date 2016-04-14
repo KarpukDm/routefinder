@@ -79,7 +79,7 @@ public class Route implements Persistable<Integer> {
     }
 
     public Integer getId() {
-        return null;
+        return id;
     }
 
     public boolean isNew() {
@@ -156,4 +156,6 @@ public class Route implements Persistable<Integer> {
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
     }
+
+
 }
