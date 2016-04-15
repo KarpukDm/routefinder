@@ -5,25 +5,17 @@ import com.routefinder.maps.google.api.helper.CoordinateFinder;
 import com.routefinder.maps.google.api.helper.DistanceCalculator;
 import com.routefinder.model.*;
 import com.routefinder.service.AccountService;
-import com.routefinder.service.MyRouteService;
 import com.routefinder.service.RouteService;
 import org.primefaces.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.SpringSessionContext;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -55,6 +47,14 @@ public class RouteBean implements Serializable {
     private ConfigGenerator configGenerator;
     private Account account;
 
+    private String duration;
+    private String lats;
+    private String lngs;
+    private String zoomLat;
+    private String zoomLng;
+    private String zoomLevel;
+    private String pointsNames;
+
     public void addPoints() throws IOException, JSONException, IllegalAccessException {
         CoordinateFinder coordinateFinder = new CoordinateFinder();
         configGenerator = new ConfigGenerator();
@@ -77,6 +77,19 @@ public class RouteBean implements Serializable {
         route.setRatings(ratings);
 
         route.setDistance(new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate));
+
+        this.duration = configGenerator.getDuration(route);
+        this.lats = configGenerator.getLats(points);
+        this.lngs = configGenerator.getLngs(points);
+        this.zoomLat = configGenerator.getZoomLat(points);
+        this.zoomLng = configGenerator.getZoomLng(points);
+        this.zoomLevel = configGenerator.getZoomLevel(route);
+        this.pointsNames = configGenerator.getPointNames(points);
+
+
+        route.setRouteConfig(new RouteConfig(this.duration,
+                this.lats, this.lngs, this.zoomLat, this.zoomLng, this.zoomLevel, this.pointsNames));
+
     }
 
     public void addInfo() {
@@ -110,8 +123,8 @@ public class RouteBean implements Serializable {
         if(isExistRoute()){
             return "5";
         }
-
-        return configGenerator.getDuration(route);
+        this.duration = configGenerator.getDuration(route);
+        return duration;
     }
 
     public String getLats() {
@@ -119,8 +132,7 @@ public class RouteBean implements Serializable {
         if(isExistRoute()){
             return "48.8567, 43.8163, 34.3, 23";
         }
-
-        return configGenerator.getLats(this.points);
+        return lats;
     }
 
     public String getLngs() {
@@ -129,7 +141,7 @@ public class RouteBean implements Serializable {
             return "2.3510, -79.4287, -118.15, -82";
         }
 
-        return configGenerator.getLngs(this.points);
+        return lngs;
     }
 
     public String  getZoomLat(){
@@ -138,7 +150,7 @@ public class RouteBean implements Serializable {
             return "42";
         }
 
-        return configGenerator.getZoomLat(this.points);
+        return zoomLat;
     }
 
     public String getZoomLng(){
@@ -147,7 +159,8 @@ public class RouteBean implements Serializable {
             return "-55";
         }
 
-        return configGenerator.getZoomLng(this.points);
+
+        return zoomLng;
     }
 
     public String getZoomLevel(){
@@ -156,13 +169,7 @@ public class RouteBean implements Serializable {
             return "3.5";
         }
 
-        return configGenerator.getZoomLevel(this.route);
-    }
-
-    private boolean isExistRoute(){
-
-        return (startPoint == null || endPoint == null ||
-                startPointCoordinate == null || endPointCoordinate == null);
+        return zoomLevel;
     }
 
     public String getPointNames(){
@@ -192,7 +199,13 @@ public class RouteBean implements Serializable {
                     "        }";
         }
 
-        return configGenerator.getPointNames(this.points);
+        return pointsNames;
+    }
+
+    private boolean isExistRoute(){
+
+        return (startPoint == null || endPoint == null ||
+                startPointCoordinate == null || endPointCoordinate == null);
     }
 
     public List<Route> getRoutes(){

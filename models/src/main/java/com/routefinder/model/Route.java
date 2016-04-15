@@ -158,4 +158,14 @@ public class Route implements Persistable<Integer> {
     }
 
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private RouteConfig routeConfig;
+
+    public RouteConfig getRouteConfig() {
+        return routeConfig;
+    }
+
+    public void setRouteConfig(RouteConfig routeConfig) {
+        this.routeConfig = routeConfig;
+    }
 }

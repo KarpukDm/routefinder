@@ -32,7 +32,7 @@ public class CoordinateFinder {
         String baseUrl = "http://maps.googleapis.com/maps/api/geocode/json";// путь к Geocoding API по HTTP
         Map<String, String> params = new HashMap<>();
         params.put("sensor", "false");// исходит ли запрос на геокодирование от устройства с датчиком местоположения
-        params.put("address", new Translator().translate(address));// адрес, который нужно геокодировать
+        params.put("address", address);// адрес, который нужно геокодировать
         String url = baseUrl + '?' + LinksCollectorGoogle.getParams(params);// генерируем путь с параметрами
 
         System.out.println(url);// Путь, что бы можно было посмотреть в браузере ответ службы
