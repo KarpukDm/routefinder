@@ -34,7 +34,8 @@
 
                     <f:facet name="header">Route</f:facet>
 
-                    <a href="route/#{account.route.id}" style="font-size: 16pt;">#{account.route.points.get(0).name} - #{account.route.points.get(account.route.points.size() - 1).name}</a>
+                    <a href="route/#{account.route.id}"
+                       style="font-size: 16pt;">#{account.route.points.get(0).name} - #{account.route.points.get(account.route.points.size() - 1).name}</a>
 
                     <br/>
 
@@ -46,7 +47,7 @@
 
                     <f:facet name="header">Day: time</f:facet>
 
-                    <h:dataTable styleClass="table table-hover" value="#{account.route.schedules}" var="schedule">
+                    <h:dataTable value="#{account.route.schedules}" styleClass="table table-hover" var="schedule">
                         <h:column>
                             <h:outputText value="#{schedule.day}: "/>
                         </h:column>

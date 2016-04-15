@@ -57,7 +57,7 @@
                                     <f:ajax event="blur" execute="@this" render="pointsError"/>
                                 </h:inputText>
 
-                                <h:commandButton id="sendPoints" type="submit" class="sign-up-button"
+                                <h:commandButton id="sendPoints" type="submit"
                                                  value="Save" action="#{routeBean.addPoints()}"
                                                  styleClass="btn btn-md btn-primary"
                                                  style="margin-top: 20px; float: right"/>
@@ -91,7 +91,7 @@
                                         </p:inputText>
                                     </h:panelGroup>
 
-                                    <h:commandButton id="sendInfo" type="submit" class="sign-up-button"
+                                    <h:commandButton id="sendInfo" type="submit"
                                                      value="Save" action="#{routeBean.addInfo}"
                                                      styleClass="btn btn-md btn-info"
                                                      style="float: right; margin-top: 10px;"/>
@@ -107,37 +107,55 @@
                                  styleClass="btn btn-md btn-group" style="margin-left: 10px;"/>
 
                 <p:dialog header="Schedule" widgetVar="schedule" resizable="false">
-                    <h:form styleClass="form-horizontal col-md-6">
-                        <div class="form-group col-md-12">
+                    <h:form styleClass="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12">
 
-                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
-                                                 a:placeholder="Monday" value="#{scheduleBean.monday}"/>
+                                <h:panelGroup style="display: inline">
+                                    <h:outputLabel value="Monday: "/>
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px"
+                                                 a:placeholder="h:m" value="#{scheduleBean.monday}"/>
+                                </h:panelGroup>
 
-                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
-                                                 a:placeholder="Tuesday" value="#{scheduleBean.tuesday}"/>
+                                <h:panelGroup style="display: inline">
+                                    <h:outputLabel value="Tuesday: "/>
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px"
+                                                 a:placeholder="h:m" value="#{scheduleBean.tuesday}"/>
 
-                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
-                                                 a:placeholder="Wednesday" value="#{scheduleBean.wednesday}"/>
+                                </h:panelGroup>
+                                <h:panelGroup style="display: inline">
+                                    <h:outputLabel value="Wednesday: "/>
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px"
+                                                 a:placeholder="h:m" value="#{scheduleBean.wednesday}"/>
+                                </h:panelGroup>
+                                <h:panelGroup style="display: inline">
+                                    <h:outputLabel value="Thursday: "/>
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px"
+                                                 a:placeholder="h:m" value="#{scheduleBean.thursday}"/>
+                                </h:panelGroup>
+                                <h:panelGroup style="display: inline">
+                                    <h:outputLabel value="Friday: "/>
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px"
+                                                 a:placeholder="h:m" value="#{scheduleBean.friday}"/>
+                                </h:panelGroup>
+                                <h:panelGroup style="display: inline">
+                                    <h:outputLabel value="Saturday: "/>
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px"
+                                                 a:placeholder="h:m" value="#{scheduleBean.saturday}"/>
+                                </h:panelGroup>
+                                <h:panelGroup style="display: inline">
+                                    <h:outputLabel value="Saturday: "/>
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px"
+                                                 a:placeholder="h:m" value="#{scheduleBean.sunday}"/>
+                                </h:panelGroup>
 
-                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
-                                                 a:placeholder="Thursday" value="#{scheduleBean.thursday}"/>
-
-                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
-                                                 a:placeholder="Friday" value="#{scheduleBean.friday}"/>
-
-                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
-                                                 a:placeholder="Saturday" value="#{scheduleBean.saturday}"/>
-
-                                    <h:inputText styleClass="form-control input-sm" style="width: 100%"
-                                                 a:placeholder="Sunday" value="#{scheduleBean.sunday}"/>
-
-
-                                <h:commandButton id="sendSchedule" type="submit" class="sign-up-button"
-                                                 value="Save" action="#{routeBean.addSchedule(scheduleBean.scheduleList)}"
+                                <h:commandButton id="sendSchedule" type="submit"
+                                                 value="Save"
+                                                 action="#{routeBean.addSchedule(scheduleBean.scheduleList)}"
                                                  styleClass="btn btn-md btn-info"
-                                                 style="float: right; margin-top: 10px;"/>
+                                style="margin-top: 10px;"/>
                             </div>
-
+                        </div>
                     </h:form>
                 </p:dialog>
 

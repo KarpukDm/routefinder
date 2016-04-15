@@ -7,22 +7,23 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputStylesheet library="css" name="table.css"/>
 </h:head>
 
 
 <ui:composition>
 
     <h:dataTable border="0" styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 table table-hover"
-                 value="#{routeBean.routes}" var="route" style="width: 83%;">
+                 value="#{routeBean.routes}" var="route" style="width: 83%;" columnClasses="column1,column2,column3,column4">
 
-        <h:column>
+        <h:column headerClass="column1">
             <f:facet name="header">Rating</f:facet>
 
-            <h:outputText value="#{route.rating}" styleClass="column" style="font-size: 36pt;"/>
+            <h:outputText value="#{route.rating}" style="font-size: 36pt;"/>
 
         </h:column>
 
-        <h:column>
+        <h:column headerClass="column2">
 
             <f:facet name="header">Route</f:facet>
 
@@ -34,7 +35,7 @@
 
         </h:column>
 
-        <h:column>
+        <h:column headerClass="column3">
 
             <f:facet name="header">Day: time</f:facet>
 
@@ -50,7 +51,7 @@
 
         </h:column>
 
-        <h:column>
+        <h:column headerClass="column4">
 
             <f:facet name="header">Price</f:facet>
 

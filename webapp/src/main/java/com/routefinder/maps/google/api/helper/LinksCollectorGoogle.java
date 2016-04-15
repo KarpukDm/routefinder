@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Created by offsp on 08.04.2016.
  */
-public class Encoder {
+public class LinksCollectorGoogle {
 
     public static String getParams(Map<String, String> params) {
 

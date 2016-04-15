@@ -1,82 +1,28 @@
 package com.routefinder.translator;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.routefinder.translator.yandex.api.LinksCollectorYandex;
+import org.primefaces.json.JSONArray;
+import org.primefaces.json.JSONException;
+import org.primefaces.json.JSONObject;
+
+import java.io.IOException;
+
+import static com.routefinder.readers.URLConnectionReader.httpGet;
 
 /**
  * Created by offsp on 09.04.2016.
  */
 public class Translator {
 
-    private static final Map<String, String> associations;
+    public String translate(String city) throws JSONException, IOException, IllegalAccessException {
 
-    static {
-        associations = new HashMap<>();
-        associations.put("а", "a");
-        associations.put("б", "b");
-        associations.put("в", "v");
-        associations.put("г", "g");
-        associations.put("д", "d");
-        associations.put("е", "e");
-        associations.put("ё", "yo");
-        associations.put("ж", "j");
-        associations.put("з", "z");
-        associations.put("и", "i");
-        associations.put("й", "j");
-        associations.put("к", "k");
-        associations.put("л", "l");
-        associations.put("м", "m");
-        associations.put("н", "n");
-        associations.put("о", "o");
-        associations.put("п", "p");
-        associations.put("р", "r");
-        associations.put("с", "s");
-        associations.put("т", "t");
-        associations.put("у", "u");
-        associations.put("ф", "f");
-        associations.put("х", "h");
-        associations.put("ц", "c");
-        associations.put("ч", "ch");
-        associations.put("ш", "sh");
-        associations.put("щ", "shch");
-        associations.put("ъ", "j");
-        associations.put("ы", "i");
-        associations.put("ь", "");
-        associations.put("э", "e");
-        associations.put("ю", "yu");
-        associations.put("я", "ya");
-    }
+        LinksCollectorYandex linksCollectorYandex = new LinksCollectorYandex();
+        String link = linksCollectorYandex.getLink(city);
 
-    private boolean isEnglish(String word){
+        String jsonString = httpGet(link);
+        JSONObject response = new JSONObject(jsonString);
+        JSONArray resultArr = response.getJSONArray("text");
 
-        char s = word.toLowerCase().charAt(0);
-
-        return s > 'a' && s < 'z';
-    }
-
-    public String translate(String city) {
-
-        if(isEnglish(city)){
-            return city;
-        }
-
-        try {
-            String cityTranslate = "";
-            for (char l : city.toCharArray()) {
-                if(Character.isAlphabetic(l)) {
-                    cityTranslate += associations.get(String.valueOf(l).toLowerCase());
-                }
-                else{
-                    if(Character.isDigit(l)) {
-                        cityTranslate += String.valueOf(l);
-                    }else{
-                        cityTranslate += " ";
-                    }
-                }
-            }
-            return cityTranslate;
-        }catch (Exception e){
-            return city;
-        }
+        return resultArr.toString();
     }
 }

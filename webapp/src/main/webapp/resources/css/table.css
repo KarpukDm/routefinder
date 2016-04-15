@@ -5,3 +5,21 @@
 .row{
     margin-top: 1px;
 }
+
+.column1{
+    text-align: center;
+    font-size: 18pt;
+    width: 5%;
+}
+
+.column2{
+    width: 50%;
+}
+
+.column3{
+    width: 10%;
+}
+
+.column4{
+    width: 10%;
+}

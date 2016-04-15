@@ -55,7 +55,7 @@ public class RouteBean implements Serializable {
     private ConfigGenerator configGenerator;
     private Account account;
 
-    public void addPoints() throws IOException, JSONException {
+    public void addPoints() throws IOException, JSONException, IllegalAccessException {
         CoordinateFinder coordinateFinder = new CoordinateFinder();
         configGenerator = new ConfigGenerator();
 
