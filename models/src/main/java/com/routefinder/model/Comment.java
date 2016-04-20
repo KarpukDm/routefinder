@@ -18,6 +18,7 @@ public class Comment implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
+
     @Column(nullable = false)
     private String message;
 

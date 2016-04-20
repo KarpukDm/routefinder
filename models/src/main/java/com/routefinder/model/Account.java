@@ -45,6 +45,10 @@ public class Account implements Persistable<Integer> {
         myRoutes.add(myRoute);
     }
 
+    public void addComment(Comment comment){
+        comments.add(comment);
+    }
+
     public String getLogin() {
         return login;
     }

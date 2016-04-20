@@ -49,6 +49,10 @@ public class Route implements Persistable<Integer> {
         return String.valueOf(x);
     }
 
+    public void addComment(Comment comment){
+        comments.add(comment);
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

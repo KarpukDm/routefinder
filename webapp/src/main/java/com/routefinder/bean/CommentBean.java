@@ -1,5 +1,7 @@
 package com.routefinder.bean;
 
+import com.routefinder.model.Account;
+import com.routefinder.model.Comment;
 import com.routefinder.model.Route;
 import com.routefinder.service.AccountService;
 import com.routefinder.service.RouteService;
@@ -7,14 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.IntegerConverter;
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created by offsp on 21.04.2016.
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 @Component
 public class CommentBean implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -26,10 +31,28 @@ public class CommentBean implements Serializable {
     private AccountService accountService;
 
     private String message;
-    private Route route;
 
-    public void addComment(Route route){
+    public void addComment() {
+        if (message != null) {
 
+            Comment comment = new Comment(message);
+
+            String username = AccountBean.getUsername();
+            Account account = accountService.findOneAccountByLogin(username);
+            if (account != null) {
+                account.addComment(comment);
+                accountService.save(account);
+            }
+
+            Map<String, String> params =
+                    FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+            String routeId = params.get("routeId");
+
+            Route route = routeService.findOneRouteById(Integer.valueOf(routeId));
+
+            route.addComment(comment);
+            routeService.save(route);
+        }
     }
 
     public RouteService getRouteService() {

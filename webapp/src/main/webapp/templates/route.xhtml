@@ -158,15 +158,26 @@
                 <div class="col-md-offset-2 row">
 
                     <div class="col-md-7">
-                        <h:outputText value="Comments"/>
+                        <h:outputText value="Comments:" styleClass="col-md-12"/>
+
+                        <ui:repeat value="#{route.comments}" var="comment">
+
+                            <h2 class="sub-header"/>
+
+                            <h:outputText value="#{comment.message}"/>
+
+                        </ui:repeat>
+
                     </div>
 
                     <div class="col-md-5" style="padding-right: 40px;">
-                        <h:outputText value="Your comment" style="float: left;"/>
+                        <h:outputText value="Your comment:" style="float: left;"/>
                         <h:form>
                             <h:inputTextarea style="resize: none; height: 100px;" styleClass="col-md-12" value="#{commentBean.message}"/>
                             <h:commandButton styleClass="btn btn-primary" style="float: right; margin-top: 5px;" value="Send"
-                                             action="#{commentBean.addComment(route)}"/>
+                                             action="#{commentBean.addComment}">
+                                <f:param name="routeId" value="#{route.id}" />
+                            </h:commandButton>
                         </h:form>
                     </div>
                 </div>
