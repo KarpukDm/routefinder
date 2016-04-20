@@ -9,8 +9,8 @@
 <h:head>
     <title>Title</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="dashboard.css"
-    />
+    <h:outputStylesheet library="css" name="dashboard.css"/>
+    <h:outputStylesheet library="css" name="table.css"/>
 </h:head>
 
 <f:view>
@@ -27,15 +27,15 @@
                              value="#{routeBean.myRoutes}" var="account" paginator="true" rows="10"
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                              lazy="true">
-                    <p:column headerText="Rating" styleClass="rating">
+                    <p:column headerText="Rating" style="width: 8%;">
 
-                        <h:outputText styleClass="rating-value" value="#{account.route.rating}"/>
+                        <h:outputText styleClass="rating-value" style="font-size: 26pt;" value="#{account.route.rating}"/>
 
                     </p:column>
 
-                    <p:column headerText="Route" styleClass="route">
+                    <p:column headerText="Route" style="width: 52%;">
 
-                        <a class="route-link" href="route/#{account.route.id}"
+                        <a class="route-link" style="color: #2e7496;" href="route/#{account.route.id}"
                         >#{account.route.points.get(0).name} - #{account.route.points.get(account.route.points.size() - 1).name}</a>
 
                         <br/>
@@ -44,7 +44,7 @@
 
                     </p:column>
 
-                    <p:column headerText="Day: time" styleClass="schedule">
+                    <p:column headerText="Day: time" style="width: 20%;">
 
                         <p:dataTable value="#{account.route.schedules}" var="schedule">
                             <p:column>
@@ -58,9 +58,9 @@
 
                     </p:column>
 
-                    <p:column headerText="Price" styleClass="price">
+                    <p:column headerText="Price" style="width: 15%;">
 
-                        <h:outputText value="#{account.route.price} y.e."/>
+                        <h:outputText styleClass="price-value" style="font-size: 16pt;" value="#{account.route.price} y.e."/>
                     </p:column>
                 </p:dataTable>
             </h:panelGroup>

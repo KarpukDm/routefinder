@@ -56,47 +56,51 @@ public class RouteBean implements Serializable {
     private String pointsNames;
 
     public void addPoints() throws IOException, JSONException, IllegalAccessException {
+
         CoordinateFinder coordinateFinder = new CoordinateFinder();
         configGenerator = new ConfigGenerator();
 
         route = new Route(15.0);
         points = new LinkedList<>();
 
-        startPointCoordinate = coordinateFinder.getPoint(startPoint);
-        endPointCoordinate = coordinateFinder.getPoint(endPoint);
-        Double distance = new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate);
+        if(startPoint != null || endPoint != null) {
 
-        List<Neighbor> neighbors = new LinkedList<>();
-        neighbors.add(new Neighbor(startPointCoordinate.getId(), distance));
-        neighbors.add(new Neighbor(endPointCoordinate.getId(), distance));
+            startPointCoordinate = coordinateFinder.getPoint(startPoint);
+            endPointCoordinate = coordinateFinder.getPoint(endPoint);
+            Double distance = new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate);
 
-        startPointCoordinate.setNeighbors(neighbors.subList(0, neighbors.size() - 1));
-        endPointCoordinate.setNeighbors(neighbors.subList(1, neighbors.size()));
+            List<Neighbor> neighbors = new LinkedList<>();
+            neighbors.add(new Neighbor(startPointCoordinate.getId(), distance));
+            neighbors.add(new Neighbor(endPointCoordinate.getId(), distance));
 
-        points.add(startPointCoordinate);
-        points.add(endPointCoordinate);
+            startPointCoordinate.setNeighbors(neighbors.subList(0, neighbors.size() - 1));
+            endPointCoordinate.setNeighbors(neighbors.subList(1, neighbors.size()));
 
-        route.setPoints(points);
+            points.add(startPointCoordinate);
+            points.add(endPointCoordinate);
 
-        route.setCounter(0);
+            route.setPoints(points);
 
-        List<Rating> ratings = new LinkedList<>();
-        ratings.add(new Rating(0));
-        route.setRatings(ratings);
+            route.setCounter(0);
 
-        route.setDistance(distance);
+            List<Rating> ratings = new LinkedList<>();
+            ratings.add(new Rating(0));
+            route.setRatings(ratings);
 
-        this.duration = configGenerator.getDuration(route);
-        this.lats = configGenerator.getLats(points);
-        this.lngs = configGenerator.getLngs(points);
-        this.zoomLat = configGenerator.getZoomLat(points);
-        this.zoomLng = configGenerator.getZoomLng(points);
-        this.zoomLevel = configGenerator.getZoomLevel(route);
-        this.pointsNames = configGenerator.getPointNames(points);
+            route.setDistance(distance);
+
+            this.duration = configGenerator.getDuration(route);
+            this.lats = configGenerator.getLats(points);
+            this.lngs = configGenerator.getLngs(points);
+            this.zoomLat = configGenerator.getZoomLat(points);
+            this.zoomLng = configGenerator.getZoomLng(points);
+            this.zoomLevel = configGenerator.getZoomLevel(route);
+            this.pointsNames = configGenerator.getPointNames(points);
 
 
-        route.setRouteConfig(new RouteConfig(this.duration,
-                this.lats, this.lngs, this.zoomLat, this.zoomLng, this.zoomLevel, this.pointsNames));
+            route.setRouteConfig(new RouteConfig(this.duration,
+                    this.lats, this.lngs, this.zoomLat, this.zoomLng, this.zoomLevel, this.pointsNames));
+        }
 
     }
 
@@ -113,22 +117,25 @@ public class RouteBean implements Serializable {
 
     public void createRoute() throws IOException {
 
-        MyRoute myRoute = new MyRoute();
-        myRoute.setRoute(route);
-
         String username = AccountBean.getUsername();
         if(account == null || !Objects.equals(account.getLogin(), username)) {
            this.account = accountService.findOneAccountByLogin(username);
         }
 
-        account.addRoute(myRoute);
+        if(isExistRoute()) {
 
-        accountService.save(account);
+            MyRoute myRoute = new MyRoute();
+            myRoute.setRoute(route);
+
+            account.addRoute(myRoute);
+
+            accountService.save(account);
+        }
     }
 
     public String getDuration(){
 
-        if(isExistRoute()){
+        if(!isExistRoute()){
             return "5";
         }
         this.duration = configGenerator.getDuration(route);
@@ -137,7 +144,7 @@ public class RouteBean implements Serializable {
 
     public String getLats() {
 
-        if(isExistRoute()){
+        if(!isExistRoute()){
             return "48.8567, 43.8163, 34.3, 23";
         }
         return lats;
@@ -145,7 +152,7 @@ public class RouteBean implements Serializable {
 
     public String getLngs() {
 
-        if(isExistRoute()){
+        if(!isExistRoute()){
             return "2.3510, -79.4287, -118.15, -82";
         }
 
@@ -154,7 +161,7 @@ public class RouteBean implements Serializable {
 
     public String  getZoomLat(){
 
-        if(isExistRoute()){
+        if(!isExistRoute()){
             return "42";
         }
 
@@ -163,7 +170,7 @@ public class RouteBean implements Serializable {
 
     public String getZoomLng(){
 
-        if(isExistRoute()){
+        if(!isExistRoute()){
             return "-55";
         }
 
@@ -173,7 +180,7 @@ public class RouteBean implements Serializable {
 
     public String getZoomLevel(){
 
-        if(isExistRoute()){
+        if(!isExistRoute()){
             return "3.5";
         }
 
@@ -212,7 +219,7 @@ public class RouteBean implements Serializable {
 
     private boolean isExistRoute(){
 
-        return (startPoint == null || endPoint == null ||
+        return !(startPoint == null || endPoint == null ||
                 startPointCoordinate == null || endPointCoordinate == null);
     }
 

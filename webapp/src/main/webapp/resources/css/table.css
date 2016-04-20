@@ -1,18 +1,12 @@
-.column{
-    margin: auto;
-}
-
-.row{
-    margin-top: 1px;
-}
 
 .rating{
     text-align: center;
     width: 5%;
 }
 
-.rating-value{
-    font-size: 18pt;
+.rating.rating-value{
+    margin: auto;
+    font-size: 26pt;
 }
 
 
@@ -20,8 +14,9 @@
     width: 50%;
 }
 
-.route-link{
+.route.route-link{
     font-size: 16pt;
+    color: #2a6496;
 }
 
 .schedule{
@@ -30,4 +25,9 @@
 
 .price{
     width: 10%;
+}
+
+.price-value{
+    font-size: 16pt;
+    margin: auto;
 }
