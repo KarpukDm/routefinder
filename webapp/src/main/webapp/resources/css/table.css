@@ -6,20 +6,28 @@
     margin-top: 1px;
 }
 
-.column1{
+.rating{
     text-align: center;
-    font-size: 18pt;
     width: 5%;
 }
 
-.column2{
+.rating-value{
+    font-size: 18pt;
+}
+
+
+.route{
     width: 50%;
 }
 
-.column3{
+.route-link{
+    font-size: 16pt;
+}
+
+.schedule{
     width: 10%;
 }
 
-.column4{
+.price{
     width: 10%;
 }

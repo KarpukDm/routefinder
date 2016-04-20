@@ -25,7 +25,7 @@ public class Neighbor implements Persistable<Integer> {
         super();
     }
 
-    public Neighbor(Double distance){
+    public Neighbor(Integer id, Double distance){
         super();
         this.distance = distance;
     }

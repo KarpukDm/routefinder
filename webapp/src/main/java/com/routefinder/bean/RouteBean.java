@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Created by offsp on 07.04.2016.
+ * Created by offsp on 07.04    .2016.
  */
 @ManagedBean
 @SessionScoped
@@ -64,6 +64,14 @@ public class RouteBean implements Serializable {
 
         startPointCoordinate = coordinateFinder.getPoint(startPoint);
         endPointCoordinate = coordinateFinder.getPoint(endPoint);
+        Double distance = new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate);
+
+        List<Neighbor> neighbors = new LinkedList<>();
+        neighbors.add(new Neighbor(startPointCoordinate.getId(), distance));
+        neighbors.add(new Neighbor(endPointCoordinate.getId(), distance));
+
+        startPointCoordinate.setNeighbors(neighbors.subList(0, neighbors.size() - 1));
+        endPointCoordinate.setNeighbors(neighbors.subList(1, neighbors.size()));
 
         points.add(startPointCoordinate);
         points.add(endPointCoordinate);
@@ -76,7 +84,7 @@ public class RouteBean implements Serializable {
         ratings.add(new Rating(0));
         route.setRatings(ratings);
 
-        route.setDistance(new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate));
+        route.setDistance(distance);
 
         this.duration = configGenerator.getDuration(route);
         this.lats = configGenerator.getLats(points);

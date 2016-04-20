@@ -42,7 +42,7 @@
                     </h:commandButton>
                 </h:form>
 
-                <h:commandButton value="Add start and end points" onclick="points.show();"
+                <h:commandButton value="Add start and end points" onclick="PF('points').show();"
                                  styleClass="btn btn-md btn-primary"/>
 
                 <p:dialog header="Points" widgetVar="points" resizable="false">
@@ -74,7 +74,7 @@
                 </p:dialog>
 
 
-                <h:commandButton value="Add a description to the route" onclick="descr.show();"
+                <h:commandButton value="Add a description to the route" onclick="PF('descr').show();"
                                  styleClass="btn btn-md btn-info" style="margin-left: 10px;"/>
 
                 <p:dialog header="Description" widgetVar="descr" resizable="false">
@@ -110,7 +110,7 @@
                 </p:dialog>
 
 
-                <h:commandButton value="Add schedule" onclick="schedule.show();"
+                <h:commandButton value="Add schedule" onclick="PF('schedule').show();"
                                  styleClass="btn btn-md btn-group" style="margin-left: 10px;"/>
 
                 <p:dialog header="Schedule" widgetVar="schedule" resizable="false">

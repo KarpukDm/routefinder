@@ -4,11 +4,13 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets"
-      xml:lang="en" lang="en">
+      xml:lang="en" lang="en"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Title</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
-    <h:outputStylesheet library="css" name="dashboard.css"/>
+    <h:outputStylesheet library="css" name="dashboard.css"
+    />
 </h:head>
 
 <f:view>
@@ -20,52 +22,48 @@
 
             <ui:include src="/templates-components/vertical-menu.xhtml"/>
 
-            <h:dataTable border="0" styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 table table-hover"
-                         value="#{routeBean.myRoutes}" var="account" style="width: 83%;">
+            <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+                <p:dataTable tableStyleClass="table table-hover"
+                             value="#{routeBean.myRoutes}" var="account" paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             lazy="true">
+                    <p:column headerText="Rating" styleClass="rating">
 
-                <h:column>
-                    <f:facet name="header">Rating</f:facet>
+                        <h:outputText styleClass="rating-value" value="#{account.route.rating}"/>
 
-                    <h:outputText value="#{account.route.rating}" styleClass="column" style="font-size: 36pt;"/>
+                    </p:column>
 
-                </h:column>
+                    <p:column headerText="Route" styleClass="route">
 
-                <h:column>
+                        <a class="route-link" href="route/#{account.route.id}"
+                        >#{account.route.points.get(0).name} - #{account.route.points.get(account.route.points.size() - 1).name}</a>
 
-                    <f:facet name="header">Route</f:facet>
+                        <br/>
 
-                    <a href="route/#{account.route.id}"
-                       style="font-size: 16pt;">#{account.route.points.get(0).name} - #{account.route.points.get(account.route.points.size() - 1).name}</a>
+                        <h:outputText value="#{account.route.shortInfo}"/>
 
-                    <br/>
+                    </p:column>
 
-                    <h:outputText value="#{account.route.shortInfo}" style="margin-top: 10px;"/>
+                    <p:column headerText="Day: time" styleClass="schedule">
 
-                </h:column>
+                        <p:dataTable value="#{account.route.schedules}" var="schedule">
+                            <p:column>
+                                <h:outputText value="#{schedule.day}: "/>
+                            </p:column>
 
-                <h:column>
+                            <p:column>
+                                <h:outputText value="#{schedule.time}"/>
+                            </p:column>
+                        </p:dataTable>
 
-                    <f:facet name="header">Day: time</f:facet>
+                    </p:column>
 
-                    <h:dataTable value="#{account.route.schedules}" styleClass="table table-hover" var="schedule">
-                        <h:column>
-                            <h:outputText value="#{schedule.day}: "/>
-                        </h:column>
+                    <p:column headerText="Price" styleClass="price">
 
-                        <h:column>
-                            <h:outputText value="#{schedule.time}"/>
-                        </h:column>
-                    </h:dataTable>
-
-                </h:column>
-
-                <h:column>
-
-                    <f:facet name="header">Price</f:facet>
-
-                    <h:outputText style="font-size: 18pt;" value="#{account.route.price} y.e."/>
-                </h:column>
-            </h:dataTable>
+                        <h:outputText value="#{account.route.price} y.e."/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
 
         </div>
 
