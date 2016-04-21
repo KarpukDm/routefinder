@@ -1,8 +1,6 @@
 package com.routefinder.bean;
 
-import com.routefinder.model.Account;
-import com.routefinder.model.Role;
-import com.routefinder.model.Roles;
+import com.routefinder.model.*;
 import com.routefinder.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -21,6 +19,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by karpukdm on 01.04.16.
@@ -38,6 +37,57 @@ public class AccountBean implements Serializable {
     private String login;
     private String password;
 
+    public boolean isOwnerOrAdmin(Route route){
+
+        if(route == null) return false;
+
+        Account account = accountService.findOneAccountByLogin(getUsername());
+
+        List<Role> roles = account.getRoles();
+        for (Role role : roles){
+            if(role.getName().equals("ROLE_ADMIN")){
+                return true;
+            }
+        }
+
+        List<MyRoute> myRoutes = account.getMyRoutes();
+        for(MyRoute myRoute : myRoutes){
+
+            if(myRoute.getRoute() == null) continue;
+
+            if(Objects.equals(myRoute.getRoute().getId(), route.getId())){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isExistLike(Route route){
+
+        return isExistRating(route, 1);
+    }
+
+    public boolean isExistDislike(Route route){
+
+        return isExistRating(route, -1);
+    }
+
+    private boolean isExistRating(Route route, int value){
+
+        if(route == null) return false;
+
+        Account account = accountService.findOneAccountByLogin(getUsername());
+
+        List<Rating> ratings = account.getRatings();
+        for(Rating rating : ratings){
+            if(Objects.equals(rating.getRouteId(), route.getId()) && rating.getValue() == value){
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public ModelAndView signUp(){
 
@@ -67,7 +117,7 @@ public class AccountBean implements Serializable {
         return null;
     }
 
-    public static String getUsername(){
+    static String getUsername(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Map<String, Object> sessionMap = externalContext.getSessionMap();

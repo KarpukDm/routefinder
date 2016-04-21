@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -82,10 +83,6 @@ public class RouteBean implements Serializable {
             route.setPoints(points);
 
             route.setCounter(0);
-
-            List<Rating> ratings = new LinkedList<>();
-            ratings.add(new Rating(0));
-            route.setRatings(ratings);
 
             route.setDistance(distance);
 

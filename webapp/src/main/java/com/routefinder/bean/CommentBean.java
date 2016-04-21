@@ -10,9 +10,10 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.convert.IntegerConverter;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,13 +47,39 @@ public class CommentBean implements Serializable {
 
             Map<String, String> params =
                     FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-            String routeId = params.get("routeId");
+            String id = params.get("routeId");
 
-            Route route = routeService.findOneRouteById(Integer.valueOf(routeId));
+            Route route = getRoute(Integer.valueOf(id));
 
             route.addComment(comment);
-            routeService.save(route);
+            routeService.saveAndFlush(route);
         }
+    }
+
+    public List<Comment> getComments(){
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map<String, Object> requestMap = externalContext.getRequestMap();
+        String[] array = null;
+        if(requestMap.containsKey("javax.servlet.forward.request_uri")) {
+            String request = (String) requestMap.get("javax.servlet.forward.request_uri");
+            array = request.split("/");
+        }
+
+        if(array == null){
+            Map<String, String> params =
+                    FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+            String routeId = params.get("routeId");
+
+            return getRoute(Integer.valueOf(routeId)).getComments();
+        }
+
+        return getRoute(Integer.valueOf(array[array.length - 1])).getComments();
+    }
+
+    private Route getRoute(Integer id){
+        return routeService.findOneRouteById(id);
     }
 
     public RouteService getRouteService() {

@@ -18,4 +18,9 @@ public class RouteServiceImpl extends GenericServiceImpl<Route, Integer, RouteRe
     public Route findOneRouteById(Integer id) {
         return repository.findOneRouteById(id);
     }
+
+    @Override
+    public void deleteOneById(Integer id) {
+        repository.deleteOneById(id);
+    }
 }

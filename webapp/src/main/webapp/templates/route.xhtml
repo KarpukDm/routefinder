@@ -129,13 +129,37 @@
                     </div>
 
                     <div class="col-md-4">
-                        <h:commandButton type="button" class="btn btn-warning button" value=" Edit "/>
+                        <h:commandButton type="button" rendered="#{accountBean.isOwnerOrAdmin(route)}"
+                                         class="btn btn-warning button" value=" Edit "/>
                     </div>
 
                     <div class="col-md-4">
-                        <h:commandButton type="button" class="btn btn-danger button" value="Delete"/>
+                        <h:commandButton type="button" rendered="#{accountBean.isOwnerOrAdmin(route)}"
+                                         action="#{routePageBean.deleteRoute}" class="btn btn-danger button"
+                                         value="Delete">
+                            <f:param name="routeId" value="#{route.id}"/>
+                            <f:ajax execute="@all" render="@all"/>
+
+                        </h:commandButton>
                     </div>
 
+                    <div class="col-md-4">
+                        <h:commandButton type="button" rendered="#{not accountBean.isOwnerOrAdmin(route)}"
+                                         action="#{routePageBean.like}" class="btn btn-success button" value="Like"
+                                         disabled="#{accountBean.isExistLike(route)}">
+                            <f:param name="routeId" value="#{route.id}"/>
+                            <f:ajax execute="@all" render="@all"/>
+                        </h:commandButton>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h:commandButton type="button" rendered="#{not accountBean.isOwnerOrAdmin(route)}"
+                                         action="#{routePageBean.dislike}" class="btn btn-danger button"
+                                         value="Dislike" disabled="#{accountBean.isExistDislike(route)}">
+                            <f:param name="routeId" value="#{route.id}"/>
+                            <f:ajax execute="@all" render="@all"/>
+                        </h:commandButton>
+                    </div>
 
                 </div>
                 <div class="col-md-8">
@@ -155,12 +179,12 @@
 
             <h:panelGroup styleClass="row">
 
-                <div class="col-md-offset-2 row">
+                <h:form class="col-md-offset-2 row">
 
-                    <div class="col-md-7">
+                    <h:panelGroup id="comments-list" class="col-md-7">
                         <h:outputText value="Comments:" styleClass="col-md-12"/>
 
-                        <ui:repeat value="#{route.comments}" var="comment">
+                        <ui:repeat value="#{commentBean.comments}" var="comment">
 
                             <h2 class="sub-header"/>
 
@@ -168,19 +192,22 @@
 
                         </ui:repeat>
 
-                    </div>
+                    </h:panelGroup>
 
                     <div class="col-md-5" style="padding-right: 40px;">
                         <h:outputText value="Your comment:" style="float: left;"/>
-                        <h:form>
-                            <h:inputTextarea style="resize: none; height: 100px;" styleClass="col-md-12" value="#{commentBean.message}"/>
-                            <h:commandButton styleClass="btn btn-primary" style="float: right; margin-top: 5px;" value="Send"
-                                             action="#{commentBean.addComment}">
-                                <f:param name="routeId" value="#{route.id}" />
-                            </h:commandButton>
-                        </h:form>
+
+                        <h:inputTextarea style="resize: none; height: 100px;" styleClass="col-md-12"
+                                         value="#{commentBean.message}"/>
+                        <h:commandButton styleClass="btn btn-primary" style="float: right; margin-top: 5px;"
+                                         value="Send"
+                                         action="#{commentBean.addComment}">
+                            <f:param name="routeId" value="#{route.id}"/>
+                            <f:ajax execute="@all" render="@form"/>
+                        </h:commandButton>
+
                     </div>
-                </div>
+                </h:form>
 
             </h:panelGroup>
 

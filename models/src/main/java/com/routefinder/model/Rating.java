@@ -21,13 +21,25 @@ public class Rating implements Persistable<Integer> {
     @Column(nullable = false)
     private Integer value;
 
+    @Column(nullable = false)
+    private Integer routeId;
+
     public Rating(){
         super();
     }
 
-    public Rating(Integer value){
+    public Rating(Integer value, Integer id){
         super();
         this.value = value;
+        this.routeId = id;
+    }
+
+    public Integer getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(Integer routeId) {
+        this.routeId = routeId;
     }
 
     public void setId(Integer id) {

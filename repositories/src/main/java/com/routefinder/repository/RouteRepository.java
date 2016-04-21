@@ -12,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RouteRepository extends JpaRepository<Route, Integer> {
 
     Route findOneRouteById(Integer id);
+
+    void deleteOneById(Integer id);
 }

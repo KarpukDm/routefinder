@@ -10,4 +10,6 @@ import com.routefinder.service.common.GenericService;
 public interface RouteService extends GenericService<Route, Integer> {
 
     Route findOneRouteById(Integer id);
+
+    void deleteOneById(Integer id);
 }
