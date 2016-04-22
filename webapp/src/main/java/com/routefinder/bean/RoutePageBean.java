@@ -26,13 +26,11 @@ public class RoutePageBean {
     @Autowired
     private AccountService accountService;
 
-    public void deleteRoute(){
+        public void deleteRoute(){
 
-        Map<String, String> params =
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String id = params.get("routeId");
+        Route route = getRoute();
 
-        routeService.deleteOneById(Integer.valueOf(id));
+        routeService.delete(route);
     }
 
     public void like(){
