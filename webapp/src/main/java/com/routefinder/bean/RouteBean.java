@@ -121,6 +121,8 @@ public class RouteBean implements Serializable {
 
         if(isExistRoute()) {
 
+            route.setAuthor(account.getId());
+
             MyRoute myRoute = new MyRoute();
             myRoute.setRoute(route);
 

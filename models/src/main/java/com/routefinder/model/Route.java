@@ -26,6 +26,9 @@ public class Route implements Persistable<Integer> {
     private String info;
 
     @Column(nullable = false)
+    private Integer author;
+
+    @Column(nullable = false)
     private Integer counter;
 
     @Column(nullable = false)
@@ -40,7 +43,7 @@ public class Route implements Persistable<Integer> {
         this.distance = distance;
     }
 
-    public void like(Integer id){
+    /*public void like(Integer id){
         ratings.add(new Rating(1, id));
 
         for(int i = 0; i < ratings.size(); i++){
@@ -49,9 +52,9 @@ public class Route implements Persistable<Integer> {
                 return;
             }
         }
-    }
+    }*/
 
-    public void dislike(Integer id){
+   /* public void dislike(Integer id){
         ratings.add(new Rating(-1, id));
 
         for(int i = 0; i < ratings.size(); i++){
@@ -60,7 +63,7 @@ public class Route implements Persistable<Integer> {
                 return;
             }
         }
-    }
+    }*/
 
     public String getRating(){
         int x = 0;
@@ -77,6 +80,14 @@ public class Route implements Persistable<Integer> {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Integer author) {
+        this.author = author;
     }
 
     public Double getDistance() {
@@ -112,7 +123,7 @@ public class Route implements Persistable<Integer> {
         return false;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "route")
     private List<Rating> ratings;
 
     public List<Rating> getRatings() {
@@ -167,6 +178,8 @@ public class Route implements Persistable<Integer> {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+
 
     public void setCounter(Integer counter) {
         this.counter = counter;

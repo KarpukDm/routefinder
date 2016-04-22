@@ -7,6 +7,8 @@ import com.routefinder.service.common.impl.GenericServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by karpukdm on 29.03.16.
  */
@@ -14,4 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class RatingServiceImpl extends GenericServiceImpl<Rating, Integer, RatingRepository>
         implements RatingService{
+
+    @Override
+    public List<Rating> findAllOrderByAccountId(Integer id) {
+        return repository.findAllOrderByAccountId(id);
+    }
 }

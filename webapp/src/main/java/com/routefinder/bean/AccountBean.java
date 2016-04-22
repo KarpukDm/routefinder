@@ -79,9 +79,8 @@ public class AccountBean implements Serializable {
 
         Account account = accountService.findOneAccountByLogin(getUsername());
 
-        List<Rating> ratings = account.getRatings();
-        for(Rating rating : ratings){
-            if(Objects.equals(rating.getRouteId(), route.getId()) && rating.getValue() == value){
+        for(Rating r : account.getRatings()){
+            if(r.getValue() == value && Objects.equals(r.getRoute().getId(), route.getId())){
                 return true;
             }
         }

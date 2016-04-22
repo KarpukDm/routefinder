@@ -31,8 +31,8 @@ public class Account implements Persistable<Integer> {
         super();
     }
 
-    public void like(Integer id){
-        ratings.add(new Rating(1, id));
+    /*public void like(Integer id){
+        ratings.add(new Rating(1));
 
         for(int i = 0; i < ratings.size(); i++){
             if(ratings.get(i).getValue() == -1 && ratings.get(i).getRouteId().equals(id)){
@@ -51,7 +51,7 @@ public class Account implements Persistable<Integer> {
                 return;
             }
         }
-    }
+    }*/
 
     public Account(String password, String login){
         super();
@@ -137,7 +137,7 @@ public class Account implements Persistable<Integer> {
         this.addresses = addresses;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "account")
     private List<Rating> ratings;
 
     public List<Rating> getRatings() {

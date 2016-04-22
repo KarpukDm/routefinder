@@ -134,13 +134,12 @@
                     </div>
 
                     <div class="col-md-4">
-                        <p:commandButton type="submit" rendered="#{accountBean.isOwnerOrAdmin(route)}"
-                                         action="#{routePageBean.deleteRoute()}" class="btn btn-danger button"
-                                         value="Delete"
-                        >
+                        <h:commandButton type="submit" rendered="#{accountBean.isOwnerOrAdmin(route)}"
+                                         action="#{routePageBean.deleteRoute}" class="btn btn-danger button"
+                                         value="Delete">
                             <f:param name="routeId" value="#{route.id}"/>
-                            <!--<f:ajax execute="@all" render="@all"/>-->
-                        </p:commandButton>
+                            <f:ajax execute="@all" render="@all"/>
+                        </h:commandButton>
                     </div>
 
                     <div class="col-md-4">
@@ -148,7 +147,7 @@
                                          action="#{routePageBean.like}" class="btn btn-success button" value="Like"
                                          disabled="#{accountBean.isExistLike(route)}">
                             <f:param name="routeId" value="#{route.id}"/>
-                            <!--<f:ajax execute="@all" render="@all"/>-->
+                            <f:ajax execute="@all" render="@all"/>
                         </h:commandButton>
                     </div>
 
@@ -157,7 +156,7 @@
                                          action="#{routePageBean.dislike}" class="btn btn-danger button"
                                          value="Dislike" disabled="#{accountBean.isExistDislike(route)}">
                             <f:param name="routeId" value="#{route.id}"/>
-                           <!-- <f:ajax execute="@all" render="@all"/>-->
+                            <f:ajax execute="@all" render="@all"/>
                         </h:commandButton>
                     </div>
 

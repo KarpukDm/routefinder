@@ -4,6 +4,7 @@ import com.routefinder.model.Account;
 import com.routefinder.model.Comment;
 import com.routefinder.model.Route;
 import com.routefinder.service.AccountService;
+import com.routefinder.service.CommentService;
 import com.routefinder.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,9 @@ public class CommentBean implements Serializable {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private CommentService commentService;
+
     private String message;
 
     public void addComment() {
@@ -40,10 +44,12 @@ public class CommentBean implements Serializable {
 
             String username = AccountBean.getUsername();
             Account account = accountService.findOneAccountByLogin(username);
-            if (account != null) {
+            /*if (account != null) {
                 account.addComment(comment);
                 accountService.save(account);
-            }
+            }*/
+
+            comment.setAccount(account);
 
             Map<String, String> params =
                     FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -51,8 +57,12 @@ public class CommentBean implements Serializable {
 
             Route route = getRoute(Integer.valueOf(id));
 
-            route.addComment(comment);
-            routeService.saveAndFlush(route);
+           /* route.addComment(comment);
+            routeService.saveAndFlush(route);*/
+
+            comment.setRoute(route);
+
+            commentService.save(comment);
         }
     }
 
