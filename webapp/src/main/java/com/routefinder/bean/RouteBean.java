@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -61,13 +60,14 @@ public class RouteBean implements Serializable {
         CoordinateFinder coordinateFinder = new CoordinateFinder();
         configGenerator = new ConfigGenerator();
 
-        route = new Route(15.0);
+        route = new Route();
         points = new LinkedList<>();
 
         if(startPoint != null || endPoint != null) {
 
             startPointCoordinate = coordinateFinder.getPoint(startPoint);
             endPointCoordinate = coordinateFinder.getPoint(endPoint);
+
             Double distance = new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate);
 
             List<Neighbor> neighbors = new LinkedList<>();
@@ -122,6 +122,9 @@ public class RouteBean implements Serializable {
         if(isExistRoute()) {
 
             route.setAuthor(account.getId());
+
+            startPointCoordinate.addRoute(route);
+            endPointCoordinate.addRoute(route);
 
             MyRoute myRoute = new MyRoute();
             myRoute.setRoute(route);

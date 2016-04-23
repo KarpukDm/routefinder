@@ -3,6 +3,7 @@ package com.routefinder.model;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -35,6 +36,13 @@ public class Point implements Persistable<Integer> {
         super();
         this.name = name;
         this.coordinates = a;
+    }
+
+    public void addRoute(Route route){
+        if(routes == null){
+            routes = new LinkedList<Route>();
+        }
+        routes.add(route);
     }
 
     public void setId(Integer id) {

@@ -37,6 +37,8 @@ public class AccountBean implements Serializable {
     private String login;
     private String password;
 
+    private String requestedRouteId;
+
     public boolean isOwnerOrAdmin(Route route){
 
         if(route == null) return false;
@@ -155,5 +157,11 @@ public class AccountBean implements Serializable {
         this.password = password;
     }
 
+    public String getRequestedRouteId() {
+        return requestedRouteId;
+    }
 
+    public void setRequestedRouteId(String requestedRouteId) {
+        this.requestedRouteId = requestedRouteId;
+    }
 }

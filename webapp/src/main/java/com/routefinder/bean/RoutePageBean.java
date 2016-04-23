@@ -33,14 +33,14 @@ public class RoutePageBean {
     @Autowired
     private RatingService ratingService;
 
-        public void deleteRoute(){
+    public void deleteRoute() {
 
         Route route = getRoute();
 
         routeService.delete(route);
     }
 
-    public void like(){
+    public void like() {
 
         Route route = getRoute();
 
@@ -62,7 +62,7 @@ public class RoutePageBean {
         ratingService.save(rating);
     }
 
-    public void dislike(){
+    public void dislike() {
 
         Route route = getRoute();
 
@@ -92,7 +92,7 @@ public class RoutePageBean {
         return getRoute(Integer.valueOf(id));
     }
 
-    private Route getRoute(Integer id){
+    private Route getRoute(Integer id) {
         return routeService.findOneRouteById(id);
     }
 }

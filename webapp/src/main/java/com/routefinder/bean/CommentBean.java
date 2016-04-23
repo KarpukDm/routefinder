@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by offsp on 21.04.2016.
@@ -44,21 +45,10 @@ public class CommentBean implements Serializable {
 
             String username = AccountBean.getUsername();
             Account account = accountService.findOneAccountByLogin(username);
-            /*if (account != null) {
-                account.addComment(comment);
-                accountService.save(account);
-            }*/
 
             comment.setAccount(account);
 
-            Map<String, String> params =
-                    FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-            String id = params.get("routeId");
-
-            Route route = getRoute(Integer.valueOf(id));
-
-           /* route.addComment(comment);
-            routeService.saveAndFlush(route);*/
+            Route route = getRoute(Integer.valueOf(getRouteId()));
 
             comment.setRoute(route);
 
@@ -66,26 +56,33 @@ public class CommentBean implements Serializable {
         }
     }
 
-    public List<Comment> getComments(){
+    public List<Comment> getComments(String id){
 
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = facesContext.getExternalContext();
-        Map<String, Object> requestMap = externalContext.getRequestMap();
-        String[] array = null;
-        if(requestMap.containsKey("javax.servlet.forward.request_uri")) {
-            String request = (String) requestMap.get("javax.servlet.forward.request_uri");
-            array = request.split("/");
-        }
-
-        if(array == null){
+        if(id == null || Objects.equals(id, "")) {
             Map<String, String> params =
                     FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-            String routeId = params.get("routeId");
-
-            return getRoute(Integer.valueOf(routeId)).getComments();
+            id = params.get("routeId");
         }
 
-        return getRoute(Integer.valueOf(array[array.length - 1])).getComments();
+        ExternalContext externalContext;
+        if(id == null || Objects.equals(id, "")){
+            externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+            Map<String, Object> requestMap = externalContext.getRequestMap();
+            if(requestMap.containsKey("javax.servlet.forward.request_uri")) {
+                String url = (String) requestMap.get("javax.servlet.forward.request_uri");
+                String[] array = url.split("/");
+                id = array[array.length - 1];
+            }
+        }
+
+        return commentService.findAllOrderByRouteId(Integer.valueOf(id));
+    }
+
+    private String getRouteId(){
+        Map<String, String> params =
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        return params.get("routeId");
     }
 
     private Route getRoute(Integer id){

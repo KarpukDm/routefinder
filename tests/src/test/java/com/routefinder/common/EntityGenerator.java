@@ -113,11 +113,11 @@ public class EntityGenerator {
     }
 
     public MyRoute getMyRouteEntity(){
-        return new MyRoute(1);
+        return new MyRoute();
     }
 
     public Neighbor getNeighborEntity(){
-        return new Neighbor(12.4);
+        return new Neighbor();
     }
 
     public Planner getPlannerEntity(){
@@ -129,7 +129,7 @@ public class EntityGenerator {
     }
 
     public Rating getRatingEntity(){
-        return new Rating(12.2);
+        return new Rating();
     }
 
     public Role getRoleEntity(){

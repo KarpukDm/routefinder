@@ -7,6 +7,8 @@ import com.routefinder.service.common.impl.GenericServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by karpukdm on 29.03.16.
  */
@@ -15,4 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentServiceImpl extends GenericServiceImpl<Comment, Integer, CommentRepository>
         implements CommentService{
 
+    @Override
+    public List<Comment> findAllOrderByRouteId(Integer id) {
+        return repository.findAllOrderByRouteId(id);
+    }
 }

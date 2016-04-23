@@ -3,18 +3,27 @@ package com.routefinder.spring.mvc.controller;
 import com.routefinder.model.Route;
 import com.routefinder.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import java.util.Objects;
+
 /**
  * Created by karpukdm on 01.04.16.
  */
-@org.springframework.stereotype.Controller
+@ManagedBean
+@SessionScoped
+@Component
+@Controller
 public class RouteFinderController {
+
+    private Route route;
 
     @Autowired
     private RouteService routeService;
@@ -34,14 +43,15 @@ public class RouteFinderController {
     @RequestMapping("/route/{id}")
     public String route(@PathVariable Integer id, Model model) {
 
-        Route route = routeService.findOneRouteById(id);
-        if(route != null) {
-            model.addAttribute(route);
-
-            return "route";
+        if (id != null) {
+            if (this.route == null || !Objects.equals(id, this.route.getId())) {
+                this.route = routeService.findOneRouteById(id);
+            }
         }
+        model.addAttribute(this.route);
 
-        return "not-found";
+        return "route";
+
     }
 
     @RequestMapping("/profile")
@@ -74,7 +84,7 @@ public class RouteFinderController {
         return "my-reminders";
     }
 
-    @RequestMapping(value="/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
 
        /* Authentication authentication = SecurityContextHolder.getContext().
@@ -126,5 +136,13 @@ public class RouteFinderController {
     public String search(Model model) {
 
         return "search";
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

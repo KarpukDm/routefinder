@@ -42,29 +42,6 @@ public class Route implements Persistable<Integer> {
         super();
         this.distance = distance;
     }
-
-    /*public void like(Integer id){
-        ratings.add(new Rating(1, id));
-
-        for(int i = 0; i < ratings.size(); i++){
-            if(ratings.get(i).getValue() == -1 && ratings.get(i).getRouteId().equals(id)){
-                ratings.remove(i);
-                return;
-            }
-        }
-    }*/
-
-   /* public void dislike(Integer id){
-        ratings.add(new Rating(-1, id));
-
-        for(int i = 0; i < ratings.size(); i++){
-            if(ratings.get(i).getValue() == 1 && ratings.get(i).getRouteId().equals(id)){
-                ratings.remove(i);
-                return;
-            }
-        }
-    }*/
-
     public String getRating(){
         int x = 0;
         for(Rating rating : ratings){
