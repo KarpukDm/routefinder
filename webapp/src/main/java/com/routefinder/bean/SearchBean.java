@@ -25,15 +25,16 @@ public class SearchBean {
     private String a;
     private String b;
 
-
-    private List<List<Route>> result;
-
-    public void findRoute(){
+    public List<List<Route>> getRoutes(){
 
         Point points = pointService.findOneByName(this.b);
 
-        this.result = new SearchAlgorithm(points.getRoutes()).findRoute(a, b);
-        int x = 0;
+        if(a == null || b == null){
+            return null;
+        }
+
+        return new SearchAlgorithm(points.getRoutes()).findRoute(a, b);
+
     }
 
     public String getA() {
@@ -50,13 +51,5 @@ public class SearchBean {
 
     public void setB(String b) {
         this.b = b;
-    }
-
-    public List<List<Route>> getResult() {
-        return result;
-    }
-
-    public void setResult(List<List<Route>> result) {
-        this.result = result;
     }
 }

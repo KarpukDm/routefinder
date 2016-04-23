@@ -27,7 +27,7 @@
                         <h:inputText value="#{searchBean.a}"/>
                         <h:inputText value="#{searchBean.b}"/>
                         <h:commandButton type="submit"
-                                         action="#{searchBean.findRoute}" class="btn btn-danger button"
+                                         class="btn btn-danger button"
                                          value="Dislike">
                             <f:ajax execute="@all" render="@all"/>
                         </h:commandButton>
@@ -35,10 +35,11 @@
                 </h:panelGroup>
 
                 <h:panelGroup styleClass="col-md-12">
-                    <ui:repeat value="#{searchBean.result}" var="route">
+                    <ui:repeat value="#{searchBean.routes}" var="route">
 
                         <ui:repeat value="#{route}" var="r">
-                            #{r.points.get(0)} - #{r.points.get(r.points.size - 1)}
+                            #{r.points.get(0).name} - #{r.points.get(r.points.size() - 1).name}
+                            <br/>
                         </ui:repeat>
 
                         <br/>

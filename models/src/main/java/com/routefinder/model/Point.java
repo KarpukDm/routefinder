@@ -97,4 +97,12 @@ public class Point implements Persistable<Integer> {
     public void setNeighbors(List<Neighbor> neighbors) {
         this.neighbors = neighbors;
     }
+
+    public void addNeighbors(List<Neighbor> neighbors){
+        if(this.neighbors == null){
+            this.neighbors = new LinkedList<Neighbor>();
+        }
+
+        this.neighbors.addAll(neighbors);
+    }
 }

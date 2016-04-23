@@ -5,6 +5,7 @@ import com.routefinder.maps.google.api.helper.CoordinateFinder;
 import com.routefinder.maps.google.api.helper.DistanceCalculator;
 import com.routefinder.model.*;
 import com.routefinder.service.AccountService;
+import com.routefinder.service.PointService;
 import com.routefinder.service.RouteService;
 import org.primefaces.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class RouteBean implements Serializable {
 
     @Autowired
     private RouteService routeService;
+
+    @Autowired
+    private PointService pointService;
 
     private String startPoint;
     private String endPoint;
@@ -65,8 +69,15 @@ public class RouteBean implements Serializable {
 
         if(startPoint != null || endPoint != null) {
 
-            startPointCoordinate = coordinateFinder.getPoint(startPoint);
-            endPointCoordinate = coordinateFinder.getPoint(endPoint);
+            startPointCoordinate = pointService.findOneByName(startPoint);
+            if(startPointCoordinate == null) {
+                startPointCoordinate = coordinateFinder.getPoint(startPoint);
+            }
+
+            endPointCoordinate = pointService.findOneByName(endPoint);
+            if(endPointCoordinate == null) {
+                endPointCoordinate = coordinateFinder.getPoint(endPoint);
+            }
 
             Double distance = new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate);
 
@@ -74,8 +85,8 @@ public class RouteBean implements Serializable {
             neighbors.add(new Neighbor(startPointCoordinate.getId(), distance));
             neighbors.add(new Neighbor(endPointCoordinate.getId(), distance));
 
-            startPointCoordinate.setNeighbors(neighbors.subList(0, neighbors.size() - 1));
-            endPointCoordinate.setNeighbors(neighbors.subList(1, neighbors.size()));
+            startPointCoordinate.addNeighbors(neighbors.subList(0, neighbors.size() - 1));
+            endPointCoordinate.addNeighbors(neighbors.subList(1, neighbors.size()));
 
             points.add(startPointCoordinate);
             points.add(endPointCoordinate);

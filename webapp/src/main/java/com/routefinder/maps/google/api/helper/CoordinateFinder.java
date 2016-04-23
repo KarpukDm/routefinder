@@ -25,7 +25,12 @@ public class CoordinateFinder {
 
         getCoordinate(address);
 
-        return new Point(address, new Coordinates(lat, lng));
+        Point point = new Point();
+        Coordinates coordinates = new Coordinates(lat, lng);
+        point.setCoordinates(coordinates);
+        coordinates.setPoint(point);
+
+        return point;
     }
 
     private void getCoordinate(String address) throws IOException, JSONException, IllegalAccessException {
