@@ -18,9 +18,6 @@ public class Neighbor implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @Column
-    private Integer pointId;
-
     @Column(nullable = false)
     private Double distance;
 
@@ -28,10 +25,10 @@ public class Neighbor implements Persistable<Integer> {
         super();
     }
 
-    public Neighbor(Integer pointId, Double distance){
+    public Neighbor(Point point, Double distance){
         super();
         this.distance = distance;
-        this.pointId = pointId;
+        this.point = point;
     }
 
     public void setId(Integer id) {
@@ -54,11 +51,14 @@ public class Neighbor implements Persistable<Integer> {
         return false;
     }
 
-    public Integer getPointId() {
-        return pointId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Point point;
+
+    public Point getPoint() {
+        return point;
     }
 
-    public void setPointId(Integer pointId) {
-        this.pointId = pointId;
+    public void setPoint(Point point) {
+        this.point = point;
     }
 }

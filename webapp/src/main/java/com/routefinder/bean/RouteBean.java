@@ -88,15 +88,14 @@ public class RouteBean implements Serializable {
 
             Double distance = new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate);
 
-            Neighbor neighbor = new Neighbor(endPointCoordinate.getId(), distance);
-
+            Neighbor neighbor = new Neighbor(endPointCoordinate, distance);
             if(!neighborsS.contains(neighbor)) {
                 neighborsS.add(neighbor);
             }
 
-            neighbor = new Neighbor(startPointCoordinate.getId(), distance);
+            neighbor = new Neighbor(startPointCoordinate, distance);
             if(!neighborsE.contains(neighbor)) {
-                neighborsE.add(new Neighbor(startPointCoordinate.getId(), distance));
+                neighborsE.add(new Neighbor(startPointCoordinate, distance));
             }
 
             startPointCoordinate.setNeighbors(neighborsS);
