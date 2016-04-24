@@ -26,9 +26,6 @@ public class Route implements Persistable<Integer> {
     private String info;
 
     @Column(nullable = false)
-    private Integer author;
-
-    @Column(nullable = false)
     private Integer counter;
 
     @Column(nullable = false)
@@ -51,20 +48,8 @@ public class Route implements Persistable<Integer> {
         return String.valueOf(x);
     }
 
-    public void addComment(Comment comment){
-        comments.add(comment);
-    }
-
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Integer author) {
-        this.author = author;
     }
 
     public Double getDistance() {
@@ -181,5 +166,20 @@ public class Route implements Persistable<Integer> {
 
     public void setRouteConfig(RouteConfig routeConfig) {
         this.routeConfig = routeConfig;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public void addRating(Rating rating){
+        ratings.add(rating);
     }
 }

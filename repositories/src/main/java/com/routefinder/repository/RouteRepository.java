@@ -5,6 +5,8 @@ import com.routefinder.model.Account;
 import com.routefinder.model.Route;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * Created by karpukdm on 26.03.16.
  */
@@ -12,6 +14,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RouteRepository extends JpaRepository<Route, Integer> {
 
     Route findOneRouteById(Integer id);
+
+    List<Route> findAllOrderByAccount_Login(String route);
 
     void deleteOneById(Integer id);
 }

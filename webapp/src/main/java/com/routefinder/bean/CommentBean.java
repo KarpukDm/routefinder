@@ -53,6 +53,7 @@ public class CommentBean implements Serializable {
             comment.setRoute(route);
 
             commentService.saveAndFlush(comment);
+            routeService.flush();
 
             this.message = "";
         }
@@ -78,6 +79,7 @@ public class CommentBean implements Serializable {
             }
         }
 
+        assert id != null;
         return commentService.findAllOrderByRouteId(Integer.valueOf(id));
     }
 

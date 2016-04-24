@@ -95,4 +95,5 @@ public class RoutePageBean {
     private Route getRoute(Integer id) {
         return routeService.findOneRouteById(id);
     }
+
 }

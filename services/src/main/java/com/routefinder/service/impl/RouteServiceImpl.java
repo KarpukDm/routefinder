@@ -7,6 +7,8 @@ import com.routefinder.service.common.impl.GenericServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by karpukdm on 29.03.16.
  */
@@ -17,6 +19,11 @@ public class RouteServiceImpl extends GenericServiceImpl<Route, Integer, RouteRe
     @Override
     public Route findOneRouteById(Integer id) {
         return repository.findOneRouteById(id);
+    }
+
+    @Override
+    public List<Route> findAllOrderByAccount_Login(String route) {
+        return repository.findAllOrderByAccount_Login(route);
     }
 
     @Override

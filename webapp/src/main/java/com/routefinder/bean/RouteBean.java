@@ -145,7 +145,7 @@ public class RouteBean implements Serializable {
 
         if(isExistRoute()) {
 
-            route.setAuthor(account.getId());
+            route.setAccount(account);
 
             List<Rating> ratings = new LinkedList<>();
             ratings.add(new Rating(0));
@@ -154,13 +154,7 @@ public class RouteBean implements Serializable {
             startPointCoordinate.addRoute(route);
             endPointCoordinate.addRoute(route);
 
-            /*points.add(startPointCoordinate);
-            points.add(endPointCoordinate);*/
-
-            MyRoute myRoute = new MyRoute();
-            myRoute.setRoute(route);
-
-            account.addRoute(myRoute);
+            account.addRoute(route);
 
             accountService.saveAndFlush(account);
 
@@ -273,16 +267,11 @@ public class RouteBean implements Serializable {
         return routeService.findAll();
     }
 
-    public List<MyRoute> getMyRoutes(){
-
-        String login = AccountBean.getUsername();
+    public List<Route> getMyRoutes(){
 
         String username = AccountBean.getUsername();
-        if(account == null || !Objects.equals(account.getLogin(), username)) {
-           this.account = accountService.findOneAccountByLogin(login);
-        }
 
-        return account.getMyRoutes();
+        return routeService.findAllOrderByAccount_Login(username);
     }
 
     public String getStartPoint() {
@@ -299,30 +288,6 @@ public class RouteBean implements Serializable {
 
     public void setEndPoint(String endPoint) {
         this.endPoint = endPoint;
-    }
-
-    public Point getStartPointCoordinate() {
-        return startPointCoordinate;
-    }
-
-    public void setStartPointCoordinate(Point startPointCoordinate) {
-        this.startPointCoordinate = startPointCoordinate;
-    }
-
-    public Point getEndPointCoordinate() {
-        return endPointCoordinate;
-    }
-
-    public void setEndPointCoordinate(Point endPointCoordinate) {
-        this.endPointCoordinate = endPointCoordinate;
-    }
-
-    public List<Schedule> getSchedules() {
-        return schedules;
-    }
-
-    public void setSchedules(List<Schedule> schedules) {
-        this.schedules = schedules;
     }
 
     public Route getRoute() {

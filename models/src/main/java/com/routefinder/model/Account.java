@@ -31,28 +31,6 @@ public class Account implements Persistable<Integer> {
         super();
     }
 
-    /*public void like(Integer id){
-        ratings.add(new Rating(1));
-
-        for(int i = 0; i < ratings.size(); i++){
-            if(ratings.get(i).getValue() == -1 && ratings.get(i).getRouteId().equals(id)){
-                ratings.remove(i);
-                return;
-            }
-        }
-    }
-
-    public void dislike(Integer id){
-        ratings.add(new Rating(-1, id));
-
-        for(int i = 0; i < ratings.size(); i++){
-            if(ratings.get(i).getValue() == 1 && ratings.get(i).getRouteId().equals(id)){
-                ratings.remove(i);
-                return;
-            }
-        }
-    }*/
-
     public Account(String password, String login){
         super();
         this.login = login;
@@ -61,14 +39,6 @@ public class Account implements Persistable<Integer> {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public void addRoute(MyRoute myRoute){
-        myRoutes.add(myRoute);
-    }
-
-    public void addComment(Comment comment){
-        comments.add(comment);
     }
 
     public String getLogin() {
@@ -148,17 +118,6 @@ public class Account implements Persistable<Integer> {
         this.ratings = ratings;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<MyRoute> myRoutes;
-
-    public List<MyRoute> getMyRoutes() {
-        return myRoutes;
-    }
-
-    public void setMyRoutes(List<MyRoute> myRoutes) {
-        this.myRoutes = myRoutes;
-    }
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
@@ -170,4 +129,18 @@ public class Account implements Persistable<Integer> {
         this.comments = comments;
     }
 
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Route> routes;
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
+
+    public void addRoute(Route route) {
+        this.routes.add(route);
+    }
 }

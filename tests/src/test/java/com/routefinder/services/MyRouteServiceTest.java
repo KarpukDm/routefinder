@@ -2,7 +2,6 @@ package com.routefinder.services;
 
 import com.routefinder.common.GenericServiceTest;
 import com.routefinder.model.MyRoute;
-import com.routefinder.service.MyRouteService;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
