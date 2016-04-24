@@ -163,7 +163,19 @@ public class RouteBean implements Serializable {
             account.addRoute(myRoute);
 
             accountService.saveAndFlush(account);
+
+            reset();
         }
+    }
+
+    private void reset(){
+        this.startPoint = "";
+        this.endPoint = "";
+        this.startPointCoordinate = null;
+        this.endPointCoordinate = null;
+        this.info = "";
+        this.price = "";
+        this.schedules = null;
     }
 
     public String getDuration(){
