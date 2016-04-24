@@ -21,4 +21,9 @@ public class CommentServiceImpl extends GenericServiceImpl<Comment, Integer, Com
     public List<Comment> findAllOrderByRouteId(Integer id) {
         return repository.findAllOrderByRouteId(id);
     }
+
+    @Override
+    public List<Comment> findAllOrderByAccount_Login(String login) {
+        return repository.findAllOrderByAccount_Login(login);
+    }
 }

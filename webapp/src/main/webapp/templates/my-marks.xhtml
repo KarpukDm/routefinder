@@ -20,6 +20,19 @@
 
             <ui:include src="/templates-components/vertical-menu.xhtml"/>
 
+            <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+
+                <h:panelGroup styleClass="col-md-12">
+                    <ui:repeat value="#{ratingBean.myRatings}" var="rating">
+
+                        <h2 class="sub-header"/>
+
+                        <h:outputText value="#{rating.value}"/>
+
+                    </ui:repeat>
+                </h:panelGroup>
+            </h:panelGroup>
+
         </div>
     </div>
 

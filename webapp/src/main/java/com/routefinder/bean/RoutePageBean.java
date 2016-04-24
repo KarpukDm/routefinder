@@ -27,61 +27,11 @@ public class RoutePageBean {
     @Autowired
     private RouteService routeService;
 
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private RatingService ratingService;
-
     public void deleteRoute() {
 
         Route route = getRoute();
 
         routeService.delete(route);
-    }
-
-    public void like() {
-
-        Route route = getRoute();
-
-        Rating rating = new Rating(1);
-        rating.setRoute(route);
-
-        Account account = accountService.findOneAccountByLogin(AccountBean.getUsername());
-        rating.setAccount(account);
-
-        List<Rating> ratings = ratingService.findAllOrderByAccountId(account.getId());
-        for (Rating rating1 : ratings) {
-            if (Objects.equals(rating1.getRoute().getId(), route.getId()) && rating1.getValue() == -1) {
-
-                ratingService.delete(rating1);
-                break;
-            }
-        }
-
-        ratingService.saveAndFlush(rating);
-    }
-
-    public void dislike() {
-
-        Route route = getRoute();
-
-        Rating rating = new Rating(-1);
-        rating.setRoute(route);
-
-        Account account = accountService.findOneAccountByLogin(AccountBean.getUsername());
-        rating.setAccount(account);
-
-        List<Rating> ratings = ratingService.findAllOrderByAccountId(account.getId());
-        for (Rating rating1 : ratings) {
-            if (Objects.equals(rating1.getRoute().getId(), route.getId()) && rating1.getValue() == 1) {
-
-                ratingService.delete(rating1);
-                break;
-            }
-        }
-
-        ratingService.saveAndFlush(rating);
     }
 
     private Route getRoute() {

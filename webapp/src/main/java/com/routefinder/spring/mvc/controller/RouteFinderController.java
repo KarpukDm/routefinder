@@ -1,5 +1,6 @@
 package com.routefinder.spring.mvc.controller;
 
+import com.routefinder.bean.RatingBean;
 import com.routefinder.model.Route;
 import com.routefinder.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class RouteFinderController {
                 this.route = routeService.findOneRouteById(id);
             }
         }
+
         model.addAttribute(this.route);
 
         return "route";

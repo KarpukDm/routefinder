@@ -59,6 +59,14 @@ public class CommentBean implements Serializable {
         }
     }
 
+    public List<Comment> getMyComments(){
+
+        String username = AccountBean.getUsername();
+
+        return commentService.findAllOrderByAccount_Login(username);
+
+    }
+
     public List<Comment> getComments(String id){
 
         if(id == null || Objects.equals(id, "")) {

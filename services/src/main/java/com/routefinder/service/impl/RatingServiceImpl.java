@@ -21,4 +21,15 @@ public class RatingServiceImpl extends GenericServiceImpl<Rating, Integer, Ratin
     public List<Rating> findAllOrderByAccountId(Integer id) {
         return repository.findAllOrderByAccountId(id);
     }
+
+    @Override
+    public List<Rating> findAllOrderByRoute_Id(Integer id) {
+
+        return repository.findAllOrderByRoute_Id(id);
+    }
+
+    @Override
+    public List<Rating> findAllOrderByAccount_Login(String login) {
+        return repository.findAllOrderByAccount_Login(login);
+    }
 }

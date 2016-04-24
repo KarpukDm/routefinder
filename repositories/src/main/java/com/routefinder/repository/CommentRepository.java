@@ -14,4 +14,6 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     List<Comment> findAllOrderByRouteId(Integer id);
+
+    List<Comment> findAllOrderByAccount_Login(String login);
 }
