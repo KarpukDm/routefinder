@@ -148,6 +148,10 @@ public class RouteBean implements Serializable {
 
             route.setAuthor(account.getId());
 
+            List<Rating> ratings = new LinkedList<>();
+            ratings.add(new Rating(0));
+            route.setRatings(ratings);
+
             startPointCoordinate.addRoute(route);
             endPointCoordinate.addRoute(route);
 
@@ -159,7 +163,7 @@ public class RouteBean implements Serializable {
 
             account.addRoute(myRoute);
 
-            accountService.save(account);
+            accountService.saveAndFlush(account);
         }
     }
 

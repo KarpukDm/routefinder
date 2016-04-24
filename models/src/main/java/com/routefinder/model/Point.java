@@ -101,7 +101,7 @@ public class Point implements Persistable<Integer> {
     public void addNeighbors(List<Neighbor> neighbors){
 
         for(Neighbor n : neighbors){
-            this.neighbors.add(n);
+            neighbors.add(n);
         }
     }
 }

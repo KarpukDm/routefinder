@@ -52,7 +52,7 @@ public class CommentBean implements Serializable {
 
             comment.setRoute(route);
 
-            commentService.save(comment);
+            commentService.saveAndFlush(comment);
 
             this.message = "";
         }

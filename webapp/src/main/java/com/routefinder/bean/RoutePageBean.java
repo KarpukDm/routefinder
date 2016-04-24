@@ -59,7 +59,7 @@ public class RoutePageBean {
             }
         }
 
-        ratingService.save(rating);
+        ratingService.saveAndFlush(rating);
     }
 
     public void dislike() {
@@ -81,7 +81,7 @@ public class RoutePageBean {
             }
         }
 
-        ratingService.save(rating);
+        ratingService.saveAndFlush(rating);
     }
 
     private Route getRoute() {

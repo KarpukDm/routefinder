@@ -156,8 +156,6 @@ public class Route implements Persistable<Integer> {
         this.price = price;
     }
 
-
-
     public void setCounter(Integer counter) {
         this.counter = counter;
     }
