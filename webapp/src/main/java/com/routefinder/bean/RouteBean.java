@@ -69,33 +69,47 @@ public class RouteBean implements Serializable {
 
         if(startPoint != null || endPoint != null) {
 
+            List<Neighbor> neighborsS = new LinkedList<>();
+            List<Neighbor> neighborsE = new LinkedList<>();
+
             startPointCoordinate = pointService.findOneByName(startPoint);
             if(startPointCoordinate == null) {
                 startPointCoordinate = coordinateFinder.getPoint(startPoint);
+            }else{
+                neighborsS = startPointCoordinate.getNeighbors();
             }
 
             endPointCoordinate = pointService.findOneByName(endPoint);
             if(endPointCoordinate == null) {
                 endPointCoordinate = coordinateFinder.getPoint(endPoint);
+            }else{
+                neighborsE = endPointCoordinate.getNeighbors();
             }
 
             Double distance = new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate);
 
-            List<Neighbor> neighbors = new LinkedList<>();
-            neighbors.add(new Neighbor(startPointCoordinate.getId(), distance));
-            neighbors.add(new Neighbor(endPointCoordinate.getId(), distance));
+            Neighbor neighbor = new Neighbor(endPointCoordinate.getId(), distance);
 
-            startPointCoordinate.addNeighbors(neighbors.subList(0, neighbors.size() - 1));
-            endPointCoordinate.addNeighbors(neighbors.subList(1, neighbors.size()));
+            if(!neighborsS.contains(neighbor)) {
+                neighborsS.add(neighbor);
+            }
+
+            neighbor = new Neighbor(startPointCoordinate.getId(), distance);
+            if(!neighborsE.contains(neighbor)) {
+                neighborsE.add(new Neighbor(startPointCoordinate.getId(), distance));
+            }
+
+            startPointCoordinate.setNeighbors(neighborsS);
+            endPointCoordinate.setNeighbors(neighborsE);
+
+            route.setCounter(0);
+
+            route.setDistance(distance);
 
             points.add(startPointCoordinate);
             points.add(endPointCoordinate);
 
             route.setPoints(points);
-
-            route.setCounter(0);
-
-            route.setDistance(distance);
 
             this.duration = configGenerator.getDuration(route);
             this.lats = configGenerator.getLats(points);
@@ -136,6 +150,9 @@ public class RouteBean implements Serializable {
 
             startPointCoordinate.addRoute(route);
             endPointCoordinate.addRoute(route);
+
+            /*points.add(startPointCoordinate);
+            points.add(endPointCoordinate);*/
 
             MyRoute myRoute = new MyRoute();
             myRoute.setRoute(route);

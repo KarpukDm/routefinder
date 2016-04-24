@@ -28,6 +28,7 @@ public class CoordinateFinder {
         Point point = new Point();
         Coordinates coordinates = new Coordinates(lat, lng);
         point.setCoordinates(coordinates);
+        point.setName(address);
         coordinates.setPoint(point);
 
         return point;

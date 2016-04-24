@@ -148,7 +148,7 @@ public class Account implements Persistable<Integer> {
         this.ratings = ratings;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<MyRoute> myRoutes;
 
     public List<MyRoute> getMyRoutes() {
