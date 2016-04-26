@@ -45,6 +45,10 @@ public class SearchBean {
             result.add(n.getPoint());
         }
 
+        if(result.size() < 2) {
+            return null;
+        }
+
         return result;
 
     }
