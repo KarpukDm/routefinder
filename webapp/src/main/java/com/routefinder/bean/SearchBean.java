@@ -1,14 +1,15 @@
 package com.routefinder.bean;
 
 import com.routefinder.algorithm.SearchAlgorithm;
+import com.routefinder.model.Neighbor;
 import com.routefinder.model.Point;
-import com.routefinder.model.Route;
 import com.routefinder.service.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -25,15 +26,26 @@ public class SearchBean {
     private String a;
     private String b;
 
-    public List<List<Route>> getRoutes(){
+    public List<Point> getRoutes(){
 
-        Point points = pointService.findOneByName(this.b);
+        Point points = pointService.findOneByName(this.a);
 
         if(a == null || b == null){
             return null;
         }
 
-        return new SearchAlgorithm(points.getRoutes()).findRoute(a, b);
+        SearchAlgorithm searchAlgorithm = new SearchAlgorithm(b, 4, points.getNeighbors());
+
+        List<Neighbor> neighbors = searchAlgorithm.getRoutes(points.getNeighbors(), 0);
+
+        List<Point> result = new LinkedList<>();
+        result.add(points);
+
+        for(Neighbor n : neighbors){
+            result.add(n.getPoint());
+        }
+
+        return result;
 
     }
 

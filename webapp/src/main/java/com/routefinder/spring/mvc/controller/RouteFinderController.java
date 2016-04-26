@@ -45,9 +45,8 @@ public class RouteFinderController {
     public String route(@PathVariable Integer id, Model model) {
 
         if (id != null) {
-            if (this.route == null || !Objects.equals(id, this.route.getId())) {
-                this.route = routeService.findOneRouteById(id);
-            }
+
+            this.route = routeService.findOneRouteById(id);
         }
 
         model.addAttribute(this.route);
