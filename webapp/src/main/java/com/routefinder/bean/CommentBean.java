@@ -38,7 +38,14 @@ public class CommentBean implements Serializable {
 
     private String message;
 
-    public void addComment() {
+    //сделать viewscoped, сделать пост конструктор сетаю роут и комментс
+
+           // манажет проперти ерез решетку с ф.скобками
+
+    private List<String> comments;
+
+    public void addComment(String id) {
+
         if (message != null) {
 
             Comment comment = new Comment(message);
@@ -48,14 +55,11 @@ public class CommentBean implements Serializable {
 
             comment.setAccount(account);
 
-            Route route = getRoute(Integer.valueOf(getRouteId()));
+            Route route = getRoute(Integer.valueOf(id));
 
             comment.setRoute(route);
 
             commentService.saveAndFlush(comment);
-            routeService.flush();
-
-            this.message = "";
         }
     }
 
@@ -67,9 +71,9 @@ public class CommentBean implements Serializable {
 
     }
 
-    public List<Comment> getComments(String id){
+    public List<Comment> getComments(Integer id){
 
-        if(id == null || Objects.equals(id, "")) {
+        /*if(id == null || Objects.equals(id, "")) {
             Map<String, String> params =
                     FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             id = params.get("routeId");
@@ -85,10 +89,10 @@ public class CommentBean implements Serializable {
                 String[] array = url.split("/");
                 id = array[array.length - 1];
             }
-        }
+        }*/
 
-        assert id != null;
-        return commentService.findAllOrderByRouteId(Integer.valueOf(id));
+        //assert id != null;
+        return commentService.findAllOrderByRouteId(id);
     }
 
     private String getRouteId(){
@@ -124,4 +128,5 @@ public class CommentBean implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

@@ -27,28 +27,22 @@ public class SearchAlgorithm {
 
     }
 
-    public List<Neighbor> getRoutes(List<Neighbor> neighbors, int level){
+    public List<Neighbor> getRoutes(List<Neighbor> neighbors, int level) {
 
-       // pList.add(neighbors.get(0).getPoint());
+        for(Neighbor n : neighbors){
+            neighborList.add(n);
+            if(!n.getPoint().getName().equals(endPoint) && level <= maxLevel){
 
-        if(level <= maxLevel && !neighbors.get(0).getPoint().getName().equals(endPoint)){
+                getRoutes(n.getPoint().getNeighbors(), level + 1);
+            }
 
-            points.add(neighbors.get(0));
-            neighbors = getRoutes(neighbors.get(0).getPoint().getNeighbors(), level + 1);
+            if(level > maxLevel){
+                neighborList.remove(n);
+                return null;
+            }
         }
-        if(level > maxLevel){
-            neighbors.remove(0);
-            points.clear();
-            //pList.clear();
-        }
 
-        if(neighbors.size() != 0 && neighbors.get(0).getPoint().getName().equals(endPoint)){
-           // points = new LinkedList<>();
-            //points.add(pList);
-            neighborList.addAll(points);
-            neighborList.add(neighbors.get(0));
-            neighbors.remove(0);
-        }
+
 
         return neighborList;
     }
