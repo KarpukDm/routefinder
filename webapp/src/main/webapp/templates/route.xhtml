@@ -130,7 +130,11 @@
                     <h:form>
 
                         <div class="col-md-4">
-                            <h:commandButton type="button" class="btn btn-primary button" value="Subscribe"/>
+                            <h:commandButton type="button" action="#{routePageBean.subscribe}" class="btn btn-primary button"
+                                             value="Subscribe">
+                                <f:param name="routeId" value="#{route.id}"/>
+                                <f:ajax execute="@all" render="@all"/>
+                            </h:commandButton>
                         </div>
 
                         <div class="col-md-4">
@@ -143,7 +147,6 @@
                                              action="#{routePageBean.deleteRoute}" class="btn btn-danger button"
                                              value="Delete">
                                 <f:param name="routeId" value="#{route.id}"/>
-                                <f:ajax execute="@all" render="@all"/>
                             </h:commandButton>
                         </div>
 
@@ -195,7 +198,12 @@
 
                             <h2 class="sub-header"/>
 
-                            <h:outputText value="#{comment.message}"/>
+                            <h:panelGroup styleClass="col-md-12">
+
+                            <h:outputText style="font-weight: bold;" styleClass="col-md-2" value="#{comment.account.login}:"/>
+                            <h:outputText styleClass="col-md-10" value="#{comment.message}"/>
+
+                            </h:panelGroup>
 
                         </ui:repeat>
 

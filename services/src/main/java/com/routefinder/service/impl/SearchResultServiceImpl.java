@@ -1,11 +1,14 @@
 package com.routefinder.service.impl;
 
+import com.routefinder.model.FavoriteRoute;
 import com.routefinder.model.SearchResult;
 import com.routefinder.repository.SearchResultRepository;
 import com.routefinder.service.SearchResultService;
 import com.routefinder.service.common.impl.GenericServiceImpl;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +24,8 @@ public class SearchResultServiceImpl extends GenericServiceImpl<SearchResult, In
 
 
     @Override
-    public List<SearchResult> findTop10BySearch(String lastname) {
-        return repository.findTop10BySearch(lastname);
+    public Page<SearchResult> findLastRecords(Pageable pageable) {
+        return repository.findAll(pageable);
     }
+
 }

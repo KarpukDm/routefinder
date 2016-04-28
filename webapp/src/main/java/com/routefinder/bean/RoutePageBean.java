@@ -1,10 +1,9 @@
 package com.routefinder.bean;
 
-import com.routefinder.model.Account;
-import com.routefinder.model.Rating;
+import com.routefinder.model.FavoriteRoute;
 import com.routefinder.model.Route;
 import com.routefinder.service.AccountService;
-import com.routefinder.service.RatingService;
+import com.routefinder.service.FavoriteRouteService;
 import com.routefinder.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by offsp on 21.04.2016.
@@ -27,11 +24,21 @@ public class RoutePageBean {
     @Autowired
     private RouteService routeService;
 
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private FavoriteRouteService favoriteRouteService;
+
     public void deleteRoute() {
 
-        Route route = getRoute();
+        //Route route = getRoute();
 
-        routeService.delete(route);
+        Map<String, String> params =
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String id = params.get("routeId");
+
+        routeService.deleteOneById(Integer.valueOf(id));
     }
 
     private Route getRoute() {
@@ -40,6 +47,15 @@ public class RoutePageBean {
         String id = params.get("routeId");
 
         return getRoute(Integer.valueOf(id));
+    }
+
+    public void subscribe(){
+
+        FavoriteRoute favoriteRoute = new FavoriteRoute();
+        favoriteRoute.setRoute(getRoute());
+        favoriteRoute.setAccount(accountService.findOneAccountByLogin(AccountBean.getUsername()));
+
+        favoriteRouteService.save(favoriteRoute);
     }
 
     private Route getRoute(Integer id) {

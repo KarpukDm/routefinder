@@ -50,10 +50,8 @@
                 <h:panelGroup styleClass="col-md-8">
                     <ui:repeat value="#{searchBean.routes}" var="route" varStatus="index">
 
-                        <h:outputText value="#{index.index}" style="font-size: 16pt;"/>
-
-                        <a class="route-link" style="font-size: 16pt; color: #245269"
-                           href="sresult/#{index.index}) ">
+                        <a class="route-link col-md-12" style="font-size: 16pt; color: #245269"
+                           href="sresult/#{index.index}">
                             <ui:repeat value="#{route}" var="r">
 
                                 #{r.name} -
@@ -61,15 +59,13 @@
                             </ui:repeat>
                         </a>
 
-                        <br/>
-                        <br/>
-                        <br/>
+                        <h2 class="sub-header col-md-12"/>
 
                     </ui:repeat>
                 </h:panelGroup>
 
                 <h:panelGroup styleClass="col-md-4" style="text-align: center;">
-                    <ui:repeat value="#{searchBean.lastRequests}" var="req" varStatus="index">
+                    <ui:repeat value="#{searchBean.lastRequests.content}" var="req" varStatus="index">
 
                         <h:commandButton style="font-size: 11pt; margin-bottom: 10px;" styleClass="btn btn-success button"
                                          action="#{searchBean.findByLastRequest(req)}"

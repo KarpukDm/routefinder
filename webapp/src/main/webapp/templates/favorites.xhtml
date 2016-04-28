@@ -3,7 +3,7 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <h:head>
     <title>Favorites | ROUTE FINDER</title>
@@ -19,6 +19,49 @@
         <div class="row">
             <ui:include src="/templates-components/vertical-menu.xhtml"/>
 
+            <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+
+                <p:dataTable tableStyleClass="table table-hover"
+                             value="#{favoriteRouteBean.favoriteRoutes}" var="favorite" paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                >
+                    <p:column headerText="Rating" style="width: 8%;">
+
+                        <h:outputText styleClass="rating-value" style="font-size: 26pt;" value="#{favorite.route.rating}"/>
+
+                    </p:column>
+
+                    <p:column headerText="Route" style="width: 52%;">
+
+                        <a class="route-link" style="font-size: 16pt; color: #245269"
+                           href="route/#{favorite.route.id}">#{favorite.route.points.get(0).name} - #{favorite.route.points.get(favorite.route.points.size() - 1).name}</a>
+
+                        <br/>
+
+                        <h:outputText value="#{favorite.route.shortInfo}"/>
+
+                    </p:column>
+
+                    <p:column headerText="Day: time" style="width: 20%;">
+
+                        <p:dataTable value="#{favorite.route.schedules}" var="schedule">
+                            <p:column>
+                                <h:outputText value="#{schedule.day}: "/>
+                            </p:column>
+
+                            <p:column>
+                                <h:outputText value="#{schedule.time}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:column>
+
+                    <p:column headerText="Price" style="width: 15%;">
+
+                        <h:outputText styleClass="price-value" style="font-size: 16pt;" value="#{favorite.route.price} y.e."/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
         </div>
     </div>
 

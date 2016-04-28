@@ -109,13 +109,9 @@ public class EntityGenerator {
         return new Address("email@email.com");
     }
 
-
-
     public Neighbor getNeighborEntity(){
         return new Neighbor();
     }
-
-
 
     public Point getPointEntity(){
         return new Point("name");

@@ -9,6 +9,9 @@ import com.routefinder.model.SearchResult;
 import com.routefinder.service.PointService;
 import com.routefinder.service.SearchResultService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
@@ -60,9 +63,9 @@ public class SearchBean {
 
     }
 
-    public List<SearchResult> getLastRequests(){
+    public Page<SearchResult> getLastRequests(){
 
-        return searchResultService.findTop10BySearch("result");
+        return searchResultService.findLastRecords(new PageRequest(0, 10, Sort.Direction.DESC, "id"));
     }
 
     public List<List<Point>> getRoutes(){

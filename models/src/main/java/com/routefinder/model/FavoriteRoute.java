@@ -18,24 +18,8 @@ public class FavoriteRoute implements Persistable<Integer> {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
-    @Column
-    private Integer route_id;
-
-    public FavoriteRoute(Integer route_id){
-        super();
-        this.route_id =  route_id;
-    }
-
     public FavoriteRoute(){
         super();
-    }
-
-    public Integer getRoute_id() {
-        return route_id;
-    }
-
-    public void setRoute_id(Integer route_id) {
-        this.route_id = route_id;
     }
 
     public void setId(Integer id) {
@@ -50,4 +34,25 @@ public class FavoriteRoute implements Persistable<Integer> {
         return false;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Route route;
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    @ManyToOne
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }

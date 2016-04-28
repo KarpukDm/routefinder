@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface SearchResultService extends GenericService<SearchResult, Integer> {
 
-    List<SearchResult> findTop10BySearch(String lastname);
+    Page<SearchResult> findLastRecords(Pageable pageable);
 }
