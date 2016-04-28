@@ -42,8 +42,6 @@ public class RouteBean implements Serializable {
     private Point startPointCoordinate;
     private Point endPointCoordinate;
 
-    private List<Schedule> schedules;
-    private List<Point> points;
     private String info;
     private String price;
 
@@ -65,7 +63,7 @@ public class RouteBean implements Serializable {
         configGenerator = new ConfigGenerator();
 
         route = new Route();
-        points = new LinkedList<>();
+        List<Point> points = new LinkedList<>();
 
         if(startPoint != null || endPoint != null) {
 
@@ -169,7 +167,7 @@ public class RouteBean implements Serializable {
         this.endPointCoordinate = null;
         this.info = "";
         this.price = "";
-        this.schedules = null;
+        List<Schedule> schedules = null;
     }
 
     public String getDuration(){

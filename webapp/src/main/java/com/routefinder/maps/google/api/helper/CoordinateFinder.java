@@ -2,7 +2,6 @@ package com.routefinder.maps.google.api.helper;
 
 import com.routefinder.model.Coordinates;
 import com.routefinder.model.Point;
-import com.routefinder.translator.Translator;
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONException;
 import org.primefaces.json.JSONObject;

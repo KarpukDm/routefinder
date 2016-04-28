@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
       xml:lang="en" lang="en"
       xmlns:p="http://primefaces.org/ui"
-    >
+>
 <h:head>
     <title>#{route.points.get(0).name} - #{route.points.get(route.points.size() - 1).name} | ROUTE FINDER</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
@@ -33,25 +33,25 @@
 
         dataProvider: {
         map: "worldLow",
-        zoomLevel: #{route.routeConfig.zoomLevel},
-        zoomLongitude: #{route.routeConfig.zoomLng},
-        zoomLatitude: #{route.routeConfig.zoomLat},
+        zoomLevel: #{searchBean.zoomLevel},
+        zoomLongitude: #{searchBean.zoomLng},
+        zoomLatitude: #{searchBean.zoomLat},
 
 
         lines: [{
         id: "line1",
         arc: -0.85,
         alpha: 0.3,
-        latitudes: [#{route.routeConfig.lats}],
-        longitudes: [#{route.routeConfig.lngs}]
+        latitudes: [#{searchBean.lats}],
+        longitudes: [#{searchBean.lngs}]
         }, {
         id: "line2",
         alpha: 0,
         color: "#000000",
-        latitudes: [#{route.routeConfig.lats}],
-        longitudes: [#{route.routeConfig.lngs}]
+        latitudes: [#{searchBean.lats}],
+        longitudes: [#{searchBean.lngs}]
         }],
-        images: [ #{route.routeConfig.pointNames} , {
+        images: [ #{searchBean.pointNames} , {
         svgPath: planeSVG,
         positionOnLine: 0,
         color: "#000000",
@@ -84,7 +84,7 @@
         rollOverColor: "#585869",
         selectedColor: "#585869",
         pauseDuration: 0.2,
-        animationDuration: #{route.routeConfig.duration},
+        animationDuration: #{searchBean.duration},
         adjustAnimationSpeed: true
         },
 
@@ -103,11 +103,11 @@
     <div class="container-fluid">
         <div class="row">
 
-            <c:set value="#{route}" var="param" scope="session"/>
+            <!--<c:set value="#{searchBean}" var="param" scope="session"/>-->
 
             <ui:include src="/templates-components/vertical-menu.xhtml"/>
 
-            <div class="col-md-offset-2 row">
+            <!--<div class="col-md-offset-2 row">
                 <div class="col-md-4">
                     <p:dataTable tableStyleClass="table table-hover"
                                  value="#{route.schedules}" var="schedule" style="padding-top: 20px;">
@@ -204,19 +204,19 @@
                     <div class="col-md-5" style="padding-right: 40px;">
                         <h:outputText value="Your comment:" style="float: left;"/>
 
-                        <h:inputTextarea style="resize: none; height: 100px;" styleClass="col-md-12 form-control"
+                        <h:inputTextarea style="resize: none; height: 100px;" styleClass="col-md-12"
                                          value="#{commentBean.message}"/>
 
                         <h:commandButton styleClass="btn btn-primary" style="float: right; margin-top: 5px;"
                                          value="Send" action="#{commentBean.addComment(param.id)}">
-                           <!-- <f:param name="routeId" value="#{route.id}"/>-->
+                            &lt;!&ndash; <f:param name="routeId" value="#{route.id}"/>&ndash;&gt;
                             <f:ajax execute="@all" render="@form"/>
                         </h:commandButton>
 
                     </div>
                 </h:form>
 
-            </h:panelGroup>
+            </h:panelGroup>-->
 
         </div>
     </div>

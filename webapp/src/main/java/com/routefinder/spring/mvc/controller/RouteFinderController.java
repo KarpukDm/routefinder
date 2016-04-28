@@ -41,6 +41,14 @@ public class RouteFinderController {
         return "home";
     }
 
+    @RequestMapping("/sresult/{id}")
+    public String sresult(Model model) {
+
+
+
+        return "s-result";
+    }
+
     @RequestMapping("/route/{id}")
     public String route(@PathVariable Integer id, Model model) {
 

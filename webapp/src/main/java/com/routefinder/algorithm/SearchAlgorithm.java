@@ -75,6 +75,28 @@ public class SearchAlgorithm {
 
         getRoutes(neighbors, 0);
 
+        for(int i = 0; i < routePoints.size(); i++){
+
+            boolean flag = true;
+
+            for(int j = 0; j < routePoints.get(i).size(); j++){
+
+                for(int l = 0; l < routePoints.get(i).size(); l++){
+
+                    if(routePoints.get(i).get(j).getName().equals(routePoints.get(i).get(l).getName()) && j != l) {
+                        routePoints.remove(i);
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if(!flag){
+                    i--;
+                    break;
+                }
+            }
+        }
+
         return routePoints;
     }
 

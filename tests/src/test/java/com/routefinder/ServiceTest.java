@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
         AddressServiceTest.class,
         MyRouteServiceTest.class,
         NeighborServiceTest.class,
-        PlannerServiceTest.class,
+        SearchResultServiceTest.class,
         PointServiceTest.class,
         RatingServiceTest.class,
         RoleServiceTest.class,

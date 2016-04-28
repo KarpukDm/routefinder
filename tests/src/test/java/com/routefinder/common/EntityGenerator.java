@@ -32,13 +32,10 @@ public class EntityGenerator {
     private FeedbackService feedbackService;
 
     @Autowired
-    private MyRouteService myRouteService;
-
-    @Autowired
     private NeighborService neighborService;
 
     @Autowired
-    private PlannerService plannerService;
+    private SearchResultService searchResultService;
 
     @Autowired
     private PointService pointService;
@@ -112,17 +109,13 @@ public class EntityGenerator {
         return new Address("email@email.com");
     }
 
-    public MyRoute getMyRouteEntity(){
-        return new MyRoute();
-    }
+
 
     public Neighbor getNeighborEntity(){
         return new Neighbor();
     }
 
-    public Planner getPlannerEntity(){
-        return new Planner(1, "14:00", "notice");
-    }
+
 
     public Point getPointEntity(){
         return new Point("name");

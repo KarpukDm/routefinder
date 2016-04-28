@@ -22,25 +22,44 @@
 
             <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
 
-                <h:panelGroup styleClass="col-md-12">
+
+                <h:panelGroup styleClass="col-md-8" style="margin-top: 25px;">
                     <h:form>
-                        <h:inputText value="#{searchBean.a}"/>
-                        <h:inputText value="#{searchBean.b}"/>
-                        <h:commandButton type="submit"
-                                         class="btn btn-danger button"
-                                         value="Find">
+                        <h:inputText styleClass="col-md-4" style="margin-left: 10px; height: 30px;"
+                                     value="#{searchBean.a}" a:placeholder="Start point"/>
+                        <h:inputText styleClass="col-md-4" style="margin-left: 10px; height: 30px;"
+                                     value="#{searchBean.b}" a:placeholder="End point"/>
+                        <h:inputText styleClass="col-md-2" style="margin-left: 10px; height: 30px;"
+                                     value="#{searchBean.maxLevel}" a:placeholder="N of transplants"/>
+                        <h:commandButton type="submit" action="#{searchBean.saveRequest}"
+                                         class="btn btn-primary button col-md-1"
+                                         value="Find" style="margin-left: 10px;margin-top: -5px; height: 40px;">
                             <f:ajax execute="@all" render="@all"/>
                         </h:commandButton>
                     </h:form>
+
                 </h:panelGroup>
 
-                <h:panelGroup styleClass="col-md-12">
-                    <ui:repeat value="#{searchBean.routes}" var="route">
+                <h:panelGroup styleClass="col-md-4" style="margin-top: 25px; text-align: center; font-size: 16pt;">
+                    Last requests:
+                </h:panelGroup>
 
-                        <ui:repeat value="#{route}" var="r">
-                            #{r.name}
-                            <br/>
-                        </ui:repeat>
+
+                <h2 class="sub-header col-md-12"/>
+
+                <h:panelGroup styleClass="col-md-8">
+                    <ui:repeat value="#{searchBean.routes}" var="route" varStatus="index">
+
+                        <h:outputText value="#{index.index}" style="font-size: 16pt;"/>
+
+                        <a class="route-link" style="font-size: 16pt; color: #245269"
+                           href="sresult/#{index.index}) ">
+                            <ui:repeat value="#{route}" var="r">
+
+                                #{r.name} -
+
+                            </ui:repeat>
+                        </a>
 
                         <br/>
                         <br/>
@@ -48,6 +67,21 @@
 
                     </ui:repeat>
                 </h:panelGroup>
+
+                <h:panelGroup styleClass="col-md-4" style="text-align: center;">
+                    <ui:repeat value="#{searchBean.lastRequests}" var="req" varStatus="index">
+
+                        <h:commandButton style="font-size: 11pt; margin-bottom: 10px;" styleClass="btn btn-success button"
+                                         action="#{searchBean.findByLastRequest(req)}"
+                                         value="#{req.startPoint} - #{req.endPoint}">
+                            <f:ajax execute="@all" render="@all"/>
+                        </h:commandButton>
+
+                        <br/>
+
+                    </ui:repeat>
+                </h:panelGroup>
+
             </h:panelGroup>
 
         </div>
