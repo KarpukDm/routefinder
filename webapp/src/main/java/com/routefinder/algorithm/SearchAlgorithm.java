@@ -16,34 +16,66 @@ public class SearchAlgorithm {
 
     private String endPoint;
 
-    private List<Neighbor> neighborList = new LinkedList<>();
+    private List<List<Point>> routePoints = new LinkedList<>();
 
-    private List<Neighbor> points = new LinkedList<>();
+    private List<Point> rp = new LinkedList<>();
 
-    public SearchAlgorithm(String endPoint, int maxLevel, List<Neighbor> neighbors) {
+    public SearchAlgorithm(String endPoint, int maxLevel) {
         this.endPoint = endPoint;
 
         this.maxLevel = maxLevel;
 
     }
 
-    public List<Neighbor> getRoutes(List<Neighbor> neighbors, int level) {
+    private List<Neighbor> getRoutes(List<Neighbor> neighbors, int level) {
 
-        for(Neighbor n : neighbors){
-            neighborList.add(n);
-            if(!n.getPoint().getName().equals(endPoint) && level <= maxLevel){
+        for(int i = 0; i < neighbors.size(); i++){
 
-                getRoutes(n.getPoint().getNeighbors(), level + 1);
+            if(neighbors.get(i) != null) {
+
+                if(!rp.contains(neighbors.get(i).getPoint())) {
+                    rp.add(neighbors.get(i).getPoint());
+                }
+
+                if (!neighbors.get(i).getPoint().getName().equals(endPoint) && level <= maxLevel) {
+
+                    neighbors.get(i).getPoint().setNeighbors(getRoutes(neighbors.get(i).getPoint().getNeighbors(), level + 1));
+                }
+
+                if (level > maxLevel || (neighbors.get(i).getPoint().getNeighbors() == null
+                        || neighbors.get(i).getPoint().getNeighbors().size() == 0)) {
+
+                    neighbors.remove(i);
+                    i--;
+
+                    rp = rp.subList(0, level);
+
+                    continue;
+                }
+
+                if (neighbors.get(i).getPoint().getName().equals(endPoint)) {
+
+                    List<Point> x = new LinkedList<>();
+                    x.addAll(rp);
+                    routePoints.add(x);
+                    rp = rp.subList(0, level);
+
+                    neighbors.remove(i);
+                    i--;
+                }
             }
 
-            if(level > maxLevel){
-                neighborList.remove(n);
-                return null;
-            }
+            rp = rp.subList(0, level - 1);
         }
 
-
-
-        return neighborList;
+        return neighbors;
     }
+
+    public List<List<Point>> getRoutes(List<Neighbor> neighbors) {
+
+        getRoutes(neighbors, 0);
+
+        return routePoints;
+    }
+
 }

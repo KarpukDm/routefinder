@@ -2,6 +2,7 @@ package com.routefinder.repository;
 
 
 import com.routefinder.model.Account;
+import com.routefinder.model.Point;
 import com.routefinder.model.Route;
 import org.primefaces.component.rating.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,8 @@ import java.util.List;
 public interface RouteRepository extends JpaRepository<Route, Integer> {
 
     Route findOneRouteById(Integer id);
+
+    Route findOneRouteByPoints(List<Point> points);
 
     List<Route> findAllOrderByAccount_Login(String route);
 

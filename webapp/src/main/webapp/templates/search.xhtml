@@ -37,9 +37,13 @@
                 <h:panelGroup styleClass="col-md-12">
                     <ui:repeat value="#{searchBean.routes}" var="route">
 
+                        <ui:repeat value="#{route}" var="r">
+                            #{r.name}
+                            <br/>
+                        </ui:repeat>
 
-                            #{route.name}
-
+                        <br/>
+                        <br/>
                         <br/>
 
                     </ui:repeat>

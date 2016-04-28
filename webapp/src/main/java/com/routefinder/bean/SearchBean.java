@@ -26,31 +26,26 @@ public class SearchBean {
     private String a;
     private String b;
 
-    public List<Point> getRoutes(){
+    private Integer maxLevel = 4;
 
-        Point points = pointService.findOneByName(this.a);
+
+    public List<List<Point>> getRoutes(){
+
+        Point point = pointService.findOneByName(this.a);
 
         if(a == null || b == null){
             return null;
         }
 
-        SearchAlgorithm searchAlgorithm = new SearchAlgorithm(b, 4, points.getNeighbors());
+        List<Neighbor> neighbors = new LinkedList<>();
+        Neighbor neighbor = new Neighbor();
+        neighbor.setPoint(point);
+        neighbors.add(neighbor);
 
-        List<Neighbor> neighbors = searchAlgorithm.getRoutes(points.getNeighbors(), 0);
+        SearchAlgorithm searchAlgorithm = new SearchAlgorithm(b, maxLevel);
 
-        List<Point> result = new LinkedList<>();
-        result.add(points);
 
-        for(Neighbor n : neighbors){
-            result.add(n.getPoint());
-        }
-
-        if(result.size() < 2) {
-            return null;
-        }
-
-        return result;
-
+        return searchAlgorithm.getRoutes(neighbors);
     }
 
     public String getA() {
