@@ -55,6 +55,12 @@ public class CommentBean implements Serializable {
 
             comment.setAccount(account);
 
+            if("".equals(id)){
+                Map<String, String> params =
+                        FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+                id = params.get("routeId");
+            }
+
             Route route = getRoute(Integer.valueOf(id));
 
             comment.setRoute(route);
@@ -71,9 +77,9 @@ public class CommentBean implements Serializable {
 
     }
 
-    public List<Comment> getComments(Integer id){
+    public List<Comment> getComments(String id){
 
-        /*if(id == null || Objects.equals(id, "")) {
+        if(id == null || Objects.equals(id, "")) {
             Map<String, String> params =
                     FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             id = params.get("routeId");
@@ -89,10 +95,10 @@ public class CommentBean implements Serializable {
                 String[] array = url.split("/");
                 id = array[array.length - 1];
             }
-        }*/
+        }
 
-        //assert id != null;
-        return commentService.findAllOrderByRouteId(id);
+        assert id != null;
+        return commentService.findAllOrderByRouteId(Integer.valueOf(id));
     }
 
     private String getRouteId(){

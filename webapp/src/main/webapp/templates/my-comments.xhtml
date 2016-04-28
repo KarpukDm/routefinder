@@ -3,7 +3,7 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <h:head>
     <title>My comments | ROUTE FINDER</title>
@@ -23,15 +23,43 @@
 
             <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
 
-                <h:panelGroup styleClass="col-md-12">
-                    <ui:repeat value="#{commentBean.myComments}" var="comment">
+                <p:dataTable tableStyleClass="table table-hover"
+                             value="#{commentBean.myComments}" var="myComment" paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                >
 
-                        <h2 class="sub-header"/>
+                    <p:column headerText="Comment" style="width: 40%;">
 
-                        <h:outputText value="#{comment.message}"/>
+                        <h:outputText value="#{myComment.message}"/>
 
-                    </ui:repeat>
-                </h:panelGroup>
+                    </p:column>
+
+
+                    <p:column headerText="Route" style="width: 40%;">
+
+                        <a class="route-link" style="font-size: 16pt; color: #245269"
+                           href="route/#{myComment.route.id}">#{myComment.route.points.get(0).name} - #{myComment.route.points.get(myComment.route.points.size() - 1).name}</a>
+
+                        <br/>
+
+                        <h:outputText value="#{myComment.route.shortInfo}"/>
+
+                    </p:column>
+
+                    <p:column headerText="Rating" style="width: 8%;">
+
+                        <h:outputText styleClass="rating-value" style="font-size: 26pt;" value="#{myComment.route.rating}"/>
+
+                    </p:column>
+
+                    <p:column headerText="Price" style="width: 12%;">
+
+                        <h:outputText styleClass="price-value" style="font-size: 16pt;" value="#{myComment.route.price} y.e."/>
+                    </p:column>
+
+                </p:dataTable>
+
+
             </h:panelGroup>
 
         </div>

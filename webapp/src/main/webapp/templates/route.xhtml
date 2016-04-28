@@ -217,7 +217,7 @@
 
                         <h:commandButton styleClass="btn btn-primary" style="float: right; margin-top: 5px;"
                                          value="Send" action="#{commentBean.addComment(param.id)}">
-                           <!-- <f:param name="routeId" value="#{route.id}"/>-->
+                            <f:param name="routeId" value="#{route.id}"/>
                             <f:ajax execute="@all" render="@form"/>
                         </h:commandButton>
 

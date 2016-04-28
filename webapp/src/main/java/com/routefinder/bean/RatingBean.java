@@ -33,6 +33,19 @@ public class RatingBean {
     @Autowired
     private RouteService routeService;
 
+    private List<Rating> ratings;
+
+    public boolean isLike(Integer id){
+
+        for(Rating r : ratings){
+            if(r.getRoute().getId().equals(id)){
+                return r.getValue() == 1;
+            }
+        }
+
+        return ratingService.findOneOrderByRoute_IdAndAccount_Login(id, AccountBean.getUsername()).getValue() == 1;
+    }
+
     public void like() {
 
         Route route = getRoute();
@@ -93,7 +106,9 @@ public class RatingBean {
 
         String username = AccountBean.getUsername();
 
-        return ratingService.findAllOrderByAccount_Login(username);
+        this.ratings = ratingService.findAllOrderByAccount_Login(username);
+
+        return ratings;
     }
 
     private Route getRoute() {
@@ -106,5 +121,13 @@ public class RatingBean {
 
     private Route getRoute(Integer id) {
         return routeService.findOneRouteById(id);
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 }

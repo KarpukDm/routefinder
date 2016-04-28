@@ -12,7 +12,9 @@ public interface RatingService extends GenericService<Rating, Integer> {
 
     List<Rating> findAllOrderByAccountId(Integer id);
 
-    List<Rating> findAllOrderByRoute_Id(Integer id);
+    Rating findOneOrderByRoute_IdAndAccount_Login(Integer id, String login);
 
     List<Rating> findAllOrderByAccount_Login(String login);
+
+    List<Rating> findAllOrderByRoute_Id(Integer id);
 }

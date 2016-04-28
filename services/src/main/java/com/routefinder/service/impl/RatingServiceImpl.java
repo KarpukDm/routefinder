@@ -23,13 +23,17 @@ public class RatingServiceImpl extends GenericServiceImpl<Rating, Integer, Ratin
     }
 
     @Override
-    public List<Rating> findAllOrderByRoute_Id(Integer id) {
-
-        return repository.findAllOrderByRoute_Id(id);
+    public Rating findOneOrderByRoute_IdAndAccount_Login(Integer id, String login) {
+        return repository.findOneOrderByRoute_IdAndAccount_Login(id, login);
     }
 
     @Override
     public List<Rating> findAllOrderByAccount_Login(String login) {
         return repository.findAllOrderByAccount_Login(login);
+    }
+
+    @Override
+    public List<Rating> findAllOrderByRoute_Id(Integer id) {
+        return repository.findAllOrderByRoute_Id(id);
     }
 }
