@@ -28,8 +28,8 @@ public class RouteServiceImpl extends GenericServiceImpl<Route, Integer, RouteRe
     }
 
     @Override
-    public List<Route> findAllOrderByPoints(List<Point> list) {
-        return repository.findAllOrderByPoints(list);
+    public List<Route> findAllOrderByStartPointAndEndPoint(String start, String end) {
+        return repository.findAllOrderByStartPointAndEndPoint(start, end);
     }
 
     @Override

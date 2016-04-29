@@ -145,6 +145,10 @@ public class RouteBean implements Serializable {
 
             route.setAccount(account);
 
+            route.setStartPoint(startPoint);
+
+            route.setEndPoint(endPoint);
+
             List<Rating> ratings = new LinkedList<>();
             ratings.add(new Rating(0));
             route.setRatings(ratings);

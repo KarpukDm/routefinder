@@ -26,6 +26,12 @@ public class Route implements Persistable<Integer> {
     private String info;
 
     @Column(nullable = false)
+    private String startPoint;
+
+    @Column(nullable = false)
+    private String endPoint;
+
+    @Column(nullable = false)
     private Integer counter;
 
     @Column(nullable = false)
@@ -181,5 +187,21 @@ public class Route implements Persistable<Integer> {
 
     public void addRating(Rating rating){
         ratings.add(rating);
+    }
+
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(String end) {
+        this.endPoint = end;
+    }
+
+    public String getStartPoint() {
+        return startPoint;
+    }
+
+    public void setStartPoint(String start) {
+        this.startPoint = start;
     }
 }

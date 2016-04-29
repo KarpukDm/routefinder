@@ -158,11 +158,8 @@ public class SearchBean {
 
         for(int i = 0; i < this.routes.get(index).size() - 1; i++){
 
-            List<Point> points = new LinkedList<>();
-            points.add(this.routes.get(index).get(i));
-            points.add(this.routes.get(index).get(i + 1));
-
-            List<Route> r = routeService.findAllOrderByPoints(points);
+            List<Route> r = routeService.findAllOrderByStartPointAndEndPoint(this.routes.get(index).get(i).getName(),
+                    this.routes.get(index).get(i + 1).getName());
 
             if(r != null) {
                 routes.addAll(r);
