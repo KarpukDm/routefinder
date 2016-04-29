@@ -2,6 +2,7 @@ package com.routefinder.bean;
 
 import com.routefinder.algorithm.SearchAlgorithm;
 import com.routefinder.amcharts.helper.ConfigGenerator;
+import com.routefinder.maps.google.api.helper.DistanceCalculator;
 import com.routefinder.model.Neighbor;
 import com.routefinder.model.Point;
 import com.routefinder.model.Route;
@@ -14,8 +15,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,13 +39,14 @@ public class SearchBean {
 
     private String a;
     private String b;
-
-    private List<Point> points;
-
-    private ConfigGenerator configGenerator = new ConfigGenerator();
-
     @SuppressWarnings("FieldCanBeLocal")
     private Integer maxLevel = 3;
+
+    private int index;
+
+    private List<List<Point>> routes = new LinkedList<>();
+
+    private ConfigGenerator configGenerator = new ConfigGenerator();
 
     public void saveRequest(){
 
@@ -83,8 +88,9 @@ public class SearchBean {
 
         SearchAlgorithm searchAlgorithm = new SearchAlgorithm(b, maxLevel);
 
+        this.routes = searchAlgorithm.getRoutes(neighbors);
 
-        return searchAlgorithm.getRoutes(neighbors);
+        return this.routes;
     }
 
     public String getDuration(){
@@ -96,9 +102,13 @@ public class SearchBean {
 
         Double d = 0d;
 
-        for (Point point : points) {
+        DistanceCalculator distanceCalculator = new DistanceCalculator();
 
-            d += point.getNeighbors().get(0).getDistance();
+        for (int i = 0; i < routes.get(index).size() - 1; i++) {
+
+            if(d == 0){
+                d += distanceCalculator.getDistance(routes.get(index).get(i), routes.get(index).get(i + 1));
+            }
         }
 
         return new Route(d);
@@ -106,22 +116,22 @@ public class SearchBean {
 
     public String getLats() {
 
-        return configGenerator.getLats(points);
+        return configGenerator.getLats(routes.get(index));
     }
 
     public String getLngs() {
 
-        return configGenerator.getLngs(points);
+        return configGenerator.getLngs(routes.get(index));
     }
 
     public String  getZoomLat(){
 
-        return configGenerator.getZoomLat(points);
+        return configGenerator.getZoomLat(routes.get(index));
     }
 
     public String getZoomLng(){
 
-        return configGenerator.getZoomLng(points);
+        return configGenerator.getZoomLng(routes.get(index));
     }
 
     public String getZoomLevel(){
@@ -131,7 +141,11 @@ public class SearchBean {
 
     public String getPointNames(){
 
-        return configGenerator.getPointNames(points);
+        return configGenerator.getPointNames(routes.get(index));
+    }
+
+    public void setRoutes(List<List<Point>> routes) {
+        this.routes = routes;
     }
 
     public String getA() {
@@ -156,5 +170,13 @@ public class SearchBean {
 
     public void setMaxLevel(Integer maxLevel) {
         this.maxLevel = maxLevel;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

@@ -8,4 +8,15 @@
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
 
+    <managed-bean>
+        <managed-bean-name>searchBean</managed-bean-name>
+        <managed-bean-class>com.routefinder.bean.SearchBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>routeFinderController</managed-bean-name>
+        <managed-bean-class>com.routefinder.spring.mvc.controller.RouteFinderController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
 </faces-config>

@@ -1,5 +1,6 @@
 package com.routefinder.service.impl;
 
+import com.routefinder.model.Point;
 import com.routefinder.model.Route;
 import com.routefinder.repository.RouteRepository;
 import com.routefinder.service.RouteService;
@@ -24,6 +25,11 @@ public class RouteServiceImpl extends GenericServiceImpl<Route, Integer, RouteRe
     @Override
     public List<Route> findAllOrderByAccount_Login(String route) {
         return repository.findAllOrderByAccount_Login(route);
+    }
+
+    @Override
+    public Route findOneRouteOrderByPoints(List<Point> list) {
+        return repository.findOneRouteOrderByPoints(list);
     }
 
     @Override

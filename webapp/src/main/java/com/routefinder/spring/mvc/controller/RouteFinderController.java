@@ -1,9 +1,10 @@
 package com.routefinder.spring.mvc.controller;
 
-import com.routefinder.bean.RatingBean;
+import com.routefinder.bean.SearchBean;
 import com.routefinder.model.Route;
 import com.routefinder.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.util.Objects;
 
 /**
  * Created by karpukdm on 01.04.16.
@@ -25,6 +25,10 @@ import java.util.Objects;
 public class RouteFinderController {
 
     private Route route;
+
+    @Autowired
+    @Qualifier("searchBean")
+    private SearchBean searchBean;
 
     @Autowired
     private RouteService routeService;
@@ -42,9 +46,10 @@ public class RouteFinderController {
     }
 
     @RequestMapping("/sresult/{id}")
-    public String sresult(Model model) {
+    public String sresult(@PathVariable Integer id, Model model) {
 
-
+        searchBean.setIndex(id);
+        model.addAttribute(searchBean.getRoutes().get(id));
 
         return "s-result";
     }
@@ -153,5 +158,13 @@ public class RouteFinderController {
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    public SearchBean getSearchBean() {
+        return searchBean;
+    }
+
+    public void setSearchBean(SearchBean searchBean) {
+        this.searchBean = searchBean;
     }
 }

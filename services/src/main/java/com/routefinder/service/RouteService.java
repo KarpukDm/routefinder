@@ -1,6 +1,6 @@
 package com.routefinder.service;
 
-import com.routefinder.model.Account;
+import com.routefinder.model.Point;
 import com.routefinder.model.Route;
 import com.routefinder.service.common.GenericService;
 
@@ -14,6 +14,8 @@ public interface RouteService extends GenericService<Route, Integer> {
     Route findOneRouteById(Integer id);
 
     List<Route> findAllOrderByAccount_Login(String route);
+
+    Route findOneRouteOrderByPoints(List<Point> list);
 
     void deleteOneById(Integer id);
 }
