@@ -17,9 +17,7 @@ public interface RouteRepository extends JpaRepository<Route, Integer> {
 
     Route findOneRouteById(Integer id);
 
-    Route findOneRouteByPoints(List<Point> points);
-
-    Route findOneRouteOrderByPoints(List<Point> list);
+    List<Route> findAllOrderByPointsI
 
     List<Route> findAllOrderByAccount_Login(String route);
 

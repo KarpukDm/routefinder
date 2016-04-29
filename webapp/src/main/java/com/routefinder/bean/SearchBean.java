@@ -8,6 +8,7 @@ import com.routefinder.model.Point;
 import com.routefinder.model.Route;
 import com.routefinder.model.SearchResult;
 import com.routefinder.service.PointService;
+import com.routefinder.service.RouteService;
 import com.routefinder.service.SearchResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,6 +37,9 @@ public class SearchBean {
 
     @Autowired
     private SearchResultService searchResultService;
+
+    @Autowired
+    private RouteService routeService;
 
     private String a;
     private String b;
@@ -148,6 +152,26 @@ public class SearchBean {
         this.routes = routes;
     }
 
+    public List<Route> getRoutesForSearchResult(){
+
+        List<Route> routes = new LinkedList<>();
+
+        for(int i = 0; i < this.routes.get(index).size() - 1; i++){
+
+            List<Point> points = new LinkedList<>();
+            points.add(this.routes.get(index).get(i));
+            points.add(this.routes.get(index).get(i + 1));
+
+            List<Route> r = routeService.findAllOrderByPoints(points);
+
+            if(r != null) {
+                routes.addAll(r);
+            }
+        }
+
+        return routes;
+    }
+
     public String getA() {
         return a;
     }
@@ -175,6 +199,7 @@ public class SearchBean {
     public int getIndex() {
         return index;
     }
+
 
     public void setIndex(int index) {
         this.index = index;

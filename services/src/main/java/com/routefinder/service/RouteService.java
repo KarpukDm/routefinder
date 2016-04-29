@@ -15,7 +15,7 @@ public interface RouteService extends GenericService<Route, Integer> {
 
     List<Route> findAllOrderByAccount_Login(String route);
 
-    Route findOneRouteOrderByPoints(List<Point> list);
+    List<Route> findAllOrderByPoints(List<Point> list);
 
     void deleteOneById(Integer id);
 }

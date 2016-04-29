@@ -105,8 +105,30 @@
 
             <ui:include src="/templates-components/vertical-menu.xhtml"/>
 
-            <div class="col-md-12">
-                <div id="chartdiv" style="width: 96%; height: 450px; padding-top: 20px; padding-left: 20px;"></div>
+
+            <div class="col-md-offset-2 row">
+                <div class="col-md-12">
+                    <div id="chartdiv" style="width: 96%; height: 450px; padding-top: 20px;"></div>
+                </div>
+
+                <h2 class="sub-header col-md-12"/>
+
+                <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                    <ui:repeat value="#{searchBean.routesForSearchResult}" var="route">
+
+                        <h:outputText styleClass="col-md-2"
+                                      value="#{route.points.get(0).name - route.points.get(route.points.size() - 1).name}"/>
+
+                        <h:outputText styleClass="col-md-8" value="#{route.info}"/>
+
+                        <a class="col-md-2" href="${pageContext.request.contextPath}/route/#{route.id}">Follow to route</a>
+
+                        <h2 class="sub-header"/>
+
+                    </ui:repeat>
+
+                </h:panelGroup>
             </div>
 
         </div>
