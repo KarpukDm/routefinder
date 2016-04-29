@@ -172,6 +172,8 @@ public class RouteBean implements Serializable {
         this.info = "";
         this.price = "";
         List<Schedule> schedules = null;
+        account = null;
+        route = null;
     }
 
     public String getDuration(){

@@ -161,7 +161,12 @@ public class SearchBean {
             List<Route> r = routeService.findAllOrderByStartPointAndEndPoint(this.routes.get(index).get(i).getName(),
                     this.routes.get(index).get(i + 1).getName());
 
-            if(r != null) {
+            if(r == null || r.size() == 0) {
+                r = routeService.findAllOrderByStartPointAndEndPoint(this.routes.get(index).get(i + 1).getName(),
+                        this.routes.get(index).get(i).getName());
+            }
+
+            if(r != null && r.size() > 0){
                 routes.addAll(r);
             }
         }
