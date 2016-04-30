@@ -20,4 +20,19 @@ public class FavoriteRouteServiceImpl extends GenericServiceImpl<FavoriteRoute, 
     public List<FavoriteRoute> findAllOrderByAccount_Login(String login) {
         return repository.findAllOrderByAccount_Login(login);
     }
+/*
+    @Override
+    public void deleteOrderByAccount_Id() {
+        repository.deleteOrderByAccount_Id();
+    }
+
+    @Override
+    public void deleteOrderByRoute_Id() {
+        repository.deleteOrderByRoute_Id();
+    }*/
+
+    @Override
+    public FavoriteRoute findOneOrderByAccount_IdAndRoute_Id(Integer account_Id, Integer route_Id) {
+        return repository.findOneOrderByAccount_IdAndRoute_Id(account_Id, route_Id);
+    }
 }

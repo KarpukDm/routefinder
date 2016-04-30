@@ -1,5 +1,6 @@
 package com.routefinder.bean;
 
+import com.routefinder.model.Account;
 import com.routefinder.model.FavoriteRoute;
 import com.routefinder.model.Route;
 import com.routefinder.service.AccountService;
@@ -36,6 +37,8 @@ public class RoutePageBean {
 
     private Route route;
 
+    private FavoriteRoute favoriteRoute;
+
     public void deleteRoute() {
 
         commentService.deleteOrderByRoute_Id(route.getId());
@@ -43,13 +46,36 @@ public class RoutePageBean {
         routeService.delete(route);
     }
 
+    public void edit(){
+
+
+    }
+
     public void subscribe(){
 
+        if(favoriteRoute != null || isSubscriber()){
+
+            return;
+        }
+
+        this.route.addSubscriber();
+
         FavoriteRoute favoriteRoute = new FavoriteRoute();
-        favoriteRoute.setRoute(getRoute());
+        favoriteRoute.setRoute(this.route);
         favoriteRoute.setAccount(accountService.findOneAccountByLogin(AccountBean.getUsername()));
 
-        favoriteRouteService.save(favoriteRoute);
+        favoriteRouteService.saveAndFlush(favoriteRoute);
+    }
+
+    public void unsubscribe(){
+
+        if(favoriteRoute != null && isSubscriber()){
+
+            route.unsubscribe();
+            routeService.saveAndFlush(route);
+
+            favoriteRouteService.delete(favoriteRoute);
+        }
     }
 
     public Route getRoute() {
@@ -60,5 +86,14 @@ public class RoutePageBean {
         this.route = route;
     }
 
+    public boolean isSubscriber() {
 
+        String login = AccountBean.getUsername();
+
+        Account account = accountService.findOneAccountByLogin(login);
+
+        favoriteRoute = favoriteRouteService.findOneOrderByAccount_IdAndRoute_Id(account.getId(), route.getId());
+
+        return favoriteRoute != null;
+    }
 }

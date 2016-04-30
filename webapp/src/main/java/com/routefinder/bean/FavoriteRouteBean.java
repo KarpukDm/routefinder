@@ -26,4 +26,5 @@ public class FavoriteRouteBean {
 
         return favoriteRouteService.findAllOrderByAccount_Login(username);
     }
+
 }

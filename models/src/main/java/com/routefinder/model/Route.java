@@ -178,6 +178,14 @@ public class Route implements Persistable<Integer> {
         ratings.add(rating);
     }
 
+    public void addSubscriber(){
+        counter++;
+    }
+
+    public void unsubscribe(){
+        counter--;
+    }
+
     public String getEndPoint() {
         return endPoint;
     }
