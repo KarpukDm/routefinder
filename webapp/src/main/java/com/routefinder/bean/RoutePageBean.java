@@ -3,6 +3,7 @@ package com.routefinder.bean;
 import com.routefinder.model.FavoriteRoute;
 import com.routefinder.model.Route;
 import com.routefinder.service.AccountService;
+import com.routefinder.service.CommentService;
 import com.routefinder.service.FavoriteRouteService;
 import com.routefinder.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,16 @@ public class RoutePageBean {
     private AccountService accountService;
 
     @Autowired
+    private CommentService commentService;
+
+    @Autowired
     private FavoriteRouteService favoriteRouteService;
 
     private Route route;
 
     public void deleteRoute() {
+
+        commentService.deleteOrderByRoute_Id(route.getId());
 
         routeService.delete(route);
     }

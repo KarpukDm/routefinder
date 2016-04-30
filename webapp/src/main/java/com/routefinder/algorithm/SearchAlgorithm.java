@@ -73,6 +73,9 @@ public class SearchAlgorithm {
 
     public List<List<Point>> getRoutes(List<Neighbor> neighbors) {
 
+        if(neighbors.get(0).getPoint() == null){
+            return null;
+        }
         getRoutes(neighbors, 0);
 
         for(int i = 0; i < routePoints.size(); i++){

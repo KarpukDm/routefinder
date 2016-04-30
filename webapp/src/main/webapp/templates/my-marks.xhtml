@@ -49,13 +49,17 @@
 
                     <p:column headerText="Day: time" style="width: 20%;">
 
-                        <p:dataTable value="#{myRating.route.schedules}" var="schedule">
+                        <p:dataTable styleClass="table table-hover" value="#{route.schedules}" var="schedule">
                             <p:column>
                                 <h:outputText value="#{schedule.day}: "/>
                             </p:column>
 
                             <p:column>
-                                <h:outputText value="#{schedule.time}"/>
+                                <h:outputText value="#{schedule.departureTime}"/>
+                            </p:column>
+
+                            <p:column>
+                                <h:outputText value="#{schedule.arrivalTime}"/>
                             </p:column>
                         </p:dataTable>
 

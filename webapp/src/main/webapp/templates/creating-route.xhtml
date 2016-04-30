@@ -117,29 +117,65 @@
                     <h:form styleClass="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-12">
-                                <h:panelGrid id="grid" columns="2">
-                                        <h:outputLabel value="Monday: "/>
-                                        <h:inputText styleClass="form-control input-sm" style="width: 100px"
-                                                     a:placeholder="h:m" value="#{scheduleBean.monday}"/>
-                                        <h:outputLabel value="Tuesday: "/>
-                                        <h:inputText styleClass="form-control input-sm" style="width: 100px"
-                                                     a:placeholder="h:m" value="#{scheduleBean.tuesday}"/>
 
-                                        <h:outputLabel value="Wednesday: "/>
-                                        <h:inputText styleClass="form-control input-sm" style="width: 100px"
-                                                     a:placeholder="h:m" value="#{scheduleBean.wednesday}"/>
-                                        <h:outputLabel value="Thursday: "/>
-                                        <h:inputText styleClass="form-control input-sm" style="width: 100px"
-                                                     a:placeholder="h:m" value="#{scheduleBean.thursday}"/>
-                                        <h:outputLabel layout="block" value="Friday: "/>
-                                        <h:inputText styleClass="form-control input-sm" style="width: 100px"
-                                                     a:placeholder="h:m" value="#{scheduleBean.friday}"/>
-                                        <h:outputLabel value="Saturday: "/>
-                                        <h:inputText styleClass="form-control input-sm" style="width: 100px"
-                                                     a:placeholder="h:m" value="#{scheduleBean.saturday}"/>
-                                        <h:outputLabel value="Saturday: "/>
-                                        <h:inputText styleClass="form-control input-sm" style="width: 100px"
-                                                     a:placeholder="h:m" value="#{scheduleBean.sunday}"/>
+                                <h:panelGrid id="grid" columns="8">
+
+                                    <h:outputLabel value=""/>
+                                    <h:outputLabel value="Monday: "/>
+                                    <h:outputLabel value="Tuesday: "/>
+                                    <h:outputLabel value="Wednesday: "/>
+                                    <h:outputLabel value="Thursday: "/>
+                                    <h:outputLabel value="Friday: "/>
+                                    <h:outputLabel value="Saturday: "/>
+                                    <h:outputLabel value="Saturday: "/>
+                                    <h:outputLabel value="Departure time: "/>
+
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.monday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.tuesday}"/>
+
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.wednesday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.thursday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.friday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.saturday}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.sunday}"/>
+
+                                    <h:outputLabel value="Arrival time: "/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.monday2}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.tuesday2}"/>
+
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.wednesday2}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.thursday2}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.friday2}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.saturday2}"/>
+
+                                    <h:inputText styleClass="form-control input-sm" style="width: 100px; margin-left: 5px; margin-bottom: 5px;"
+                                                 a:placeholder="h:m" value="#{scheduleBean.sunday2}"/>
 
                                 </h:panelGrid>
 
@@ -147,7 +183,7 @@
                                                  value="Save"
                                                  action="#{routeBean.addSchedule(scheduleBean.scheduleList)}"
                                                  styleClass="btn btn-md btn-info"
-                                                 style="margin-top: 10px;"/>
+                                                 style="margin-top: 10px; float: right;"/>
                             </div>
                         </div>
                     </h:form>

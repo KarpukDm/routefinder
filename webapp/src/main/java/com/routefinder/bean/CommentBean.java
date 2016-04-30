@@ -52,11 +52,13 @@ public class CommentBean implements Serializable {
 
             comment.setAccount(account);
 
-            route.addComment(comment);
+            //route.addComment(comment);
 
-            //commentService.saveAndFlush(comment);
+            comment.setRoute(route);
 
-            routeService.save(route);
+            commentService.saveAndFlush(comment);
+
+            //routeService.save(route);
         }
 
         message = "";
@@ -72,8 +74,8 @@ public class CommentBean implements Serializable {
 
     public List<Comment> getComments(){
 
-        //return commentService.findAllOrderByRouteId(route.getId());
-        return route.getComments();
+        return commentService.findAllOrderByRouteId(route.getId());
+        //return route.getComments();
     }
 
     private Route getRoute(Integer id){

@@ -194,18 +194,4 @@ public class Route implements Persistable<Integer> {
         this.startPoint = start;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public void addComment(Comment comment){
-        comments.add(comment);
-    }
 }

@@ -78,7 +78,11 @@ public class SearchBean {
 
         Point point = pointService.findOneByName(this.a);
 
-        if(a == null || b == null && Objects.equals(a, "") || Objects.equals(b, "")){
+        if(a == null || b == null && Objects.equals(a, "") || Objects.equals(b, "") || pointService.count() == 0){
+
+            this.a = "";
+            this.b = "";
+
             return null;
         }
 

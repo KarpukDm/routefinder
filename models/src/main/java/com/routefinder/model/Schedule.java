@@ -22,16 +22,20 @@ public class Schedule implements Persistable<Integer> {
     private String day;
 
     @Column(nullable = false)
-    private String time;
+    private String departureTime;
+
+    @Column(nullable = false)
+    private String arrivalTime;
 
     public Schedule(){
         super();
     }
 
-    public Schedule(String day, String time){
+    public Schedule(String day, String departureTime, String arrivalTime){
         super();
         this.day = day;
-        this.time = time;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
     }
 
     public void setId(Integer id) {
@@ -46,12 +50,20 @@ public class Schedule implements Persistable<Integer> {
         this.day = day;
     }
 
-    public String getTime() {
-        return time;
+    public String getDepartureTime() {
+        return departureTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public Integer getId() {
