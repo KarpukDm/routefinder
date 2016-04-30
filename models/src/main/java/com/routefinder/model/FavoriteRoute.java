@@ -45,7 +45,7 @@ public class FavoriteRoute implements Persistable<Integer> {
         this.route = route;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Account account;
 
     public Account getAccount() {

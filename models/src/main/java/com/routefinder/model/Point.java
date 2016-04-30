@@ -98,4 +98,8 @@ public class Point implements Persistable<Integer> {
         this.neighbors = neighbors;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

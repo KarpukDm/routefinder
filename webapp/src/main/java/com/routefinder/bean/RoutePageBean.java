@@ -30,23 +30,11 @@ public class RoutePageBean {
     @Autowired
     private FavoriteRouteService favoriteRouteService;
 
+    private Route route;
+
     public void deleteRoute() {
 
-        //Route route = getRoute();
-
-        Map<String, String> params =
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String id = params.get("routeId");
-
-        routeService.deleteOneById(Integer.valueOf(id));
-    }
-
-    private Route getRoute() {
-        Map<String, String> params =
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String id = params.get("routeId");
-
-        return getRoute(Integer.valueOf(id));
+        routeService.delete(route);
     }
 
     public void subscribe(){
@@ -58,8 +46,13 @@ public class RoutePageBean {
         favoriteRouteService.save(favoriteRoute);
     }
 
-    private Route getRoute(Integer id) {
-        return routeService.findOneRouteById(id);
+    public Route getRoute() {
+        return this.route;
     }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
 
 }

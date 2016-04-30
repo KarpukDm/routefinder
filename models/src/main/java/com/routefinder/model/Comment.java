@@ -62,14 +62,4 @@ public class Comment implements Persistable<Integer> {
         this.account = account;
     }
 
-    @ManyToOne
-    private Route route;
-
-    public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
-    }
 }

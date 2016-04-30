@@ -50,7 +50,7 @@ public class Address implements Persistable<Integer> {
         return false;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Account account;
 
     public Account getAccount() {

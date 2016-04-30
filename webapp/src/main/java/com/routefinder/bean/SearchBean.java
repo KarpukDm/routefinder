@@ -23,6 +23,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by offsp on 23.04.2016.
@@ -38,23 +39,18 @@ public class SearchBean {
     @Autowired
     private SearchResultService searchResultService;
 
-    @Autowired
-    private RouteService routeService;
-
     private String a;
     private String b;
     @SuppressWarnings("FieldCanBeLocal")
     private Integer maxLevel = 3;
 
-    private int index;
+    private String requestValue;
 
-    private List<List<Point>> routes = new LinkedList<>();
-
-    private ConfigGenerator configGenerator = new ConfigGenerator();
+    private List<List<Point>> result;
 
     public void saveRequest(){
 
-        if(a != null && b != null) {
+        if(a != null && b != null && !Objects.equals(a, "") && !Objects.equals(b, "")) {
             SearchResult searchResult = new SearchResult();
             searchResult.setStartPoint(a);
             searchResult.setEndPoint(b);
@@ -62,6 +58,7 @@ public class SearchBean {
 
             searchResultService.save(searchResult);
         }
+
     }
 
     public void findByLastRequest(SearchResult searchResult){
@@ -74,14 +71,14 @@ public class SearchBean {
 
     public Page<SearchResult> getLastRequests(){
 
-        return searchResultService.findLastRecords(new PageRequest(0, 10, Sort.Direction.DESC, "id"));
+        return searchResultService.findLastRecords(new PageRequest(0, 16, Sort.Direction.DESC, "id"));
     }
 
     public List<List<Point>> getRoutes(){
 
         Point point = pointService.findOneByName(this.a);
 
-        if(a == null || b == null){
+        if(a == null || b == null && Objects.equals(a, "") || Objects.equals(b, "")){
             return null;
         }
 
@@ -92,87 +89,16 @@ public class SearchBean {
 
         SearchAlgorithm searchAlgorithm = new SearchAlgorithm(b, maxLevel);
 
-        this.routes = searchAlgorithm.getRoutes(neighbors);
+        this.result = searchAlgorithm.getRoutes(neighbors);
+        this.requestValue = a + " - " + b;
+        this.a = "";
+        this.b = "";
+        this.maxLevel = 4;
 
-        return this.routes;
+        return result;
     }
 
-    public String getDuration(){
 
-        return configGenerator.getDuration(getRoute());
-    }
-
-    public Route getRoute(){
-
-        Double d = 0d;
-
-        DistanceCalculator distanceCalculator = new DistanceCalculator();
-
-        for (int i = 0; i < routes.get(index).size() - 1; i++) {
-
-            if(d == 0){
-                d += distanceCalculator.getDistance(routes.get(index).get(i), routes.get(index).get(i + 1));
-            }
-        }
-
-        return new Route(d);
-    }
-
-    public String getLats() {
-
-        return configGenerator.getLats(routes.get(index));
-    }
-
-    public String getLngs() {
-
-        return configGenerator.getLngs(routes.get(index));
-    }
-
-    public String  getZoomLat(){
-
-        return configGenerator.getZoomLat(routes.get(index));
-    }
-
-    public String getZoomLng(){
-
-        return configGenerator.getZoomLng(routes.get(index));
-    }
-
-    public String getZoomLevel(){
-
-        return configGenerator.getZoomLevel(getRoute());
-    }
-
-    public String getPointNames(){
-
-        return configGenerator.getPointNames(routes.get(index));
-    }
-
-    public void setRoutes(List<List<Point>> routes) {
-        this.routes = routes;
-    }
-
-    public List<Route> getRoutesForSearchResult(){
-
-        List<Route> routes = new LinkedList<>();
-
-        for(int i = 0; i < this.routes.get(index).size() - 1; i++){
-
-            List<Route> r = routeService.findAllOrderByStartPointAndEndPoint(this.routes.get(index).get(i).getName(),
-                    this.routes.get(index).get(i + 1).getName());
-
-            if(r == null || r.size() == 0) {
-                r = routeService.findAllOrderByStartPointAndEndPoint(this.routes.get(index).get(i + 1).getName(),
-                        this.routes.get(index).get(i).getName());
-            }
-
-            if(r != null && r.size() > 0){
-                routes.addAll(r);
-            }
-        }
-
-        return routes;
-    }
 
     public String getA() {
         return a;
@@ -198,12 +124,19 @@ public class SearchBean {
         this.maxLevel = maxLevel;
     }
 
-    public int getIndex() {
-        return index;
+    public String getRequestValue() {
+        return requestValue;
     }
 
+    public void setRequestValue(String requestValue) {
+        this.requestValue = requestValue;
+    }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public List<List<Point>> getResult() {
+        return result;
+    }
+
+    public void setResult(List<List<Point>> result) {
+        this.result = result;
     }
 }

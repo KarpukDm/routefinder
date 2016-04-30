@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
@@ -22,7 +23,7 @@ import java.util.Objects;
  * Created by offsp on 21.04.2016.
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 @Component
 public class CommentBean implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -38,13 +39,9 @@ public class CommentBean implements Serializable {
 
     private String message;
 
-    //сделать viewscoped, сделать пост конструктор сетаю роут и комментс
+    private Route route;
 
-           // манажет проперти ерез решетку с ф.скобками
-
-    private List<String> comments;
-
-    public void addComment(String id) {
+    public void addComment() {
 
         if (message != null) {
 
@@ -55,18 +52,14 @@ public class CommentBean implements Serializable {
 
             comment.setAccount(account);
 
-            if("".equals(id)){
-                Map<String, String> params =
-                        FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-                id = params.get("routeId");
-            }
+            route.addComment(comment);
 
-            Route route = getRoute(Integer.valueOf(id));
+            //commentService.saveAndFlush(comment);
 
-            comment.setRoute(route);
-
-            commentService.saveAndFlush(comment);
+            routeService.save(route);
         }
+
+        message = "";
     }
 
     public List<Comment> getMyComments(){
@@ -77,54 +70,14 @@ public class CommentBean implements Serializable {
 
     }
 
-    public List<Comment> getComments(String id){
+    public List<Comment> getComments(){
 
-        if(id == null || Objects.equals(id, "")) {
-            Map<String, String> params =
-                    FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-            id = params.get("routeId");
-        }
-
-        ExternalContext externalContext;
-        if(id == null || Objects.equals(id, "")){
-            externalContext = FacesContext.getCurrentInstance().getExternalContext();
-
-            Map<String, Object> requestMap = externalContext.getRequestMap();
-            if(requestMap.containsKey("javax.servlet.forward.request_uri")) {
-                String url = (String) requestMap.get("javax.servlet.forward.request_uri");
-                String[] array = url.split("/");
-                id = array[array.length - 1];
-            }
-        }
-
-        assert id != null;
-        return commentService.findAllOrderByRouteId(Integer.valueOf(id));
-    }
-
-    private String getRouteId(){
-        Map<String, String> params =
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        return params.get("routeId");
+        //return commentService.findAllOrderByRouteId(route.getId());
+        return route.getComments();
     }
 
     private Route getRoute(Integer id){
         return routeService.findOneRouteById(id);
-    }
-
-    public RouteService getRouteService() {
-        return routeService;
-    }
-
-    public void setRouteService(RouteService routeService) {
-        this.routeService = routeService;
-    }
-
-    public AccountService getAccountService() {
-        return accountService;
-    }
-
-    public void setAccountService(AccountService accountService) {
-        this.accountService = accountService;
     }
 
     public String getMessage() {
@@ -135,4 +88,11 @@ public class CommentBean implements Serializable {
         this.message = message;
     }
 
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 }

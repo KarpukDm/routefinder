@@ -50,7 +50,7 @@ public class Rating implements Persistable<Integer> {
         return false;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Account account;
 
     public Account getAccount() {
@@ -61,7 +61,7 @@ public class Rating implements Persistable<Integer> {
         this.account = account;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Route route;
 
     public Route getRoute() {

@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui"
     >
 <h:head>
-    <title>#{route.points.get(0).name} - #{route.points.get(route.points.size() - 1).name} | ROUTE FINDER</title>
+    <title>#{routePageBean.route.startPoint} - #{routePageBean.route.endPoint} | ROUTE FINDER</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <h:outputStylesheet library="css" name="dashboard.css"/>
     <h:outputStylesheet library="css" name="route-page.css"/>
@@ -33,25 +33,25 @@
 
         dataProvider: {
         map: "worldLow",
-        zoomLevel: #{route.routeConfig.zoomLevel},
-        zoomLongitude: #{route.routeConfig.zoomLng},
-        zoomLatitude: #{route.routeConfig.zoomLat},
+        zoomLevel: #{routePageBean.route.routeConfig.zoomLevel},
+        zoomLongitude: #{routePageBean.route.routeConfig.zoomLng},
+        zoomLatitude: #{routePageBean.route.routeConfig.zoomLat},
 
 
         lines: [{
         id: "line1",
         arc: -0.85,
         alpha: 0.3,
-        latitudes: [#{route.routeConfig.lats}],
-        longitudes: [#{route.routeConfig.lngs}]
+        latitudes: [#{routePageBean.route.routeConfig.lats}],
+        longitudes: [#{routePageBean.route.routeConfig.lngs}]
         }, {
         id: "line2",
         alpha: 0,
         color: "#000000",
-        latitudes: [#{route.routeConfig.lats}],
-        longitudes: [#{route.routeConfig.lngs}]
+        latitudes: [#{routePageBean.route.routeConfig.lats}],
+        longitudes: [#{routePageBean.route.routeConfig.lngs}]
         }],
-        images: [ #{route.routeConfig.pointNames} , {
+        images: [ #{routePageBean.route.routeConfig.pointNames} , {
         svgPath: planeSVG,
         positionOnLine: 0,
         color: "#000000",
@@ -84,7 +84,7 @@
         rollOverColor: "#585869",
         selectedColor: "#585869",
         pauseDuration: 0.2,
-        animationDuration: #{route.routeConfig.duration},
+        animationDuration: #{routePageBean.route.routeConfig.duration},
         adjustAnimationSpeed: true
         },
 
@@ -103,14 +103,12 @@
     <div class="container-fluid">
         <div class="row">
 
-            <c:set value="#{route}" var="param" scope="session"/>
-
             <ui:include src="/templates-components/vertical-menu.xhtml"/>
 
             <div class="col-md-offset-2 row">
                 <div class="col-md-4">
                     <p:dataTable tableStyleClass="table table-hover"
-                                 value="#{route.schedules}" var="schedule" style="padding-top: 20px;">
+                                 value="#{routePageBean.route.schedules}" var="schedule" style="padding-top: 20px;">
                         <p:column headerText="Day">
                             <h:outputText value="#{schedule.day}: "/>
                         </p:column>
@@ -122,8 +120,8 @@
 
                     <h2 class="sub-header"/>
 
-                    <div class="col-md-6 div-info">Rating: #{route.rating}</div>
-                    <div class="col-md-6 div-info">Counter: #{route.counter}</div>
+                    <div class="col-md-6 div-info">Rating: #{routePageBean.route.rating}</div>
+                    <div class="col-md-6 div-info">Counter: #{routePageBean.route.counter}</div>
 
                     <h2 class="sub-header"/>
 
@@ -132,38 +130,38 @@
                         <div class="col-md-4">
                             <h:commandButton type="button" action="#{routePageBean.subscribe}" class="btn btn-primary button"
                                              value="Subscribe">
-                                <f:param name="routeId" value="#{route.id}"/>
+                                <f:param name="routeId" value="#{routePageBean.route.id}"/>
                                 <f:ajax execute="@all" render="@all"/>
                             </h:commandButton>
                         </div>
 
                         <div class="col-md-4">
-                            <h:commandButton type="submit" rendered="#{accountBean.isOwnerOrAdmin(route)}"
+                            <h:commandButton type="submit" rendered="#{accountBean.isOwnerOrAdmin(routePageBean.route)}"
                                              class="btn btn-warning button" value=" Edit "/>
                         </div>
 
                         <div class="col-md-4">
-                            <h:commandButton type="submit" rendered="#{accountBean.isOwnerOrAdmin(route)}"
+                            <h:commandButton type="submit" rendered="#{accountBean.isOwnerOrAdmin(routePageBean.route)}"
                                              action="#{routePageBean.deleteRoute}" class="btn btn-danger button"
                                              value="Delete">
-                                <f:param name="routeId" value="#{route.id}"/>
+                                <f:param name="routeId" value="#{routePageBean.route.id}"/>
                             </h:commandButton>
                         </div>
 
                         <div class="col-md-4">
-                            <h:commandButton type="submit" rendered="#{not accountBean.isOwnerOrAdmin(route)}"
+                            <h:commandButton type="submit" rendered="#{not accountBean.isOwnerOrAdmin(routePageBean.route)}"
                                              action="#{ratingBean.like}" class="btn btn-success button" value="Like"
-                                             disabled="#{accountBean.isExistLike(route)}">
-                                <f:param name="routeId" value="#{route.id}"/>
+                                             disabled="#{accountBean.isExistLike(routePageBean.route)}">
+                                <f:param name="routeId" value="#{routePageBean.route.id}"/>
                                 <f:ajax execute="@all" render="@all"/>
                             </h:commandButton>
                         </div>
 
                         <div class="col-md-4">
-                            <h:commandButton type="submit" rendered="#{not accountBean.isOwnerOrAdmin(route)}"
+                            <h:commandButton type="submit" rendered="#{not accountBean.isOwnerOrAdmin(routePageBean.route)}"
                                              action="#{ratingBean.dislike}" class="btn btn-danger button"
-                                             value="Dislike" disabled="#{accountBean.isExistDislike(route)}">
-                                <f:param name="routeId" value="#{route.id}"/>
+                                             value="Dislike" disabled="#{accountBean.isExistDislike(routePageBean.route)}">
+                                <f:param name="routeId" value="#{routePageBean.route.id}"/>
                                 <f:ajax execute="@all" render="@all"/>
                             </h:commandButton>
                         </div>
@@ -179,7 +177,7 @@
 
                 <h2 class="sub-header"/>
 
-                <h:outputText value="#{route.info}"/>
+                <h:outputText value="#{routePageBean.route.info}"/>
 
                 <h2 class="sub-header"/>
 
@@ -192,9 +190,9 @@
                     <h:panelGroup id="comments-list" class="col-md-7">
                         <h:outputText value="Comments:" styleClass="col-md-12"/>
 
-                        <ui:repeat value="#{commentBean.getComments(param.id)}" var="comment">
+                        <ui:repeat value="#{commentBean.getComments()}" var="comment">
 
-                            <f:param name="routeId" value="#{route.id}"/>
+                            <f:param name="routeId" value="#{routePageBean.route.id}"/>
 
                             <h2 class="sub-header"/>
 
@@ -216,8 +214,8 @@
                                          value="#{commentBean.message}"/>
 
                         <h:commandButton styleClass="btn btn-primary" style="float: right; margin-top: 5px;"
-                                         value="Send" action="#{commentBean.addComment(param.id)}">
-                            <f:param name="routeId" value="#{route.id}"/>
+                                         value="Send" action="#{commentBean.addComment()}">
+                            <f:param name="routeId" value="#{routePageBean.route.id}"/>
                             <f:ajax execute="@all" render="@form"/>
                         </h:commandButton>
 

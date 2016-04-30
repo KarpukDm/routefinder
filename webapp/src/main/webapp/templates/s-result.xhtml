@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui"
 >
 <h:head>
-    <title>#{searchBean.a} - #{searchBean.b} | ROUTE FINDER</title>
+    <title>#{searchResultBean.requestValue} | ROUTE FINDER</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <h:outputStylesheet library="css" name="dashboard.css"/>
     <h:outputStylesheet library="css" name="route-page.css"/>
@@ -33,25 +33,25 @@
 
         dataProvider: {
         map: "worldLow",
-        zoomLevel: #{searchBean.zoomLevel},
-        zoomLongitude: #{searchBean.zoomLng},
-        zoomLatitude: #{searchBean.zoomLat},
+        zoomLevel: #{searchResultBean.zoomLevel},
+        zoomLongitude: #{searchResultBean.zoomLng},
+        zoomLatitude: #{searchResultBean.zoomLat},
 
 
         lines: [{
         id: "line1",
         arc: -0.85,
         alpha: 0.3,
-        latitudes: [#{searchBean.lats}],
-        longitudes: [#{searchBean.lngs}]
+        latitudes: [#{searchResultBean.lats}],
+        longitudes: [#{searchResultBean.lngs}]
         }, {
         id: "line2",
         alpha: 0,
         color: "#000000",
-        latitudes: [#{searchBean.lats}],
-        longitudes: [#{searchBean.lngs}]
+        latitudes: [#{searchResultBean.lats}],
+        longitudes: [#{searchResultBean.lngs}]
         }],
-        images: [ #{searchBean.pointNames} , {
+        images: [ #{searchResultBean.pointNames} , {
         svgPath: planeSVG,
         positionOnLine: 0,
         color: "#000000",
@@ -84,7 +84,7 @@
         rollOverColor: "#585869",
         selectedColor: "#585869",
         pauseDuration: 0.2,
-        animationDuration: #{searchBean.duration},
+        animationDuration: #{searchResultBean.duration},
         adjustAnimationSpeed: true
         },
 
@@ -113,22 +113,23 @@
 
                 <h2 class="sub-header col-md-12"/>
 
-               <!-- <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-                    <ui:repeat value="#{searchBean.routesForSearchResult}" var="route">
+                    <ui:repeat value="#{searchResultBean.routesForSearchResult}" var="route">
 
-                        <h:outputText styleClass="col-md-2"
-                                      value="#{route.points.get(0).name - route.points.get(route.points.size() - 1).name}"/>
+                        <h:outputText styleClass="col-md-2" style="font-weight: bold;"
+                                        value="#{route.startPoint} - #{route.endPoint}"/>
 
                         <h:outputText styleClass="col-md-8" value="#{route.info}"/>
 
                         <a class="col-md-2" href="${pageContext.request.contextPath}/route/#{route.id}">Follow to route</a>
 
-                        <h2 class="sub-header"/>
+                        <br/>
+                        <h2 class="sub-header col-md-12"/>
 
                     </ui:repeat>
 
-                </h:panelGroup>-->
+                </h:panelGroup>
             </div>
 
         </div>

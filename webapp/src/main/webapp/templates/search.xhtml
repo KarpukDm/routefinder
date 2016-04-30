@@ -4,6 +4,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xml:lang="en" lang="en">
 <h:head>
     <title>Search | ROUTE FINDER</title>
@@ -52,11 +53,9 @@
 
                         <a class="route-link col-md-12" style="font-size: 16pt; color: #245269"
                            href="sresult/#{index.index}">
-                            <ui:repeat value="#{route}" var="r">
 
-                                #{r.name} -
+                            ${fn:join(route.toArray(), " - ")}
 
-                            </ui:repeat>
                         </a>
 
                         <h2 class="sub-header col-md-12"/>
@@ -67,13 +66,12 @@
                 <h:panelGroup styleClass="col-md-4" style="text-align: center;">
                     <ui:repeat value="#{searchBean.lastRequests.content}" var="req" varStatus="index">
 
-                        <h:commandButton style="font-size: 11pt; margin-bottom: 10px;" styleClass="btn btn-success button"
+                        <h:commandButton style="font-size: 11pt; margin-bottom: 10px; margin-right: 10px;"
+                                         styleClass="btn btn-default button"
                                          action="#{searchBean.findByLastRequest(req)}"
                                          value="#{req.startPoint} - #{req.endPoint}">
                             <f:ajax execute="@all" render="@all"/>
                         </h:commandButton>
-
-                        <br/>
 
                     </ui:repeat>
                 </h:panelGroup>

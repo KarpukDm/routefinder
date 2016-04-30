@@ -102,17 +102,6 @@ public class Route implements Persistable<Integer> {
         this.ratings = ratings;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Comment> comments;
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
     @OneToMany(cascade = CascadeType.ALL)
     private List<Statistics> statistics;
 
@@ -174,7 +163,7 @@ public class Route implements Persistable<Integer> {
         this.routeConfig = routeConfig;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Account account;
 
     public Account getAccount() {
@@ -203,5 +192,20 @@ public class Route implements Persistable<Integer> {
 
     public void setStartPoint(String start) {
         this.startPoint = start;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void addComment(Comment comment){
+        comments.add(comment);
     }
 }

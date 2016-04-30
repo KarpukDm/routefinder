@@ -62,7 +62,7 @@ public class Coordinates implements Persistable<Integer> {
         return false;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Point point;
 
     public Point getPoint() {

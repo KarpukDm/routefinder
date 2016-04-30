@@ -118,17 +118,6 @@ public class Account implements Persistable<Integer> {
         this.ratings = ratings;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Comment> comments;
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Route> routes;
 

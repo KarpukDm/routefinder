@@ -37,7 +37,7 @@ public class SearchAlgorithm {
                     rp.add(neighbors.get(i).getPoint());
                 }
 
-                if (!neighbors.get(i).getPoint().getName().equals(endPoint) && level <= maxLevel) {
+                if (!neighbors.get(i).getPoint().getName().equals(endPoint) && level < maxLevel) {
 
                     neighbors.get(i).getPoint().setNeighbors(getRoutes(neighbors.get(i).getPoint().getNeighbors(), level + 1));
                 }
@@ -65,7 +65,7 @@ public class SearchAlgorithm {
                 }
             }
 
-            rp = rp.subList(0, level - 1);
+            rp = rp.subList(0, level);
         }
 
         return neighbors;

@@ -17,11 +17,11 @@ import java.util.List;
 public class CommentServiceImpl extends GenericServiceImpl<Comment, Integer, CommentRepository>
         implements CommentService{
 
-    @Override
+    /*@Override
     public List<Comment> findAllOrderByRouteId(Integer id) {
         return repository.findAllOrderByRouteId(id);
     }
-
+*/
     @Override
     public List<Comment> findAllOrderByAccount_Login(String login) {
         return repository.findAllOrderByAccount_Login(login);
