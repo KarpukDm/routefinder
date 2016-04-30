@@ -109,12 +109,16 @@
                 <div class="col-md-4">
                     <p:dataTable tableStyleClass="table table-hover"
                                  value="#{routePageBean.route.schedules}" var="schedule" style="padding-top: 20px;">
-                        <p:column headerText="Day">
+                        <p:column>
                             <h:outputText value="#{schedule.day}: "/>
                         </p:column>
 
-                        <p:column headerText="Time">
-                            <h:outputText value="#{schedule.time}"/>
+                        <p:column headerText="Departure">
+                            <h:outputText value="#{schedule.departureTime}"/>
+                        </p:column>
+
+                        <p:column headerText="Landing">
+                            <h:outputText value="#{schedule.arrivalTime}"/>
                         </p:column>
                     </p:dataTable>
 

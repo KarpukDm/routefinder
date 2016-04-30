@@ -33,7 +33,7 @@
 
                     </p:column>
 
-                    <p:column headerText="Route" style="width: 52%;">
+                    <p:column headerText="Route" style="width: 47%;">
 
                         <a class="route-link" style="font-size: 16pt; color: #245269"
                            href="route/#{route.id}">#{route.points.get(0).name} - #{route.points.get(route.points.size() - 1).name}</a>
@@ -44,7 +44,7 @@
 
                     </p:column>
 
-                    <p:column headerText="Day: time" style="width: 20%;">
+                    <p:column headerText="Day: time" style="width: 25%;">
 
                         <p:dataTable styleClass="table table-hover" value="#{route.schedules}" var="schedule">
                             <p:column>
