@@ -1,4 +1,4 @@
-package com.routefinder.maps.google.api.helper;
+package com.routefinder.calculators;
 
 import com.routefinder.model.Point;
 

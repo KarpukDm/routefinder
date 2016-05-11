@@ -1,7 +1,7 @@
 package com.routefinder.bean;
 
 import com.routefinder.amcharts.helper.ConfigGenerator;
-import com.routefinder.maps.google.api.helper.DistanceCalculator;
+import com.routefinder.calculators.DistanceCalculator;
 import com.routefinder.model.Point;
 import com.routefinder.model.Route;
 import com.routefinder.service.RouteService;

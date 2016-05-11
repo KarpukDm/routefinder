@@ -1,14 +1,10 @@
 package com.routefinder.bean;
 
 import com.routefinder.algorithm.SearchAlgorithm;
-import com.routefinder.amcharts.helper.ConfigGenerator;
-import com.routefinder.maps.google.api.helper.DistanceCalculator;
 import com.routefinder.model.Neighbor;
 import com.routefinder.model.Point;
-import com.routefinder.model.Route;
 import com.routefinder.model.SearchResult;
 import com.routefinder.service.PointService;
-import com.routefinder.service.RouteService;
 import com.routefinder.service.SearchResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,11 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -41,6 +34,9 @@ public class SearchBean {
 
     private String a;
     private String b;
+
+    private String maxPrice;
+    private String maxTime;
     @SuppressWarnings("FieldCanBeLocal")
     private Integer maxLevel = 3;
 
@@ -142,5 +138,21 @@ public class SearchBean {
 
     public void setResult(List<List<Point>> result) {
         this.result = result;
+    }
+
+    public String getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(String maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public String getMaxTime() {
+        return maxTime;
+    }
+
+    public void setMaxTime(String maxTime) {
+        this.maxTime = maxTime;
     }
 }

@@ -1,6 +1,7 @@
 package com.routefinder.bean;
 
 import com.routefinder.model.Schedule;
+import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 @ManagedBean
 @SessionScoped
+@Component
 public class ScheduleBean {
 
     private String monday;

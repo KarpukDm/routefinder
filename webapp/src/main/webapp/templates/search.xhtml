@@ -4,7 +4,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 <h:head>
     <title>Search | ROUTE FINDER</title>
@@ -37,9 +37,32 @@
                                          value="Find" style="margin-left: 10px;margin-top: -5px; height: 40px;">
                             <f:ajax execute="@all" render="@all"/>
                         </h:commandButton>
+                        <h:commandLink onclick="PF('parameters').show();"
+                                       style="font-size: 10pt; float: right; margin-right: 13%;">search parameters
+                            <f:ajax execute="@this" render="@this"/>
+                        </h:commandLink>
                     </h:form>
 
                 </h:panelGroup>
+
+                <p:dialog header="Search parameters" widgetVar="parameters" resizable="false">
+
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Maximum price: "/>
+                            <h:inputText value="#{searchBean.maxPrice}"/>
+
+
+                            <h:outputLabel value="Maximum flight time: " style="margin-top: 10px;"/>
+                            <h:inputText value="#{searchBean.maxTime}" style="margin-top: 10px;"/>
+
+                        </h:panelGrid>
+
+                        <h:commandButton value="Save" styleClass="btn btn-primary"
+                                         style="float: right; margin-top: 10px;"/>
+                    </h:form>
+
+                </p:dialog>
 
                 <h:panelGroup styleClass="col-md-4" style="margin-top: 25px; text-align: center; font-size: 16pt;">
                     Last requests:

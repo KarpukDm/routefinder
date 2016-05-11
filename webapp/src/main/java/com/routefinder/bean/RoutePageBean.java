@@ -3,17 +3,22 @@ package com.routefinder.bean;
 import com.routefinder.model.Account;
 import com.routefinder.model.FavoriteRoute;
 import com.routefinder.model.Route;
+import com.routefinder.model.Schedule;
 import com.routefinder.service.AccountService;
 import com.routefinder.service.CommentService;
 import com.routefinder.service.FavoriteRouteService;
 import com.routefinder.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by offsp on 21.04.2016.
@@ -39,6 +44,8 @@ public class RoutePageBean {
 
     private FavoriteRoute favoriteRoute;
 
+    private boolean isEdit = false;
+
     public void deleteRoute() {
 
         commentService.deleteOrderByRoute_Id(route.getId());
@@ -48,7 +55,12 @@ public class RoutePageBean {
 
     public void edit(){
 
+        isEdit = true;
+    }
 
+    public void save(){
+
+        isEdit = false;
     }
 
     public void subscribe(){
@@ -59,6 +71,7 @@ public class RoutePageBean {
         }
 
         this.route.addSubscriber();
+        routeService.saveAndFlush(route);
 
         FavoriteRoute favoriteRoute = new FavoriteRoute();
         favoriteRoute.setRoute(this.route);
@@ -69,7 +82,7 @@ public class RoutePageBean {
 
     public void unsubscribe(){
 
-        if(favoriteRoute != null && isSubscriber()){
+        if(favoriteRoute != null || isSubscriber()){
 
             route.unsubscribe();
             routeService.saveAndFlush(route);
@@ -88,12 +101,23 @@ public class RoutePageBean {
 
     public boolean isSubscriber() {
 
-        String login = AccountBean.getUsername();
+       /* if(favoriteRoute != null && !Objects.equals(favoriteRoute.getRoute().getId(), route.getId())) {*/
 
-        Account account = accountService.findOneAccountByLogin(login);
+            String login = AccountBean.getUsername();
 
-        favoriteRoute = favoriteRouteService.findOneOrderByAccount_IdAndRoute_Id(account.getId(), route.getId());
+            Account account = accountService.findOneAccountByLogin(login);
+
+            favoriteRoute = favoriteRouteService.findOneOrderByAccount_IdAndRoute_Id(account.getId(), route.getId());
+        //}
 
         return favoriteRoute != null;
+    }
+
+    public boolean isEdit() {
+        return isEdit;
+    }
+
+    public void setEdit(boolean edit) {
+        isEdit = edit;
     }
 }
