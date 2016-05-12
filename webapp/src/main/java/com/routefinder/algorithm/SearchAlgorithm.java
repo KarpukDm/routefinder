@@ -27,7 +27,7 @@ public class SearchAlgorithm {
 
     }
 
-    private List<Neighbor> getRoutes(List<Neighbor> neighbors, int level) {
+    private List<Neighbor> getRoutePoints(List<Neighbor> neighbors, int level) {
 
         for(int i = 0; i < neighbors.size(); i++){
 
@@ -39,7 +39,7 @@ public class SearchAlgorithm {
 
                 if (!neighbors.get(i).getPoint().getName().equals(endPoint) && level < maxLevel) {
 
-                    neighbors.get(i).getPoint().setNeighbors(getRoutes(neighbors.get(i).getPoint().getNeighbors(), level + 1));
+                    neighbors.get(i).getPoint().setNeighbors(getRoutePoints(neighbors.get(i).getPoint().getNeighbors(), level + 1));
                 }
 
                 if (level > maxLevel || (neighbors.get(i).getPoint().getNeighbors() == null
@@ -71,12 +71,12 @@ public class SearchAlgorithm {
         return neighbors;
     }
 
-    public List<List<Point>> getRoutes(List<Neighbor> neighbors) {
+    public List<List<Point>> getRoutePoints(List<Neighbor> neighbors) {
 
         if(neighbors.get(0).getPoint() == null){
             return null;
         }
-        getRoutes(neighbors, 0);
+        getRoutePoints(neighbors, 0);
 
         for(int i = 0; i < routePoints.size(); i++){
 

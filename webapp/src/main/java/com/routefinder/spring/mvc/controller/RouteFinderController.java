@@ -63,7 +63,7 @@ public class RouteFinderController {
     @RequestMapping("/sresult/{id}")
     public String sresult(@PathVariable Integer id, Model model) {
 
-        searchResultBean.setResult(searchBean.getResult().get(id));
+        searchResultBean.setResult(searchBean.getGeneratedRoutes().get(id));
 
         searchResultBean.setRequestValue(searchBean.getRequestValue());
 
@@ -89,6 +89,12 @@ public class RouteFinderController {
     public String profile(Model model) {
 
         return "profile";
+    }
+
+    @RequestMapping("/recommendations")
+    public String recommendations(Model model) {
+
+        return "recommendations";
     }
 
     @RequestMapping("/signup")
@@ -165,6 +171,8 @@ public class RouteFinderController {
 
     @RequestMapping("/search")
     public String search(Model model) {
+
+        searchBean.setRequestCounter(0);
 
         return "search";
     }

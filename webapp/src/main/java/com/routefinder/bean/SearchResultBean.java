@@ -2,6 +2,7 @@ package com.routefinder.bean;
 
 import com.routefinder.amcharts.helper.ConfigGenerator;
 import com.routefinder.calculators.DistanceCalculator;
+import com.routefinder.entity.GeneratedRoute;
 import com.routefinder.model.Point;
 import com.routefinder.model.Route;
 import com.routefinder.service.RouteService;
@@ -21,10 +22,7 @@ import java.util.List;
 @Component
 public class SearchResultBean {
 
-    @Autowired
-    private RouteService routeService;
-
-    private List<Point> result;
+    private GeneratedRoute result;
 
     private String requestValue;
 
@@ -41,10 +39,10 @@ public class SearchResultBean {
 
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
-        for (int i = 0; i < result.size() - 1; i++) {
+        for (int i = 0; i < result.getPoints().size() - 1; i++) {
 
             if(d == 0){
-                d += distanceCalculator.getDistance(result.get(i), result.get(i + 1));
+                d += distanceCalculator.getDistance(result.getPoints().get(i), result.getPoints().get(i + 1));
             }
         }
 
@@ -53,22 +51,22 @@ public class SearchResultBean {
 
     public String getLats() {
 
-        return configGenerator.getLats(result);
+        return configGenerator.getLats(result.getPoints());
     }
 
     public String getLngs() {
 
-        return configGenerator.getLngs(result);
+        return configGenerator.getLngs(result.getPoints());
     }
 
     public String  getZoomLat(){
 
-        return configGenerator.getZoomLat(result);
+        return configGenerator.getZoomLat(result.getPoints());
     }
 
     public String getZoomLng(){
 
-        return configGenerator.getZoomLng(result);
+        return configGenerator.getZoomLng(result.getPoints());
     }
 
     public String getZoomLevel(){
@@ -78,37 +76,14 @@ public class SearchResultBean {
 
     public String getPointNames(){
 
-        return configGenerator.getPointNames(result);
+        return configGenerator.getPointNames(result.getPoints());
     }
 
-    public List<Route> getRoutesForSearchResult(){
-
-        List<Route> routes = new LinkedList<>();
-
-        for(int i = 0; i < result.size() - 1; i++){
-
-            List<Route> r = routeService.findAllOrderByStartPointAndEndPoint(result.get(i).getName(),
-                    result.get(i + 1).getName());
-
-            if(r == null || r.size() == 0) {
-                r = routeService.findAllOrderByStartPointAndEndPoint(result.get(i + 1).getName(),
-                        result.get(i).getName());
-            }
-
-            if(r != null && r.size() > 0){
-                routes.addAll(r);
-            }
-        }
-
-
-        return routes;
-    }
-
-    public List<Point> getResult() {
+    public GeneratedRoute getResult() {
         return result;
     }
 
-    public void setResult(List<Point> result) {
+    public void setResult(GeneratedRoute result) {
         this.result = result;
     }
 

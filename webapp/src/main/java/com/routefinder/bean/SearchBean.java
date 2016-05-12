@@ -1,10 +1,10 @@
 package com.routefinder.bean;
 
 import com.routefinder.algorithm.SearchAlgorithm;
-import com.routefinder.model.Neighbor;
-import com.routefinder.model.Point;
-import com.routefinder.model.SearchResult;
+import com.routefinder.entity.GeneratedRoute;
+import com.routefinder.model.*;
 import com.routefinder.service.PointService;
+import com.routefinder.service.RouteService;
 import com.routefinder.service.SearchResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,6 +30,9 @@ public class SearchBean {
     private PointService pointService;
 
     @Autowired
+    private RouteService routeService;
+
+    @Autowired
     private SearchResultService searchResultService;
 
     private String a;
@@ -42,7 +45,11 @@ public class SearchBean {
 
     private String requestValue;
 
+    private int requestCounter;
+
     private List<List<Point>> result;
+
+    private List<GeneratedRoute> generatedRoutes;
 
     public void saveRequest(){
 
@@ -70,7 +77,9 @@ public class SearchBean {
         return searchResultService.findLastRecords(new PageRequest(0, 16, Sort.Direction.DESC, "id"));
     }
 
-    public List<List<Point>> getRoutes(){
+    public List<GeneratedRoute> getRoutes(){
+
+        requestCounter++;
 
         Point point = pointService.findOneByName(this.a);
 
@@ -89,16 +98,107 @@ public class SearchBean {
 
         SearchAlgorithm searchAlgorithm = new SearchAlgorithm(b, maxLevel);
 
-        this.result = searchAlgorithm.getRoutes(neighbors);
+        this.result = searchAlgorithm.getRoutePoints(neighbors);
         this.requestValue = a + " - " + b;
         this.a = "";
         this.b = "";
         this.maxLevel = 4;
-
-        return result;
+        this.generatedRoutes = getGeneratedRoutes(result);
+        return this.generatedRoutes;
     }
 
+    public boolean isEmptyResponse(){
 
+        return (generatedRoutes == null || generatedRoutes.size() == 0) && requestCounter > 1;
+    }
+
+    private List<GeneratedRoute> getGeneratedRoutes(List<List<Point>> result){
+
+        if(result == null){
+            return null;
+        }
+
+        List<GeneratedRoute> generatedRoutes = new LinkedList<>();
+        for(List<Point> p : result){
+
+            GeneratedRoute generatedRoute = new GeneratedRoute();
+            generatedRoute.setRoutes(getRoutesForSearchResult(p));
+
+            generatedRoute.setPoints(p);
+
+            generatedRoute.setPrice(getTotalPrice(generatedRoute.getRoutes()));
+
+            generatedRoute.setTime(getTotalTime(generatedRoute.getRoutes()));
+
+            generatedRoutes.add(generatedRoute);
+        }
+
+        return generatedRoutes;
+    }
+
+    private List<Route> getRoutesForSearchResult(List<Point> pointList){
+
+        List<Route> routes = new LinkedList<>();
+
+        for(int i = 0; i < pointList.size() - 1; i++){
+
+            List<Route> r = routeService.findAllOrderByStartPointAndEndPoint(pointList.get(i).getName(),
+                    pointList.get(i + 1).getName());
+
+            if(r == null || r.size() == 0) {
+                r = routeService.findAllOrderByStartPointAndEndPoint(pointList.get(i + 1).getName(),
+                        pointList.get(i).getName());
+            }
+
+            if(r != null && r.size() > 0){
+                routes.addAll(r);
+            }
+        }
+
+        return routes;
+    }
+
+    public boolean isMatch(List<Route> routes){
+
+        return (maxPrice == null || Objects.equals(maxPrice, "") || Double.valueOf(getTotalPrice(routes)) <= Double.valueOf(maxPrice)) &&
+                (maxTime == null || Objects.equals(maxTime, "") || Double.valueOf(getTotalTime(routes)) <= Double.valueOf(maxTime));
+    }
+
+    private String getTotalPrice(List<Route> routes){
+
+        double x = 0;
+        for(Route r : routes){
+
+            x += r.getPrice();
+        }
+
+        return String.valueOf(x);
+    }
+
+    private String getTotalTime(List<Route> routes){
+
+        double y = 0;
+        for(Route r : routes){
+            y = 0;
+            for(Schedule s : r.getSchedules()){
+
+
+                String a[] = s.getDepartureTime().split(":");
+                String b[] = s.getArrivalTime().split(":");
+
+                y = Double.valueOf(b[0]) * 60 + Double.valueOf(b[1]) - Double.valueOf(a[0]) * 60 + Double.valueOf(a[1]);
+            }
+            if(Objects.equals(maxTime, "") || maxTime == null || y <= Double.valueOf(maxTime)){
+                return String.valueOf(y);
+            }
+        }
+
+        return String.valueOf(y);
+    }
+
+    public void saveSearchParameters(){
+
+    }
 
     public String getA() {
         return a;
@@ -154,5 +254,21 @@ public class SearchBean {
 
     public void setMaxTime(String maxTime) {
         this.maxTime = maxTime;
+    }
+
+    public List<GeneratedRoute> getGeneratedRoutes() {
+        return generatedRoutes;
+    }
+
+    public void setGeneratedRoutes(List<GeneratedRoute> generatedRoutes) {
+        this.generatedRoutes = generatedRoutes;
+    }
+
+    public int getRequestCounter() {
+        return requestCounter;
+    }
+
+    public void setRequestCounter(int requestCounter) {
+        this.requestCounter = requestCounter;
     }
 }

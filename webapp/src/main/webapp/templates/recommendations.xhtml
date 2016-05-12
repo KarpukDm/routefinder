@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xml:lang="en" lang="en"
+      xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+    <title>Recommendations | ROUTE FINDER</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="dashboard.css"/>
+    <h:outputStylesheet library="css" name="route-page.css"/>
+
+    <h:outputScript library="js" name="ammap.js"/>
+    <h:outputStylesheet library="css" name="ammap.css"/>
+    <h:outputScript library="js" name="worldLow.js"/>
+    <h:outputScript library="js" name="none.js"/>
+</h:head>
+
+<f:view>
+
+    <ui:include src="/templates-components/horisontal-menu.xhtml"/>
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <ui:include src="/templates-components/vertical-menu.xhtml"/>
+
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+
+
+                <h:panelGroup styleClass="com-md-12">
+
+                    <h:panelGroup style="display: inline;">
+
+                        <h:panelGroup styleClass="col-md-3">
+                            <h:outputText value="Choose your favorite time of the year"/>
+                            <h:selectOneMenu value="Choose your favorite time of the year" >
+                                <f:selectItem itemValue="Winter" itemLabel="Winter" />
+                                <f:selectItem itemValue="Summer" itemLabel="Summer" />
+                                <f:selectItem itemValue="Spring" itemLabel="Spring" />
+                                <f:selectItem itemValue="Autumn" itemLabel="Autumn" />
+                            </h:selectOneMenu>
+                        </h:panelGroup>
+
+                        <h:panelGroup styleClass="col-md-3">
+                            <h:outputText value="Select type of vacation"/>
+                            <h:selectOneMenu value="Select type of vacation">
+                                <f:selectItem itemValue="Active" itemLabel="Active" />
+                                <f:selectItem itemValue="Cultural" itemLabel="Cultural" />
+                                <f:selectItem itemValue="Leisure time with family" itemLabel="Leisure time with family" />
+                            </h:selectOneMenu>
+                        </h:panelGroup>
+
+                        <h:panelGroup styleClass="col-md-3">
+                            <h:outputText value="Select a region"/>
+                            <h:selectOneMenu value="Select a region">
+                                <f:selectItem itemValue="North America" itemLabel="North America" />
+                                <f:selectItem itemValue="South America" itemLabel="South America" />
+                                <f:selectItem itemValue="Europe" itemLabel="Europe" />
+                                <f:selectItem itemValue="Asia" itemLabel="Asia" />
+                                <f:selectItem itemValue="Australia" itemLabel="Australia" />
+                            </h:selectOneMenu>
+                        </h:panelGroup>
+
+                        <h:commandButton value="Pick up" style="margin-left: 10px;" styleClass="btn btn-md btn-info"/>
+
+                    </h:panelGroup>
+
+                    <h2 class="sub-header"/>
+
+                    <p:dataTable tableStyleClass="table table-hover"
+                                 value="#{recommendationsBean.routes}" var="route" paginator="true" rows="10"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                    >
+                        <p:column headerText="Rating" style="width: 8%;">
+
+                            <h:outputText styleClass="rating-value" style="font-size: 26pt;" value="#{route.rating}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Route" style="width: 47%;">
+
+                            <a class="route-link" style="font-size: 16pt; color: #245269"
+                               href="route/#{route.id}">#{route.points.get(0).name} - #{route.points.get(route.points.size() - 1).name}</a>
+
+                            <br/>
+
+                            <h:outputText value="#{route.shortInfo}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Day: time" style="width: 25%;">
+
+                            <p:dataTable styleClass="table table-hover" value="#{route.schedules}" var="schedule">
+                                <p:column>
+                                    <h:outputText value="#{schedule.day}: "/>
+                                </p:column>
+
+                                <p:column>
+                                    <h:outputText value="#{schedule.departureTime}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <h:outputText value="#{schedule.arrivalTime}"/>
+                                </p:column>
+                            </p:dataTable>
+
+                        </p:column>
+
+                        <p:column headerText="Price" style="width: 15%;">
+
+                            <h:outputText styleClass="price-value" style="font-size: 16pt;" value="#{route.price} y.e."/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+            </div>
+
+        </div>
+    </div>
+
+</f:view>
+</html>
+
+
+
+
+
+
+
+

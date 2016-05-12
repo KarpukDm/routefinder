@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
       xml:lang="en" lang="en"
       xmlns:p="http://primefaces.org/ui"
-    >
+>
 <h:head>
     <title>#{routePageBean.route.startPoint} - #{routePageBean.route.endPoint} | ROUTE FINDER</title>
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
@@ -111,17 +111,20 @@
                                  value="#{routePageBean.route.schedules}" var="schedule" style="padding-top: 20px;">
                         <p:column headerText="Day">
                             <h:outputText value="#{schedule.day}: " rendered="#{not routePageBean.edit}"/>
-                            <h:inputText value="#{schedule.day}" rendered="#{routePageBean.edit}" style="width: 100px;"/>
+                            <h:inputText value="#{schedule.day}" rendered="#{routePageBean.edit}"
+                                         style="width: 100px;"/>
                         </p:column>
 
                         <p:column headerText="Departure">
                             <h:outputText value="#{schedule.departureTime}" rendered="#{not routePageBean.edit}"/>
-                            <h:inputText value="#{schedule.departureTime}" rendered="#{routePageBean.edit}" style="width: 100px;"/>
+                            <h:inputText value="#{schedule.departureTime}" rendered="#{routePageBean.edit}"
+                                         style="width: 100px;"/>
                         </p:column>
 
                         <p:column headerText="Landing">
                             <h:outputText value="#{schedule.arrivalTime}" rendered="#{not routePageBean.edit}"/>
-                            <h:inputText value="#{schedule.arrivalTime}" rendered="#{routePageBean.edit}" style="width: 100px;"/>
+                            <h:inputText value="#{schedule.arrivalTime}" rendered="#{routePageBean.edit}"
+                                         style="width: 100px;"/>
                         </p:column>
                     </p:dataTable>
 
@@ -129,18 +132,21 @@
 
                         <h2 class="sub-header"/>
 
-                        <div class="col-md-6 div-info">Rating: #{routePageBean.route.rating}</div>
-                        <div class="col-md-6 div-info">Counter: #{routePageBean.route.counter}</div>
+                        <div class="col-md-4 div-info">Rating: #{routePageBean.route.rating}</div>
+                        <div class="col-md-4 div-info">Counter: #{routePageBean.route.counter}</div>
+                        <div class="col-md-4 div-info">Price: #{routePageBean.route.price} y.e.</div>
 
                         <h2 class="sub-header"/>
 
                         <div class="col-md-4">
-                            <h:commandButton type="button" rendered="#{not routePageBean.isSubscriber()}" action="#{routePageBean.subscribe}" class="btn btn-primary button"
+                            <h:commandButton type="button" rendered="#{not routePageBean.isSubscriber()}"
+                                             action="#{routePageBean.subscribe}" class="btn btn-primary button"
                                              value="Subscribe">
                                 <f:ajax execute="@all" render="@form"/>
                             </h:commandButton>
 
-                            <h:commandButton type="button" rendered="#{routePageBean.isSubscriber()}" action="#{routePageBean.unsubscribe}" class="btn btn-primary button"
+                            <h:commandButton type="button" rendered="#{routePageBean.isSubscriber()}"
+                                             action="#{routePageBean.unsubscribe}" class="btn btn-primary button"
                                              value="Unsubscribe">
                                 <f:ajax execute="@all" render="@form"/>
                             </h:commandButton>
@@ -151,17 +157,20 @@
                         </div>-->
 
                         <div class="col-md-4">
-                            <h:commandButton type="submit" rendered="#{accountBean.isOwnerOrAdmin(routePageBean.route) and not routePageBean.edit}"
-                                             action="#{routePageBean.edit()}" class="btn btn-warning button" value=" Edit ">
+                            <h:commandButton type="submit"
+                                             rendered="#{accountBean.isOwnerOrAdmin(routePageBean.route) and not routePageBean.edit}"
+                                             action="#{routePageBean.edit()}" class="btn btn-warning button"
+                                             value=" Edit ">
                                 <f:ajax execute="@all" render="@all"/>
                             </h:commandButton>
 
-                            <h:commandButton type="submit" rendered="#{accountBean.isOwnerOrAdmin(routePageBean.route) and routePageBean.edit}"
-                                             action="#{routePageBean.save()}" class="btn btn-warning button" value=" Save ">
+                            <h:commandButton type="submit"
+                                             rendered="#{accountBean.isOwnerOrAdmin(routePageBean.route) and routePageBean.edit}"
+                                             action="#{routePageBean.save()}" class="btn btn-warning button"
+                                             value=" Save ">
                                 <f:ajax execute="@all" render="@all"/>
                             </h:commandButton>
                         </div>
-
 
 
                         <div class="col-md-4">
@@ -172,7 +181,8 @@
                         </div>
 
                         <div class="col-md-4">
-                            <h:commandButton type="submit" rendered="#{not accountBean.isOwnerOrAdmin(routePageBean.route)}"
+                            <h:commandButton type="submit"
+                                             rendered="#{not accountBean.isOwnerOrAdmin(routePageBean.route)}"
                                              action="#{ratingBean.like}" class="btn btn-success button" value="Like"
                                              disabled="#{accountBean.isExistLike(routePageBean.route)}">
 
@@ -181,9 +191,11 @@
                         </div>
 
                         <div class="col-md-4">
-                            <h:commandButton type="submit" rendered="#{not accountBean.isOwnerOrAdmin(routePageBean.route)}"
+                            <h:commandButton type="submit"
+                                             rendered="#{not accountBean.isOwnerOrAdmin(routePageBean.route)}"
                                              action="#{ratingBean.dislike}" class="btn btn-danger button"
-                                             value="Dislike" disabled="#{accountBean.isExistDislike(routePageBean.route)}">
+                                             value="Dislike"
+                                             disabled="#{accountBean.isExistDislike(routePageBean.route)}">
                                 <f:param name="routeId" value="#{routePageBean.route.id}"/>
                                 <f:ajax execute="@all" render="@form"/>
                             </h:commandButton>
@@ -191,17 +203,20 @@
                     </h:form>
 
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8" style="text-align: center;">
                     <div id="chartdiv" style="width: 96%; height: 450px; padding-top: 20px;"></div>
+                    <h3>#{routePageBean.route.startPoint} - #{routePageBean.route.endPoint}</h3>
                 </div>
             </div>
+
 
             <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
                 <h2 class="sub-header"/>
 
                 <h:outputText value="#{routePageBean.route.info}" rendered="#{not routePageBean.edit}"/>
-                <h:inputTextarea value="#{routePageBean.route.info}" rendered="#{routePageBean.edit}" style="width:1000px; resize: none;"/>
+                <h:inputTextarea value="#{routePageBean.route.info}" rendered="#{routePageBean.edit}"
+                                 style="width:1000px; resize: none;"/>
 
                 <h2 class="sub-header"/>
 
@@ -222,8 +237,9 @@
 
                             <h:panelGroup styleClass="col-md-12">
 
-                            <h:outputText style="font-weight: bold;" styleClass="col-md-2" value="#{comment.account.login}:"/>
-                            <h:outputText styleClass="col-md-10" value="#{comment.message}"/>
+                                <h:outputText style="font-weight: bold;" styleClass="col-md-2"
+                                              value="#{comment.account.login}:"/>
+                                <h:outputText styleClass="col-md-10" value="#{comment.message}"/>
 
                             </h:panelGroup>
 

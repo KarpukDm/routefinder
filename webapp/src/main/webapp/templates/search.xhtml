@@ -58,8 +58,12 @@
 
                         </h:panelGrid>
 
-                        <h:commandButton value="Save" styleClass="btn btn-primary"
-                                         style="float: right; margin-top: 10px;"/>
+                        <h:commandButton value="Save" id="saveParameters" onclick="PF('parameters').close();"
+                                         styleClass="btn btn-primary"
+                                         style="float: right; margin-top: 10px;">
+                            <f:ajax execute="@all" render="@form"/>
+                        </h:commandButton>
+
                     </h:form>
 
                 </p:dialog>
@@ -74,17 +78,25 @@
                 <h:panelGroup styleClass="col-md-8">
                     <ui:repeat value="#{searchBean.routes}" var="route" varStatus="index">
 
-                        <a class="route-link col-md-12" style="font-size: 16pt; color: #245269"
+                        <a class="route-link col-md-9" style="font-size: 16pt; color: #245269"
                            href="sresult/#{index.index}">
 
-                            ${fn:join(route.toArray(), " - ")}
+                            ${fn:join(route.points.toArray(), " - ")}
 
                         </a>
+
+                        <h:outputText value="(Partial match)" style="color: #f0ad4e;" styleClass="col-lg-3"
+                                      rendered="#{not searchBean.isMatch(route.routes)}"/>
 
                         <h2 class="sub-header col-md-12"/>
 
                     </ui:repeat>
+
+                    <h:outputText value="Nothing found!" rendered="#{searchBean.isEmptyResponse()}" style="font-size: 16pt; margin: auto;"/>
+
                 </h:panelGroup>
+
+
 
                 <h:panelGroup styleClass="col-md-4" style="text-align: center;">
                     <ui:repeat value="#{searchBean.lastRequests.content}" var="req" varStatus="index">
