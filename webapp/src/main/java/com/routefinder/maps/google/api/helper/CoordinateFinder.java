@@ -24,6 +24,10 @@ public class CoordinateFinder {
 
         getCoordinate(address);
 
+        if(lng == null || lat == null){
+            return null;
+        }
+
         Point point = new Point();
         Coordinates coordinates = new Coordinates(lat, lng);
         point.setCoordinates(coordinates);
@@ -43,13 +47,18 @@ public class CoordinateFinder {
         System.out.println(url);// Путь, что бы можно было посмотреть в браузере ответ службы
 
         String jsonString = httpGet(url);
-        JSONObject response = new JSONObject(jsonString);        ;
-        JSONArray ResultArr = response.getJSONArray("results");
-        JSONObject ResultObj = ResultArr.getJSONObject(0);
-        JSONObject Geometry = ResultObj.getJSONObject("geometry");
-        JSONObject Location = Geometry.getJSONObject("location");
-        this.lat = Location.getDouble("lat");
-        this.lng = Location.getDouble("lng");
+        try {
+            JSONObject response = new JSONObject(jsonString);
+            JSONArray ResultArr = response.getJSONArray("results");
+            JSONObject ResultObj = ResultArr.getJSONObject(0);
+            JSONObject Geometry = ResultObj.getJSONObject("geometry");
+            JSONObject Location = Geometry.getJSONObject("location");
+            this.lat = Location.getDouble("lat");
+            this.lng = Location.getDouble("lng");
+        }catch (Exception e){
+            System.out.println("Некорректное название города");
+            e.printStackTrace();
+        }
 
         System.out.println(String.format("%f,%f", lat, lng));// итоговая широта и долгота
     }

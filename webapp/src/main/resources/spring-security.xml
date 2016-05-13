@@ -14,7 +14,7 @@
         <bean:intercept-url pattern="/templates/admin.xhtml" access="hasAuthority('ROLE_ADMIN')"/>
         <bean:intercept-url pattern="/templates/profile.xhtml" access="hasAuthority('ROLE_USER')"/>
         <bean:intercept-url pattern="/templates/creating-route.xhtml" access="hasAuthority('ROLE_USER')"/>
-        <bean:intercept-url pattern="/templates/favorites.xhtml" access="hasAuthority('ROLE_USER')"/>
+        <bean:intercept-url pattern="/templates/subscriptions.xhtml" access="hasAuthority('ROLE_USER')"/>
         <bean:intercept-url pattern="/templates/my-comments.xhtml" access="hasAuthority('ROLE_USER')"/>
         <bean:intercept-url pattern="/templates/my-reminders.xhtml" access="hasAuthority('ROLE_USER')"/>
         <bean:intercept-url pattern="/templates/my-routes.xhtml" access="hasAuthority('ROLE_USER')"/>

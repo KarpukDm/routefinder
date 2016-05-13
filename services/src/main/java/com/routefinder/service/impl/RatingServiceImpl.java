@@ -1,9 +1,12 @@
 package com.routefinder.service.impl;
 
+import com.routefinder.model.FavoriteRoute;
 import com.routefinder.model.Rating;
 import com.routefinder.repository.RatingRepository;
 import com.routefinder.service.RatingService;
 import com.routefinder.service.common.impl.GenericServiceImpl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +31,11 @@ public class RatingServiceImpl extends GenericServiceImpl<Rating, Integer, Ratin
     }
 
     @Override
+    public Page<Rating> findLastEvaluations(Pageable pageable, String login) {
+        return repository.findAllOrderByAccount_Login(pageable, login);
+    }
+
+    @Override
     public List<Rating> findAllOrderByAccount_Login(String login) {
         return repository.findAllOrderByAccount_Login(login);
     }
@@ -35,5 +43,10 @@ public class RatingServiceImpl extends GenericServiceImpl<Rating, Integer, Ratin
     @Override
     public List<Rating> findAllOrderByRoute_Id(Integer id) {
         return repository.findAllOrderByRoute_Id(id);
+    }
+
+    @Override
+    public void deleteOrderByRoute_Id(Integer id) {
+        repository.deleteOrderByRoute_Id(id);
     }
 }

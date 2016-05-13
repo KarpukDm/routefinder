@@ -102,15 +102,4 @@ public class Point implements Persistable<Integer> {
     public String toString() {
         return this.name;
     }
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private PointInfo pointInfo;
-
-    public PointInfo getPointInfo() {
-        return pointInfo;
-    }
-
-    public void setPointInfo(PointInfo pointInfo) {
-        this.pointInfo = pointInfo;
-    }
 }

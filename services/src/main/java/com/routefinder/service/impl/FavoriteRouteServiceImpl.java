@@ -4,6 +4,8 @@ import com.routefinder.model.FavoriteRoute;
 import com.routefinder.repository.FavoriteRouteRepository;
 import com.routefinder.service.FavoriteRouteService;
 import com.routefinder.service.common.impl.GenericServiceImpl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,16 @@ public class FavoriteRouteServiceImpl extends GenericServiceImpl<FavoriteRoute, 
     @Override
     public List<FavoriteRoute> findAllOrderByAccount_Login(String login) {
         return repository.findAllOrderByAccount_Login(login);
+    }
+
+    @Override
+    public Page<FavoriteRoute> findLastSubscriptions(Pageable pageable, String login) {
+        return repository.findAllOrderByAccount_Login(login, pageable);
+    }
+
+    @Override
+    public void deleteOrderByRoute_Id(Integer id) {
+        repository.deleteOrderByRoute_Id(id);
     }
 /*
     @Override

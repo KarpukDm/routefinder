@@ -139,13 +139,13 @@
                         <h2 class="sub-header"/>
 
                         <div class="col-md-4">
-                            <h:commandButton type="button" rendered="#{not routePageBean.isSubscriber()}"
+                            <h:commandButton id="subscribe" type="submit" rendered="#{not routePageBean.isSubscriber()}"
                                              action="#{routePageBean.subscribe}" class="btn btn-primary button"
                                              value="Subscribe">
                                 <f:ajax execute="@all" render="@form"/>
                             </h:commandButton>
 
-                            <h:commandButton type="button" rendered="#{routePageBean.isSubscriber()}"
+                            <h:commandButton id="unsubscribe" type="submit" rendered="#{routePageBean.isSubscriber()}"
                                              action="#{routePageBean.unsubscribe}" class="btn btn-primary button"
                                              value="Unsubscribe">
                                 <f:ajax execute="@all" render="@form"/>
@@ -185,7 +185,7 @@
                                              rendered="#{not accountBean.isOwnerOrAdmin(routePageBean.route)}"
                                              action="#{ratingBean.like}" class="btn btn-success button" value="Like"
                                              disabled="#{accountBean.isExistLike(routePageBean.route)}">
-
+                                <f:param name="routeId" value="#{routePageBean.route.id}"/>
                                 <f:ajax execute="@all" render="@form"/>
                             </h:commandButton>
                         </div>

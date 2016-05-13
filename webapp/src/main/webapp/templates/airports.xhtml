@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="en" lang="en"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Airports | ROUTE FINDER</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="dashboard.css"/>
+    <h:outputStylesheet library="css" name="table.css"/>
+</h:head>
+
+<f:view>
+
+    <ui:include src="/templates-components/horisontal-menu.xhtml"/>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <ui:include src="/templates-components/vertical-menu.xhtml"/>
+
+            <h:panelGroup styleClass="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+
+                <h:outputText value="Airport (departure)" style="font-size: 12pt; font-weight: bold; margin-top: 15px;"
+                              styleClass="col-md-3"/>
+                <h:outputText value="Airport (landing)" style="font-size: 12pt; font-weight: bold; margin-top: 15px;"
+                              styleClass="col-md-3"/>
+                <h:outputText value="Route information" style="font-size: 12pt; font-weight: bold; margin-top: 15px;"
+                              styleClass="col-md-6"/>
+
+                <h2 class="sub-header" style="margin-top: 30px;"/>
+                <h:form>
+
+                    <h:panelGroup styleClass="col-md-3">
+
+                        <ui:repeat value="#{airportsBean.departureAirports}" var="point">
+
+                            <h:commandButton value="#{point.name}" action="#{airportsBean.setDepartureAirport(point)}"
+                                             styleClass="col-md-10 btn btn-primary" style="margin-top: 10px;">
+                                <f:ajax execute="@this" render="@form"/>
+                            </h:commandButton>
+
+                        </ui:repeat>
+
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="col-md-3">
+
+                        <ui:repeat value="#{airportsBean.landingAirport}" var="n" varStatus="index">
+
+                            <h:commandButton value="#{n.point}" action="#{airportsBean.setLandingAirport(index.index)}"
+                                             styleClass="col-md-10 btn btn-success" style="margin-top: 10px;">
+                                <f:ajax execute="@this" render="@form"/>
+                            </h:commandButton>
+
+
+                        </ui:repeat>
+
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="col-md-6" rendered="#{airportsBean.visible}">
+
+                        <h:outputText value="Price: #{airportsBean.route.price}" style="font-size: 12pt;" styleClass="col-md-6"/>
+                        <h:outputText value="Rating: #{airportsBean.route.rating}" style="font-size: 12pt;" styleClass="col-md-6"/>
+
+                        <p:dataTable styleClass="table table-hover col-md-12" value="#{airportsBean.route.schedules}" var="schedule" style="margin-top: 10px;">
+                            <p:column headerText="Day">
+                                <h:outputText value="#{schedule.day}: "/>
+                            </p:column>
+
+                            <p:column headerText="Departure">
+                                <h:outputText value="#{schedule.departureTime}"/>
+                            </p:column>
+
+                            <p:column headerText="Landing">
+                                <h:outputText value="#{schedule.arrivalTime}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                        <h:panelGroup style="display: inline; margin-top: 10px;">
+                            <a href="${pageContext.request.contextPath}/route/#{airportsBean.route.id}" style="float: right;">Read more</a>
+                        </h:panelGroup>
+
+                    </h:panelGroup>
+
+                </h:form>
+
+            </h:panelGroup>
+
+        </div>
+
+    </div>
+
+</f:view>
+</html>
+
+

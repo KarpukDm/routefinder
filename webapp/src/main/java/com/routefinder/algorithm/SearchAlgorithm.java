@@ -80,11 +80,12 @@ public class SearchAlgorithm {
 
         for(int i = 0; i < routePoints.size(); i++){
 
-            if(routePoints.get(i).size() > maxLevel + 2){
-
-                routePoints.remove(i);
-                i--;
+            if(routePoints.get(i).size() <= maxLevel + 2){
+                continue;
             }
+
+            routePoints.remove(i);
+            i--;
         }
 
         for(int i = 0; i < routePoints.size(); i++){

@@ -31,12 +31,16 @@
 
                     <p:column headerText="My mark" style="width: 8%;">
 
-                        <h:outputText rendered="#{ratingBean.isLike(myRating.route.id)}" value="like"/>
+                        <h:graphicImage library="image" name="l.png" styleClass="col-md-12"
+                                        rendered="#{ratingBean.isLike(myRating.route.id)}"/>
+                        <h:graphicImage library="image" name="d.png" styleClass="col-md-12"
+                                        rendered="#{not ratingBean.isLike(myRating.route.id)}"/>
+                        <!--<h:outputText rendered="#{ratingBean.isLike(myRating.route.id)}" value="like"/>
                         <h:outputText rendered="#{not ratingBean.isLike(myRating.route.id)}" value="dislike"/>
-
+-->
                     </p:column>
 
-                    <p:column headerText="Route" style="width: 47%;">
+                    <p:column headerText="Route" style="width: 44%;">
 
                         <a class="route-link" style="font-size: 16pt; color: #245269"
                            href="route/#{myRating.route.id}">#{myRating.route.points.get(0).name} - #{myRating.route.points.get(myRating.route.points.size() - 1).name}</a>
@@ -47,7 +51,7 @@
 
                     </p:column>
 
-                    <p:column headerText="Day: time" style="width: 25%;">
+                    <p:column headerText="Day: time" style="width: 28%;">
 
                         <p:dataTable styleClass="table table-hover" value="#{myRating.route.schedules}" var="schedule">
                             <p:column>

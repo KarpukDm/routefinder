@@ -56,7 +56,24 @@ public class RatingBean {
         Account account = accountService.findOneAccountByLogin(AccountBean.getUsername());
         rating.setAccount(account);
 
-        List<Rating> ratings = ratingService.findAllOrderByAccountId(account.getId());
+        if(account.getRatings() == null || account.getRatings().size() == 0){
+            account.addRatind(rating);
+        }else {
+
+            for (int i = 0; i < account.getRatings().size(); i++) {
+
+                if (account.getRatings().get(i).getRoute().getId().equals(route.getId())) {
+
+
+                    account.getRatings().get(i).setValue(1);
+
+                    //ratingService.delete(account.getRatings().get(i));
+                    break;
+                }
+            }
+        }
+
+       /* List<Rating> ratings = ratingService.findAllOrderByAccountId(account.getId());
         for (Rating rating1 : ratings) {
             if (Objects.equals(rating1.getRoute().getId(), route.getId()) && rating1.getValue() == -1) {
 
@@ -64,8 +81,11 @@ public class RatingBean {
                 break;
             }
         }
+        ratingService.saveAndFlush(rating);*/
 
-        ratingService.saveAndFlush(rating);
+        //account.addRatind(rating);
+
+        accountService.saveAndFlush(account);
     }
 
     public void dislike() {
@@ -78,6 +98,22 @@ public class RatingBean {
         Account account = accountService.findOneAccountByLogin(AccountBean.getUsername());
         rating.setAccount(account);
 
+        if(account.getRatings() == null || account.getRatings().size() == 0){
+            account.addRatind(rating);
+        }else {
+
+            for (int i = 0; i < account.getRatings().size(); i++) {
+
+                if (account.getRatings().get(i).getRoute().getId().equals(route.getId())) {
+                    account.getRatings().get(i).setValue(-1);
+                    //ratingService.delete(account.getRatings().get(i));
+                    break;
+                }
+            }
+        }
+
+       /* rating.setAccount(account);
+
         List<Rating> ratings = ratingService.findAllOrderByAccountId(account.getId());
         for (Rating rating1 : ratings) {
             if (Objects.equals(rating1.getRoute().getId(), route.getId()) && rating1.getValue() == 1) {
@@ -87,19 +123,11 @@ public class RatingBean {
             }
         }
 
-        ratingService.saveAndFlush(rating);
-    }
+        ratingService.saveAndFlush(rating);*/
 
-    public String getRating(Integer id){
+        //account.addRatind(rating);
 
-        List<Rating> ratings = ratingService.findAllOrderByRoute_Id(id);
-
-        int x = 0;
-        for(Rating rating : ratings){
-            x += rating.getValue();
-        }
-
-        return String.valueOf(x);
+        accountService.saveAndFlush(account);
     }
 
     public List<Rating> getMyRatings(){
@@ -112,6 +140,7 @@ public class RatingBean {
     }
 
     private Route getRoute() {
+
         Map<String, String> params =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String id = params.get("routeId");

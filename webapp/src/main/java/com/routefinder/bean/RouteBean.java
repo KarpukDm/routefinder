@@ -84,6 +84,10 @@ public class RouteBean implements Serializable {
                 neighborsE = endPointCoordinate.getNeighbors();
             }
 
+            if(endPointCoordinate == null || startPointCoordinate == null){
+                return;
+            }
+
             Double distance = new DistanceCalculator().getDistance(startPointCoordinate, endPointCoordinate);
 
             Neighbor neighbor = new Neighbor(endPointCoordinate, distance);

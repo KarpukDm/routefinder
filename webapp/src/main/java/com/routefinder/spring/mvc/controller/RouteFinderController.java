@@ -1,9 +1,6 @@
 package com.routefinder.spring.mvc.controller;
 
-import com.routefinder.bean.CommentBean;
-import com.routefinder.bean.RoutePageBean;
-import com.routefinder.bean.SearchBean;
-import com.routefinder.bean.SearchResultBean;
+import com.routefinder.bean.*;
 import com.routefinder.model.Route;
 import com.routefinder.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +31,20 @@ public class RouteFinderController {
     private SearchBean searchBean;
 
     @Autowired
+    @Qualifier("profileBean")
+    private ProfileBean profileBean;
+
+    @Autowired
     @Qualifier("routePageBean")
     private RoutePageBean routePageBean;
 
     @Autowired
     @Qualifier("commentBean")
     private CommentBean commentBean;
+
+    @Autowired
+    @Qualifier("airportsBean")
+    private AirportsBean airportsBean;
 
     @Autowired
     @Qualifier("searchResultBean")
@@ -88,13 +93,10 @@ public class RouteFinderController {
     @RequestMapping("/profile")
     public String profile(Model model) {
 
+        profileBean.setLastEvaluations(null);
+        profileBean.setLastSubscriptions(null);
+
         return "profile";
-    }
-
-    @RequestMapping("/recommendations")
-    public String recommendations(Model model) {
-
-        return "recommendations";
     }
 
     @RequestMapping("/signup")
@@ -103,10 +105,10 @@ public class RouteFinderController {
         return "registration";
     }
 
-    @RequestMapping("/favorites")
-    public String favorites(Model model) {
+    @RequestMapping("/subscriptions")
+    public String subscriptions(Model model) {
 
-        return "favorites";
+        return "subscriptions";
     }
 
     @RequestMapping("/myroutes")
@@ -139,8 +141,16 @@ public class RouteFinderController {
         return "my-comments";
     }
 
-    @RequestMapping("/marks")
-    public String marks(Model model) {
+    @RequestMapping("/airports")
+    public String airports(Model model) {
+
+        airportsBean.setDepartureAirport(null);
+
+        return "airports";
+    }
+
+    @RequestMapping("/evaluations")
+    public String evaluations(Model model) {
 
         return "my-marks";
     }

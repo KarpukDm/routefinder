@@ -74,6 +74,11 @@ public class Account implements Persistable<Integer> {
                 '}';
     }
 
+    public void addRatind(Rating rating){
+
+        ratings.add(rating);
+    }
+
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Role> roles;
 

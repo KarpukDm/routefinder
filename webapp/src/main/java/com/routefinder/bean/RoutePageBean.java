@@ -4,10 +4,7 @@ import com.routefinder.model.Account;
 import com.routefinder.model.FavoriteRoute;
 import com.routefinder.model.Route;
 import com.routefinder.model.Schedule;
-import com.routefinder.service.AccountService;
-import com.routefinder.service.CommentService;
-import com.routefinder.service.FavoriteRouteService;
-import com.routefinder.service.RouteService;
+import com.routefinder.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -40,6 +37,9 @@ public class RoutePageBean {
     @Autowired
     private FavoriteRouteService favoriteRouteService;
 
+    @Autowired
+    private RatingService ratingService;
+
     private Route route;
 
     private FavoriteRoute favoriteRoute;
@@ -49,6 +49,8 @@ public class RoutePageBean {
     public void deleteRoute() {
 
         commentService.deleteOrderByRoute_Id(route.getId());
+        favoriteRouteService.deleteOrderByRoute_Id(route.getId());
+        //ratingService.deleteOrderByRoute_Id(route.getId());
 
         routeService.delete(route);
     }

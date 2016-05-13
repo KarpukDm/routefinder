@@ -1,6 +1,8 @@
 package com.routefinder.repository;
 
 import com.routefinder.model.FavoriteRoute;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -13,9 +15,12 @@ public interface FavoriteRouteRepository extends JpaRepository<FavoriteRoute, In
 
     List<FavoriteRoute> findAllOrderByAccount_Login(String login);
 
-   /* void deleteOrderByAccount_Id();
+    Page<FavoriteRoute> findAllOrderByAccount_Login(String login, Pageable pageable);
 
-    void deleteOrderByRoute_Id();*/
+   // void deleteOrderByAccount_Id();
+
+    void deleteOrderByRoute_Id(Integer id);
 
     FavoriteRoute findOneOrderByAccount_IdAndRoute_Id(Integer account_Id, Integer route_Id);
+
 }
