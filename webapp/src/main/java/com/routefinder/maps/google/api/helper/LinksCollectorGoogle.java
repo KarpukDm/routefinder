@@ -7,7 +7,7 @@ import java.util.Map;
  */
 public class LinksCollectorGoogle {
 
-    public static String getParams(Map<String, String> params) {
+    static String getParams(Map<String, String> params) {
 
         String url = "";
 

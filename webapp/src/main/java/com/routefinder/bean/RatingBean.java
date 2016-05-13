@@ -60,30 +60,24 @@ public class RatingBean {
             account.addRatind(rating);
         }else {
 
+            boolean flag = false;
+
             for (int i = 0; i < account.getRatings().size(); i++) {
 
                 if (account.getRatings().get(i).getRoute().getId().equals(route.getId())) {
 
-
+                    flag = true;
                     account.getRatings().get(i).setValue(1);
 
                     //ratingService.delete(account.getRatings().get(i));
                     break;
                 }
             }
-        }
 
-       /* List<Rating> ratings = ratingService.findAllOrderByAccountId(account.getId());
-        for (Rating rating1 : ratings) {
-            if (Objects.equals(rating1.getRoute().getId(), route.getId()) && rating1.getValue() == -1) {
-
-                ratingService.delete(rating1);
-                break;
+            if(!flag){
+                account.addRatind(rating);
             }
         }
-        ratingService.saveAndFlush(rating);*/
-
-        //account.addRatind(rating);
 
         accountService.saveAndFlush(account);
     }
@@ -102,30 +96,22 @@ public class RatingBean {
             account.addRatind(rating);
         }else {
 
+            boolean flag = false;
+
             for (int i = 0; i < account.getRatings().size(); i++) {
 
                 if (account.getRatings().get(i).getRoute().getId().equals(route.getId())) {
                     account.getRatings().get(i).setValue(-1);
+                    flag = true;
                     //ratingService.delete(account.getRatings().get(i));
                     break;
                 }
             }
-        }
 
-       /* rating.setAccount(account);
-
-        List<Rating> ratings = ratingService.findAllOrderByAccountId(account.getId());
-        for (Rating rating1 : ratings) {
-            if (Objects.equals(rating1.getRoute().getId(), route.getId()) && rating1.getValue() == 1) {
-
-                ratingService.delete(rating1);
-                break;
+            if(!flag){
+                account.addRatind(rating);
             }
         }
-
-        ratingService.saveAndFlush(rating);*/
-
-        //account.addRatind(rating);
 
         accountService.saveAndFlush(account);
     }
